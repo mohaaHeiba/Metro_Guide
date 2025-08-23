@@ -9,10 +9,14 @@ Widget headerWidget(dynamic context) {
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
+              color: Theme.of(
+                context,
+              ).colorScheme.onPrimaryContainer.withOpacity(0.2),
               borderRadius: BorderRadius.circular(16),
               border: Border.all(
-                color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
+                color: Theme.of(
+                  context,
+                ).colorScheme.onSecondaryContainer.withOpacity(0.3),
                 width: 1,
               ),
             ),

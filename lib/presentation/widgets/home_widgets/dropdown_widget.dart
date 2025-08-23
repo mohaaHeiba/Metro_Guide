@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-Widget dropDown(Icon icon, BuildContext context, bool appearIcon2) {
+Widget dropDown(
+  String label,
+  Icon icon,
+  BuildContext context,
+  bool appearIcon2,
+) {
   return SizedBox(
     child: Row(
       children: [
@@ -29,7 +34,16 @@ Widget dropDown(Icon icon, BuildContext context, bool appearIcon2) {
               menuHeight: 300,
               inputDecorationTheme: InputDecorationTheme(
                 border: InputBorder.none,
+                contentPadding: const EdgeInsetsGeometry.symmetric(
+                  horizontal: 8,
+                  vertical: 15,
+                ),
+                hintStyle: TextStyle(
+                  color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
+                ),
               ),
+
+              hintText: label,
             ),
           ),
         ),

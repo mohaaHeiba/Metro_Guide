@@ -17,8 +17,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.light,
         colorScheme: ColorScheme.light(
-          primary: Colors.red,
-          secondary: Colors.redAccent,
+          primary: Colors.black,
+          onPrimaryContainer: Colors.red,
+          onSecondaryContainer: Colors.redAccent,
           outline: Colors.grey[300],
           primaryContainer: Colors.grey[400],
         ),
@@ -42,8 +43,9 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeData(
         brightness: Brightness.dark,
         colorScheme: ColorScheme.dark(
-          primary: Colors.blue,
-          secondary: Colors.blueAccent,
+          primary: Colors.white,
+          onPrimaryContainer: Colors.blue,
+          onSecondaryContainer: Colors.blueAccent,
           outline: Colors.grey[700],
           primaryContainer: Colors.grey[850],
         ),
@@ -64,7 +66,7 @@ class MyApp extends StatelessWidget {
         ),
         iconTheme: IconThemeData(color: Colors.blue[400], size: 28),
       ),
-      themeMode: ThemeMode.dark,
+      themeMode: ThemeMode.light,
       home: SafeArea(child: loginbefore ? HomePage() : WelcomePage()),
     );
   }
