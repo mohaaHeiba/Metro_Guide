@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:metro_guide/presentation/pages/home/home_page.dart';
+import 'package:metro_guide/presentation/navigationbar/navigationbar_page.dart'
+    show NavigationbarPage;
 import 'package:metro_guide/presentation/pages/welcome_page.dart';
 
 class MyApp extends StatelessWidget {
@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
         iconTheme: IconThemeData(color: Colors.blue[400], size: 28),
       ),
       themeMode: ThemeMode.light,
-      home: SafeArea(child: loginbefore ? HomePage() : WelcomePage()),
+      home: loginbefore ? NavigationbarPage() : WelcomePage(),
     );
   }
 }

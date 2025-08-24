@@ -1,58 +1,55 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:metro_guide/presentation/controllers/controllers.dart';
 import 'package:metro_guide/presentation/widgets/home_widgets/card_widget.dart';
 import 'package:metro_guide/presentation/widgets/home_widgets/dropdown_widget.dart';
 import 'package:metro_guide/presentation/widgets/home_widgets/header_widget.dart';
 import 'package:metro_guide/presentation/widgets/home_widgets/textfield_widget.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({super.key});
-  final cont1 = TextEditingController();
-  final cont2 = TextEditingController();
-
-  final isCardsAppear = false.obs;
-  final isSearch = false.obs;
-
-  final pickUp = ''.obs;
-  final pickDown = ''.obs;
-
+  const HomePage({super.key});
   @override
   Widget build(BuildContext context) {
+    final controll = Get.find<HomeController>();
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
-            spacing: 10,
+            // spacing: 10,
             children: [
               const SizedBox(),
               headerWidget(context),
-              const SizedBox(),
+              const SizedBox(height: 10),
               dropDown("From", Icon(Icons.location_on), context, true),
-              const SizedBox(),
+              const SizedBox(height: 20),
 
               dropDown("to", Icon(Icons.location_on_outlined), context, false),
-              const SizedBox(),
+              const SizedBox(height: 10),
 
               Obx(
-                () => isSearch.value
+                () => controll.isSearch.value
                     ? textFieldWidget(context)
                     : const SizedBox(),
               ),
-              ElevatedButton(
-                onPressed: () {
-                  isSearch.value = !isSearch.value;
-                },
-                child: Obx(
-                  () => Icon(
-                    isSearch.value ? Icons.arrow_upward : Icons.arrow_downward,
-                  ),
-                ),
-              ),
 
               ElevatedButton(
                 onPressed: () {
-                  isCardsAppear.value = true;
+                  controll.toggelSearch();
+                },
+                child: Obx(
+                  () => Icon(
+                    controll.isSearch.value
+                        ? Icons.arrow_upward
+                        : Icons.arrow_downward,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10),
+
+              ElevatedButton(
+                onPressed: () {
+                  controll.showCards();
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: Size(double.infinity, 50),
@@ -62,10 +59,12 @@ class HomePage extends StatelessWidget {
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
                 ),
               ),
+              const SizedBox(height: 10),
+
               Obx(() {
                 return AnimatedSwitcher(
                   duration: const Duration(milliseconds: 600),
-                  child: isCardsAppear.value
+                  child: controll.isCardsAppear.value
                       ? Container(child: cardWidget(context))
                       : const SizedBox(),
                 );

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:metro_guide/presentation/pages/home/home_page.dart';
+import 'package:metro_guide/presentation/navigationbar/navigationbar_page.dart';
 
 class WelcomePage extends StatelessWidget {
   WelcomePage({super.key});
@@ -38,7 +38,7 @@ class WelcomePage extends StatelessWidget {
               ),
               onPressed: () async {
                 login.write("loginBefore", true);
-                Get.off(HomePage(), transition: Transition.fadeIn);
+                Get.off(NavigationbarPage(), transition: Transition.fadeIn);
               },
               child: const Text(
                 "Get Started",
