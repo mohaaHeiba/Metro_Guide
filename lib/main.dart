@@ -5,10 +5,15 @@ import 'package:metro_guide/app.dart';
 import 'package:metro_guide/presentation/controllers/controllers.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   await GetStorage.init();
-  Get.put(HomeController(),permanent: true);
-  Get.put(NavigationController(),permanent: true);
-  Get.put(SettingsController(),permanent: true);
+  final initi = Get.put(DatabaseController(), permanent: true);
+  await initi.initDatabase();
+
+  Get.put(HomeController(), permanent: true);
+  Get.put(NavigationController(), permanent: true);
+  Get.put(SettingsController(), permanent: true);
 
   runApp(const MyApp());
 }

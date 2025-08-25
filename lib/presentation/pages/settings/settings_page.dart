@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:metro_guide/presentation/controllers/controllers.dart';
+import 'package:metro_guide/presentation/pages/settings/contactUs_page.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -15,7 +16,7 @@ class SettingsPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.asset("assets/images/logo.png", width: 250, height: 250),
+            Image.asset("assets/images/logo.png", width: 220, height: 220),
             const SizedBox(height: 30),
 
             Obx(
@@ -58,6 +59,15 @@ class SettingsPage extends StatelessWidget {
                   applicationIcon: const Icon(Icons.train, size: 40),
                   applicationLegalese: "Developed by Mohamed Heiba © 2025",
                 );
+              },
+            ),
+            const Divider(height: 30),
+
+            ListTile(
+              leading: const Icon(Icons.contact_support_sharp),
+              title: const Text("Coutact Us"),
+              onTap: () {
+                Get.to(ContactUsPage(), transition: Transition.rightToLeft);
               },
             ),
           ],

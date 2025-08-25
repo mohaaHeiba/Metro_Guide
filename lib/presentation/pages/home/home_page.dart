@@ -8,6 +8,7 @@ import 'package:metro_guide/presentation/widgets/home_widgets/textfield_widget.d
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     final controll = Get.find<HomeController>();
@@ -21,10 +22,26 @@ class HomePage extends StatelessWidget {
               const SizedBox(),
               headerWidget(context),
               const SizedBox(height: 10),
-              dropDown("From", Icon(Icons.location_on), context, true),
+              dropDown(
+                "From",
+                Icon(Icons.location_on),
+                context,
+                true,
+                controll.stations,
+                controll.cont1,
+                RxBool(true),
+              ),
               const SizedBox(height: 20),
 
-              dropDown("to", Icon(Icons.location_on_outlined), context, false),
+              dropDown(
+                "to",
+                Icon(Icons.location_on_outlined),
+                context,
+                false,
+                controll.stations,
+                controll.cont2,
+                controll.isAppearDropdownMenu2,
+              ),
               const SizedBox(height: 10),
 
               Obx(
@@ -47,16 +64,23 @@ class HomePage extends StatelessWidget {
               ),
               const SizedBox(height: 10),
 
-              ElevatedButton(
-                onPressed: () {
-                  controll.showCards();
-                },
-                style: ElevatedButton.styleFrom(
-                  minimumSize: Size(double.infinity, 50),
-                ),
-                child: Text(
-                  "Show Ticket",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
+              Obx(
+                () => ElevatedButton(
+                  onPressed: controll.isAppearButton.value
+                      ? () {
+                          controll.showCards();
+                        }
+                      : null,
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: Size(double.infinity, 50),
+                  ),
+                  child: Text(
+                    "Show Ticket",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
                 ),
               ),
               const SizedBox(height: 10),
@@ -65,7 +89,13 @@ class HomePage extends StatelessWidget {
                 return AnimatedSwitcher(
                   duration: const Duration(milliseconds: 600),
                   child: controll.isCardsAppear.value
-                      ? Container(child: cardWidget(context))
+                      ? Container(
+                          child: cardWidget(
+                            context,
+                            controll.pickUp,
+                            controll.pickDown,
+                          ),
+                        )
                       : const SizedBox(),
                 );
               }),

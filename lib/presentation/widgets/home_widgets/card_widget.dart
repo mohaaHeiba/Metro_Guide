@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:metro_guide/presentation/pages/details/details_page.dart';
 
-Widget cardWidget(BuildContext context) {
+Widget cardWidget(BuildContext context, final pickUp, final pickDown) {
   return Row(
     children: [
       Expanded(
@@ -109,7 +109,7 @@ Widget cardWidget(BuildContext context) {
           ),
         ),
       ),
-      const SizedBox(width: 10), // بدل spacing
+      const SizedBox(width: 10),
       Expanded(
         child: Container(
           height: 280,
@@ -192,18 +192,22 @@ Widget cardWidget(BuildContext context) {
                             ),
                           ),
                           const SizedBox(height: 8),
-                          Text(
-                            "From: ",
-                            style: TextStyle(
-                              color: Colors.white70,
-                              fontSize: 12,
+                          Obx(
+                            () => Text(
+                              "From: $pickUp",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                              ),
                             ),
                           ),
-                          Text(
-                            "To: ",
-                            style: TextStyle(
-                              color: Colors.white70,
-                              fontSize: 12,
+                          Obx(
+                            () => Text(
+                              "To: $pickDown",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                              ),
                             ),
                           ),
                           const SizedBox(height: 16),

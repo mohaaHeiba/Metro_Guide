@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
           onSecondaryContainer: Colors.redAccent,
           outline: Colors.grey[300],
           primaryContainer: Colors.grey[400],
+          secondaryContainer: Colors.grey.shade400,
         ),
 
         scaffoldBackgroundColor: Colors.grey[300],
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
           onSecondaryContainer: Colors.blueAccent,
           outline: Colors.grey[700],
           primaryContainer: Colors.grey[850],
+          secondaryContainer: Colors.grey[800],
         ),
         scaffoldBackgroundColor: Colors.grey[900],
         textTheme: const TextTheme(bodyMedium: TextStyle(color: Colors.white)),

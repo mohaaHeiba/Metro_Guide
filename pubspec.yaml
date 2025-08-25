@@ -37,10 +37,14 @@ dependencies:
 
   get: ^4.7.2
   get_storage: ^2.1.1
+  dartx: ^1.2.0
+  url_launcher: ^6.3.2
 
-  
+
   flutter_native_splash: ^2.4.6
-  google_maps_flutter: ^2.12.3
+  floor: ^1.5.0
+  path_provider: ^2.1.5
+
 
 dev_dependencies:
   flutter_test:
@@ -52,6 +56,10 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
+  build_runner: ^2.4.6
+  floor_generator: ^1.5.0
+
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -67,6 +75,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/data/stations.DB
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
