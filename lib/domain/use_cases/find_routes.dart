@@ -97,7 +97,7 @@ class FindRoutes {
         }
 
         routes.add({
-          'type': 'direct',
+          'type': 'DIRECT',
           'line': lineName,
           'direction': direction,
           'stations': stations,
@@ -133,7 +133,7 @@ class FindRoutes {
           final totalStations = part1.length + part2.length + 2;
 
           routes.add({
-            'type': 'transfer',
+            'type': 'TRANSFER',
             'line1': line1.key,
             'line2': line2.key,
             'direction1': _getDirection(line1.value, from, transfer),
@@ -189,7 +189,7 @@ class FindRoutes {
                     part1.length + part2.length + part3.length + 3;
 
                 routes.add({
-                  'type': '2_transfer',
+                  'type': '2 TRANSFER',
                   'line1': line1.key,
                   'line2': line2.key,
                   'line3': line3.key,

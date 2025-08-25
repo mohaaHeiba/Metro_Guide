@@ -100,7 +100,7 @@ Widget cardWidget(
               ElevatedButton(
                 onPressed: () {
                   Get.to(
-                    () => const DetailsPage(),
+                    () => DetailsPage(),
                     transition: Transition.rightToLeft,
                     arguments: shortsetRoute,
                   );

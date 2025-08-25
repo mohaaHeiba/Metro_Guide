@@ -16,7 +16,9 @@ Widget summaryCardWidget(Map<String, dynamic> route, BuildContext context) {
       borderRadius: BorderRadius.circular(16),
       boxShadow: [
         BoxShadow(
-          color: Colors.blue[400]!.withOpacity(0.4),
+          color: Theme.of(
+            context,
+          ).colorScheme.onPrimaryContainer.withOpacity(0.3),
           blurRadius: 12,
           offset: const Offset(0, 4),
         ),
@@ -30,10 +32,14 @@ Widget summaryCardWidget(Map<String, dynamic> route, BuildContext context) {
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.2),
+                color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: const Icon(Icons.route, color: Colors.white, size: 20),
+              child: Icon(
+                Icons.route,
+                color: Theme.of(context).colorScheme.primary,
+                size: 20,
+              ),
             ),
             const SizedBox(width: 12),
             Expanded(
@@ -46,16 +52,18 @@ Widget summaryCardWidget(Map<String, dynamic> route, BuildContext context) {
                         : route['type'] == 'transfer'
                         ? '2_transfer'
                         : 'Double Transfer Route',
-                    style: const TextStyle(
-                      color: Colors.white,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
-                    '${route['totalStations'] ?? route['stationCount']} stations',
+                    '${route['totalStations']} stations',
                     style: TextStyle(
-                      color: Colors.white.withOpacity(0.9),
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.primary.withOpacity(0.9),
                       fontSize: 14,
                     ),
                   ),
@@ -72,7 +80,7 @@ Widget summaryCardWidget(Map<String, dynamic> route, BuildContext context) {
               child: Text(
                 '${route['price']} EGP',
                 style: const TextStyle(
-                  color: Colors.white,
+                  // color: Colors.white,
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
@@ -88,7 +96,7 @@ Widget summaryCardWidget(Map<String, dynamic> route, BuildContext context) {
                 Icons.access_time,
                 'Duration',
                 route['time'],
-                Colors.white,
+                Theme.of(context).colorScheme.primary,
               ),
             ),
             const SizedBox(width: 20),
@@ -96,8 +104,8 @@ Widget summaryCardWidget(Map<String, dynamic> route, BuildContext context) {
               child: buildInfoItem(
                 Icons.straighten,
                 'Distance',
-                '${route['totalStations'] ?? route['stationCount']} stations',
-                Colors.white,
+                '${route['totalStations']} stations',
+                Theme.of(context).colorScheme.primary,
               ),
             ),
           ],

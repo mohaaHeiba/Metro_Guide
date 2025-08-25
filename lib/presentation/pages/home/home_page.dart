@@ -12,7 +12,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controll = Get.find<HomeController>();
-    final shortestRoute = controll.routes.first;
+    // final shortestRoute =await ;
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -98,9 +98,9 @@ class HomePage extends StatelessWidget {
                               context,
                               controll.pickUp,
                               controll.pickDown,
-                              shortestRoute,
+                              controll.routes.first,
                               controll.getColors(
-                                shortestRoute['totalStations'],
+                                controll.routes.first['totalStations'],
                               ),
                             );
                           }
