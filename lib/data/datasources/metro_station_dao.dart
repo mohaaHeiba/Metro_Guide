@@ -10,12 +10,17 @@ abstract class MetroStationDao {
   Future<List<String>> getallStationEnglish();
 
   @Query(
+    "SELECT name_ar, name_en, latitude,longitude, line from metro_stations",
+  )
+  Future<List<StationEntity>> getallStation();
+
+  @Query(
     "SELECT name_ar, latitude, longitude, line FROM metro_stations WHERE name_en = :pickUp",
   )
-  Future<List<StationEntity>> getAllStationPickUP(String pickUp);
+  Future<List<StationEntity>> getStationPickUP(String pickUp);
 
   @Query(
     "SELECT name_ar, latitude, longitude, line FROM metro_stations WHERE name_en = :pickDown",
   )
-  Future<List<StationEntity>> getAllStationPickDown(String pickDown);
+  Future<List<StationEntity>> getStationPickDown(String pickDown);
 }

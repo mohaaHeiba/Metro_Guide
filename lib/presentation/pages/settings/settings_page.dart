@@ -46,6 +46,16 @@ class SettingsPage extends StatelessWidget {
 
             const Divider(height: 30),
 
+            ListTile(
+              leading: const Icon(Icons.email),
+              title: const Text("Coutact Us"),
+              onTap: () {
+                Get.to(ContactUsPage(), transition: Transition.rightToLeft);
+              },
+            ),
+
+            const Divider(height: 30),
+
             // ℹ️ About App
             ListTile(
               leading: const Icon(Icons.info),
@@ -59,15 +69,6 @@ class SettingsPage extends StatelessWidget {
                   applicationIcon: const Icon(Icons.train, size: 40),
                   applicationLegalese: "Developed by Mohamed Heiba © 2025",
                 );
-              },
-            ),
-            const Divider(height: 30),
-
-            ListTile(
-              leading: const Icon(Icons.contact_support_sharp),
-              title: const Text("Coutact Us"),
-              onTap: () {
-                Get.to(ContactUsPage(), transition: Transition.rightToLeft);
               },
             ),
           ],

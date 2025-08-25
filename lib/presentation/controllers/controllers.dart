@@ -1,10 +1,11 @@
 import 'dart:io';
 import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:metro_guide/data/datasources/station_database.dart';
+import 'package:metro_guide/domain/entities/station_entity.dart';
+import 'package:metro_guide/domain/use_cases/find_routes.dart';
 import 'package:metro_guide/presentation/pages/history/history_page.dart';
 import 'package:metro_guide/presentation/pages/home/home_page.dart';
 import 'package:metro_guide/presentation/pages/map/map_page.dart';
@@ -52,15 +53,28 @@ class HomeController extends GetxController {
 
   final pickUp = ''.obs;
   final pickDown = ''.obs;
+  final routes = <Map<String, dynamic>>[].obs;
 
   void toggelSearch() {
     isSearch.value = !isSearch.value;
   }
 
-  void showCards() {
+  Future<void> showCards() async {
     isCardsAppear.value = true;
     pickUp.value = cont1.text;
     pickDown.value = cont2.text;
+
+    final FindRoutes findRoute = FindRoutes();
+    final result = await findRoute.findRoutes(pickUp.value, pickDown.value);
+    routes.assignAll(result);
+
+    print("Found routes: $routes");
+  }
+
+  Future<List<StationEntity>> getData() async {
+    final dbController = Get.find<DatabaseController>();
+    final data = await dbController.database.metrostationdao.getallStation();
+    return data;
   }
 
   final stations = [].obs;
@@ -70,24 +84,35 @@ class HomeController extends GetxController {
     // TODO: implement initState
     super.onInit();
     loadDataBase();
+    getData();
 
     cont1.addListener(() {
       final text1 = cont1.text.toLowerCase();
       final text2 = cont2.text.toLowerCase();
 
-      final match1 = stations.any((value) => value.contains(text2));
-      final match2 = stations.any((value) => value.contains(text1));
+      final match1 = stations.any((value) => value.contains(text1));
+      final match2 = stations.any((value) => value.contains(text2));
       // print(match);
 
       if (match1) {
         isAppearDropdownMenu2.value = true;
       }
-      if (match2) {
+    });
+
+    cont2.addListener(() {
+      final text1 = cont1.text.toLowerCase();
+      final text2 = cont2.text.toLowerCase();
+
+      final match1 = stations.any((value) => value.contains(text1));
+      final match2 = stations.any((value) => value.contains(text2));
+      // print(match);
+
+      if (text1 == text2) {
+        isAppearButton.value = false;
+      } else if (match2) {
         isAppearButton.value = true;
       }
     });
-
-    cont2.addListener(() {});
   }
 
   Future<void> loadDataBase() async {
@@ -96,6 +121,13 @@ class HomeController extends GetxController {
         .getallStationArabic();
     stations.addAll(data);
     print(stations);
+  }
+
+  Color getColors(int totalStations) {
+    if (totalStations <= 9) return Colors.amber.withOpacity(0.8);
+    if (totalStations <= 16) return Colors.green;
+    if (totalStations <= 23) return Colors.pinkAccent.withOpacity(0.7);
+    return Colors.brown;
   }
 }
 

@@ -138,7 +138,20 @@ class _$MetroStationDao extends MetroStationDao {
   }
 
   @override
-  Future<List<StationEntity>> getAllStationPickUP(String pickUp) async {
+  Future<List<StationEntity>> getallStation() async {
+    return _queryAdapter.queryList(
+        'SELECT name_ar, name_en, latitude,longitude, line from metro_stations',
+        mapper: (Map<String, Object?> row) => StationEntity(
+            station_id: row['station_id'] as int?,
+            name_ar: row['name_ar'] as String?,
+            name_en: row['name_en'] as String?,
+            latitude: row['latitude'] as double?,
+            longitude: row['longitude'] as double?,
+            line: row['line'] as String?));
+  }
+
+  @override
+  Future<List<StationEntity>> getStationPickUP(String pickUp) async {
     return _queryAdapter.queryList(
         'SELECT name_ar, latitude, longitude, line FROM metro_stations WHERE name_en = ?1',
         mapper: (Map<String, Object?> row) => StationEntity(station_id: row['station_id'] as int?, name_ar: row['name_ar'] as String?, name_en: row['name_en'] as String?, latitude: row['latitude'] as double?, longitude: row['longitude'] as double?, line: row['line'] as String?),
@@ -146,7 +159,7 @@ class _$MetroStationDao extends MetroStationDao {
   }
 
   @override
-  Future<List<StationEntity>> getAllStationPickDown(String pickDown) async {
+  Future<List<StationEntity>> getStationPickDown(String pickDown) async {
     return _queryAdapter.queryList(
         'SELECT name_ar, latitude, longitude, line FROM metro_stations WHERE name_en = ?1',
         mapper: (Map<String, Object?> row) => StationEntity(station_id: row['station_id'] as int?, name_ar: row['name_ar'] as String?, name_en: row['name_en'] as String?, latitude: row['latitude'] as double?, longitude: row['longitude'] as double?, line: row['line'] as String?),

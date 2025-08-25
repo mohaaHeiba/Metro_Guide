@@ -12,6 +12,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controll = Get.find<HomeController>();
+    final shortestRoute = controll.routes.first;
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -89,13 +90,21 @@ class HomePage extends StatelessWidget {
                 return AnimatedSwitcher(
                   duration: const Duration(milliseconds: 600),
                   child: controll.isCardsAppear.value
-                      ? Container(
-                          child: cardWidget(
-                            context,
-                            controll.pickUp,
-                            controll.pickDown,
-                          ),
-                        )
+                      ? Obx(() {
+                          if (controll.routes.isEmpty) {
+                            return Center(child: Text("No routes found"));
+                          } else {
+                            return cardWidget(
+                              context,
+                              controll.pickUp,
+                              controll.pickDown,
+                              shortestRoute,
+                              controll.getColors(
+                                shortestRoute['totalStations'],
+                              ),
+                            );
+                          }
+                        })
                       : const SizedBox(),
                 );
               }),

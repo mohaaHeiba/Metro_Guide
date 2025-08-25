@@ -2,7 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:metro_guide/presentation/pages/details/details_page.dart';
 
-Widget cardWidget(BuildContext context, final pickUp, final pickDown) {
+Widget cardWidget(
+  BuildContext context,
+  final pickUp,
+  final pickDown,
+  final shortsetRoute,
+  final color,
+) {
+  // final route = shortsetRoute.first;
   return Row(
     children: [
       Expanded(
@@ -23,10 +30,11 @@ Widget cardWidget(BuildContext context, final pickUp, final pickDown) {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.only(top: 16, bottom: 16, left: 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  spacing: 2,
+                  children: [
                     Text(
                       "Journey Details",
                       style: TextStyle(
@@ -37,19 +45,22 @@ Widget cardWidget(BuildContext context, final pickUp, final pickDown) {
                     SizedBox(height: 20),
                     Row(
                       children: [
-                        SizedBox(width: 8),
+                        // SizedBox(width: 8),
                         Text(
-                          "Duration: 25 min",
+                          "Duration:   ${shortsetRoute['time']}" ?? "unknown",
                           style: TextStyle(fontSize: 15),
+                          overflow: TextOverflow.visible,
+                          maxLines: 1,
                         ),
                       ],
                     ),
                     SizedBox(height: 12),
                     Row(
                       children: [
-                        SizedBox(width: 8),
+                        // SizedBox(width: 8),
                         Text(
-                          "Price: 15 EGP",
+                          "Price:         ${shortsetRoute['price']}" ??
+                              "unknown",
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w500,
@@ -60,15 +71,23 @@ Widget cardWidget(BuildContext context, final pickUp, final pickDown) {
                     SizedBox(height: 12),
                     Row(
                       children: [
-                        SizedBox(width: 8),
-                        Text("Stations: 12", style: TextStyle(fontSize: 15)),
+                        // SizedBox(width: 8),
+                        Text(
+                          "Stations:    ${shortsetRoute['totalStations']}" ??
+                              "unknown",
+                          style: TextStyle(fontSize: 15),
+                        ),
                       ],
                     ),
                     SizedBox(height: 12),
                     Row(
                       children: [
-                        SizedBox(width: 8),
-                        Text("Transfers: 1", style: TextStyle(fontSize: 15)),
+                        // SizedBox(width: 8),
+                        Text(
+                          "Transfers:  ${shortsetRoute['type'] == 'direct' ? 1 : 2}" ??
+                              "unknown",
+                          style: TextStyle(fontSize: 15),
+                        ),
                       ],
                     ),
                   ],
@@ -83,6 +102,7 @@ Widget cardWidget(BuildContext context, final pickUp, final pickDown) {
                   Get.to(
                     () => const DetailsPage(),
                     transition: Transition.rightToLeft,
+                    arguments: shortsetRoute,
                   );
                 },
                 style: ElevatedButton.styleFrom(
@@ -115,7 +135,7 @@ Widget cardWidget(BuildContext context, final pickUp, final pickDown) {
           height: 280,
           width: 300,
           decoration: BoxDecoration(
-            color: Colors.amber,
+            color: color,
             borderRadius: BorderRadius.circular(12),
           ),
           child: Padding(
@@ -191,26 +211,33 @@ Widget cardWidget(BuildContext context, final pickUp, final pickDown) {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const SizedBox(height: 8),
-                          Obx(
-                            () => Text(
-                              "From: $pickUp",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 14,
-                              ),
+                          SizedBox(
+                            height: 65,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Obx(
+                                  () => Text(
+                                    "From: $pickUp" ?? "N/A",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ),
+                                Obx(
+                                  () => Text(
+                                    "To: $pickDown" ?? "N/A",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          Obx(
-                            () => Text(
-                              "To: $pickDown",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 14,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 16),
+
                           Padding(
                             padding: const EdgeInsets.only(top: 30),
                             child: Container(
@@ -223,8 +250,8 @@ Widget cardWidget(BuildContext context, final pickUp, final pickDown) {
                                 borderRadius: BorderRadius.circular(8),
                               ),
 
-                              child: const Text(
-                                " EGP",
+                              child: Text(
+                                " EGP  ${shortsetRoute['price']}" ?? "N/A",
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 16,
