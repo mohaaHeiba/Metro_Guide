@@ -127,12 +127,11 @@ class DetailsPage extends StatelessWidget {
       directionText = 'Towards: ${route['direction']}';
     } else if (route['type'] == 'TRANSFER') {
       directionText =
-          'Towards: ${route['direction1']} ⬅ ${route['direction2']}';
+          'Towards: ${route['direction1']} ← ${route['direction2']}';
     } else if (route['type'] == '2 TRANSFER') {
       directionText =
-          '${route['direction1']} ⬅ ${route['direction2']} ⬅ ${route['direction3']}';
+          '${route['direction1']} ← ${route['direction2']} ← ${route['direction3']}';
     } else {
-      directionColor = Colors.grey[400]!;
       directionIcon = Icons.help;
       directionText = 'Direction information not available';
     }
@@ -206,18 +205,20 @@ class DetailsPage extends StatelessWidget {
       List<String> stations = List<String>.from(route['stations']);
 
       stationWidgets.addAll([
-        _buildStationItem(controller.pickUp.value, true, false),
-        ...stations.map((station) => _buildStationItem(station, false, false)),
-        _buildStationItem(controller.pickDown.value, false, true),
+        _buildStationItem(controller.pickUp.value, true, false, context),
+        ...stations.map(
+          (station) => _buildStationItem(station, false, false, context),
+        ),
+        _buildStationItem(controller.pickDown.value, false, true, context),
       ]);
     } else if (route['type'] == 'TRANSFER') {
       // Get part2 list
       List<String> part2 = List<String>.from(route['part2']);
 
       stationWidgets.addAll([
-        _buildStationItem(controller.pickUp.value, true, false),
+        _buildStationItem(controller.pickUp.value, true, false, context),
         ...route['part1'].map(
-          (station) => _buildStationItem(station, false, false),
+          (station) => _buildStationItem(station, false, false, context),
         ),
         _buildTransferItem(
           route['transferAt'],
@@ -225,17 +226,19 @@ class DetailsPage extends StatelessWidget {
           route['line2'],
           context,
         ),
-        ...part2.map((station) => _buildStationItem(station, false, false)),
-        _buildStationItem(controller.pickDown.value, false, true),
+        ...part2.map(
+          (station) => _buildStationItem(station, false, false, context),
+        ),
+        _buildStationItem(controller.pickDown.value, false, true, context),
       ]);
     } else if (route['type'] == '2 TRANSFER') {
       // Get part3 list
       List<String> part3 = List<String>.from(route['part3']);
 
       stationWidgets.addAll([
-        _buildStationItem(controller.pickUp.value, true, false),
+        _buildStationItem(controller.pickUp.value, true, false, context),
         ...route['part1'].map(
-          (station) => _buildStationItem(station, false, false),
+          (station) => _buildStationItem(station, false, false, context),
         ),
         _buildTransferItem(
           route['transfer1At'],
@@ -244,7 +247,7 @@ class DetailsPage extends StatelessWidget {
           context,
         ),
         ...route['part2'].map(
-          (station) => _buildStationItem(station, false, false),
+          (station) => _buildStationItem(station, false, false, context),
         ),
         _buildTransferItem(
           route['transfer2At'],
@@ -252,8 +255,10 @@ class DetailsPage extends StatelessWidget {
           route['line3'],
           context,
         ),
-        ...part3.map((station) => _buildStationItem(station, false, false)),
-        _buildStationItem(controller.pickDown.value, false, true),
+        ...part3.map(
+          (station) => _buildStationItem(station, false, false, context),
+        ),
+        _buildStationItem(controller.pickDown.value, false, true, context),
       ]);
     }
 
@@ -270,7 +275,12 @@ class DetailsPage extends StatelessWidget {
     );
   }
 
-  Widget _buildStationItem(String stationName, bool isStart, bool isEnd) {
+  Widget _buildStationItem(
+    String stationName,
+    bool isStart,
+    bool isEnd,
+    BuildContext context,
+  ) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(

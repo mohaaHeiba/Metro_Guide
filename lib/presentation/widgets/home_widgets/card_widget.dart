@@ -19,9 +19,9 @@ Widget cardWidget(
             borderRadius: BorderRadius.circular(12),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.05),
-                blurRadius: 6,
-                offset: const Offset(0, 3),
+                color: Colors.black.withOpacity(0.4),
+                // offset: Offset(0, 5),
+                blurRadius: 5,
               ),
             ],
           ),
@@ -30,7 +30,10 @@ Widget cardWidget(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 16, bottom: 16, left: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8,
+                  vertical: 16,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   spacing: 2,
@@ -47,7 +50,7 @@ Widget cardWidget(
                       children: [
                         // SizedBox(width: 8),
                         Text(
-                          "Duration:   ${shortsetRoute['time']}" ?? "unknown",
+                          "Duration: ${shortsetRoute['time']}" ?? "unknown",
                           style: TextStyle(fontSize: 15),
                           overflow: TextOverflow.visible,
                           maxLines: 1,
@@ -59,8 +62,7 @@ Widget cardWidget(
                       children: [
                         // SizedBox(width: 8),
                         Text(
-                          "Price:         ${shortsetRoute['price']}" ??
-                              "unknown",
+                          "Price:       ${shortsetRoute['price']}" ?? "unknown",
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w500,
@@ -73,7 +75,7 @@ Widget cardWidget(
                       children: [
                         // SizedBox(width: 8),
                         Text(
-                          "Stations:    ${shortsetRoute['totalStations']}" ??
+                          "Stations:  ${shortsetRoute['totalStations']}" ??
                               "unknown",
                           style: TextStyle(fontSize: 15),
                         ),
@@ -84,7 +86,7 @@ Widget cardWidget(
                       children: [
                         // SizedBox(width: 8),
                         Text(
-                          "Transfers:  ${shortsetRoute['type'] == 'direct' ? 1 : 2}" ??
+                          "Transfers:${shortsetRoute['type'] == 'direct' ? 1 : 2}" ??
                               "unknown",
                           style: TextStyle(fontSize: 15),
                         ),
@@ -135,9 +137,21 @@ Widget cardWidget(
           height: 280,
           width: 300,
           decoration: BoxDecoration(
-            color: color,
             borderRadius: BorderRadius.circular(12),
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [color, color[800]],
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black,
+                // offset: Offset(0, 5),
+                blurRadius: 5,
+              ),
+            ],
           ),
+
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -215,6 +229,7 @@ Widget cardWidget(
                             height: 65,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Obx(
                                   () => Text(

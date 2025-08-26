@@ -124,9 +124,9 @@ class HomeController extends GetxController {
   }
 
   Color getColors(int totalStations) {
-    if (totalStations <= 9) return Colors.amber.withOpacity(0.8);
+    if (totalStations <= 9) return Colors.amber;
     if (totalStations <= 16) return Colors.green;
-    if (totalStations <= 23) return Colors.pinkAccent.withOpacity(0.7);
+    if (totalStations <= 23) return Colors.pink;
     return Colors.brown;
   }
 }
