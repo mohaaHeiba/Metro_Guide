@@ -47,7 +47,7 @@ class HomePage extends StatelessWidget {
 
               Obx(
                 () => controll.isSearch.value
-                    ? textFieldWidget(context)
+                    ? textFieldWidget(context, controll.textfield)
                     : const SizedBox(),
               ),
 

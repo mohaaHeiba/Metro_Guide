@@ -41,6 +41,7 @@ dependencies:
   url_launcher: ^6.3.2
 
   geolocator: ^14.0.2
+  geocoding: ^4.0.0
 
   flutter_native_splash: ^2.4.6
   floor: ^1.5.0

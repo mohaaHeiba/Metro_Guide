@@ -5,12 +5,12 @@ import 'package:metro_guide/presentation/controllers/controllers.dart';
 class FindRoutes {
   final controll = Get.find<HomeController>();
 
-  List<StationEntity>? _cachedStations;
+  List<StationEntity>? cachedStations;
 
   Future<List<StationEntity>> _getData() async {
-    if (_cachedStations != null) return _cachedStations!;
-    _cachedStations = await controll.getData();
-    return _cachedStations!;
+    if (cachedStations != null) return cachedStations!;
+    cachedStations = await controll.getData();
+    return cachedStations!;
   }
 
   int _getPrice(int totalStation) {

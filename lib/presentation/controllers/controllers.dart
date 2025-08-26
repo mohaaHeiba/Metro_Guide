@@ -2,10 +2,13 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:metro_guide/core/services/location_service.dart';
 import 'package:metro_guide/data/datasources/station_database.dart';
 import 'package:metro_guide/domain/entities/station_entity.dart';
+import 'package:metro_guide/domain/use_cases/find_nearest_station.dart';
 import 'package:metro_guide/domain/use_cases/find_routes.dart';
 import 'package:metro_guide/presentation/pages/history/history_page.dart';
 import 'package:metro_guide/presentation/pages/home/home_page.dart';
@@ -47,6 +50,7 @@ class SettingsController extends GetxController {
 class HomeController extends GetxController {
   final cont1 = TextEditingController();
   final cont2 = TextEditingController();
+  final textfield = TextEditingController();
 
   final isCardsAppear = false.obs;
   final isSearch = false.obs;
@@ -55,6 +59,7 @@ class HomeController extends GetxController {
 
   final pickUp = ''.obs;
   final pickDown = ''.obs;
+
   final routes = <Map<String, dynamic>>[].obs;
 
   void toggelSearch() {
@@ -80,6 +85,14 @@ class HomeController extends GetxController {
   }
 
   final stations = [].obs;
+
+  Future<void> loadDataBase() async {
+    final dbController = Get.find<DatabaseController>();
+    final data = await dbController.database.metrostationdao
+        .getallStationArabic();
+    stations.addAll(data);
+    print(stations);
+  }
 
   @override
   void onInit() {
@@ -117,14 +130,6 @@ class HomeController extends GetxController {
     });
   }
 
-  Future<void> loadDataBase() async {
-    final dbController = Get.find<DatabaseController>();
-    final data = await dbController.database.metrostationdao
-        .getallStationArabic();
-    stations.addAll(data);
-    print(stations);
-  }
-
   Color getColors(int totalStations) {
     if (totalStations <= 9) return Colors.amber;
     if (totalStations <= 16) return Colors.green;
@@ -142,8 +147,84 @@ class HomeController extends GetxController {
         "Current location: ${position.latitude}, ${position.longitude}",
         Colors.green,
       );
+
+      final stationEntities = await getData();
+
+      final findNearestStation = FindNearestStation(
+        latitude: position.latitude,
+        longitude: position.longitude,
+      );
+
+      final nearest = findNearestStation.findNearestStation(stationEntities);
+      cont1.text = nearest.name_ar ?? "try again";
+      print("Nearest Station: ${nearest.name_ar}");
+
+      showSnackBar(
+        "Nearest Station",
+        "You are near: ${nearest.name_ar}",
+        Colors.blue,
+      );
     } catch (e) {
-      showSnackBar("Error s", "$e", Colors.red);
+      showSnackBar("Error", "$e", Colors.red);
+    }
+  }
+
+  Future<Position?> getCoordinatesFromAddress(String street) async {
+    try {
+      List<Location> locations = await locationFromAddress(street);
+
+      if (locations.isNotEmpty) {
+        Location location = locations.first;
+        return Position(
+          latitude: location.latitude,
+          longitude: location.longitude,
+          timestamp: DateTime.now(),
+          accuracy: 0.0,
+          altitude: 0.0,
+          heading: 0.0,
+          speed: 0.0,
+          speedAccuracy: 0.0,
+          altitudeAccuracy: 0.0,
+          headingAccuracy: 0.0,
+        );
+      }
+      return null;
+    } catch (e) {
+      // print(e);
+
+      showSnackBar(
+        'Error',
+        "Error getting coordinates from address: $e",
+        Colors.red[600]!,
+      );
+      return null;
+    }
+  }
+
+  Future<void> getNearestStationForPickDown(String street) async {
+    try {
+      final position = await getCoordinatesFromAddress(street);
+      if (position == null) return;
+
+      final stationEntities = await getData(); // List<StationEntity>
+      final findNearestStation = FindNearestStation(
+        latitude: position.latitude,
+        longitude: position.longitude,
+      );
+
+      final nearest = findNearestStation.findNearestStation(stationEntities);
+
+      cont2.text = nearest.name_ar ?? "try again";
+      // print("Nearest Station: ${nearest.name_ar}");
+
+      showSnackBar(
+        "Nearest Station",
+        "You are near: ${nearest.name_ar}",
+        Colors.blue,
+      );
+    } catch (e) {
+      // print(e);
+      showSnackBar("Error", "$e", Colors.red);
     }
   }
 }

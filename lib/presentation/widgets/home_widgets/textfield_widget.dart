@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:metro_guide/presentation/controllers/controllers.dart';
 
-Widget textFieldWidget(BuildContext context) {
+Widget textFieldWidget(BuildContext context, controllText) {
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: 10),
     child: Container(
@@ -14,6 +16,7 @@ Widget textFieldWidget(BuildContext context) {
         ],
       ),
       child: TextField(
+        controller: controllText,
         decoration: InputDecoration(
           filled: true,
           fillColor: Theme.of(context).colorScheme.primaryContainer,
@@ -43,7 +46,12 @@ Widget textFieldWidget(BuildContext context) {
             vertical: 15,
           ),
           suffixIcon: IconButton(
-            onPressed: () {},
+            onPressed: () async {
+              final homeController = Get.find<HomeController>();
+              await homeController.getNearestStationForPickDown(
+                controllText.text,
+              );
+            },
             icon: Icon(Icons.search, color: Theme.of(context).iconTheme.color),
           ),
         ),
