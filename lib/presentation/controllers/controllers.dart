@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:metro_guide/core/services/location_service.dart';
 import 'package:metro_guide/data/datasources/station_database.dart';
 import 'package:metro_guide/domain/entities/station_entity.dart';
 import 'package:metro_guide/domain/use_cases/find_routes.dart';
@@ -10,6 +11,7 @@ import 'package:metro_guide/presentation/pages/history/history_page.dart';
 import 'package:metro_guide/presentation/pages/home/home_page.dart';
 import 'package:metro_guide/presentation/pages/map/map_page.dart';
 import 'package:metro_guide/presentation/pages/settings/settings_page.dart';
+import 'package:metro_guide/presentation/widgets/custom_widgets/snackbar_widget.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 
@@ -128,6 +130,21 @@ class HomeController extends GetxController {
     if (totalStations <= 16) return Colors.green;
     if (totalStations <= 23) return Colors.pink;
     return Colors.brown;
+  }
+
+  final locationService = LocationService();
+
+  Future<void> getCurrentLocation() async {
+    try {
+      final position = await locationService.determinePosition();
+      showSnackBar(
+        "Your Location",
+        "Current location: ${position.latitude}, ${position.longitude}",
+        Colors.green,
+      );
+    } catch (e) {
+      showSnackBar("Error s", "$e", Colors.red);
+    }
   }
 }
 

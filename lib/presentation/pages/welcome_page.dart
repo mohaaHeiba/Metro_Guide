@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:metro_guide/core/services/location_service.dart';
 import 'package:metro_guide/presentation/navigationbar/navigationbar_page.dart';
 
 class WelcomePage extends StatelessWidget {
   WelcomePage({super.key});
 
   final login = GetStorage();
+  final locationService = LocationService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,6 +42,7 @@ class WelcomePage extends StatelessWidget {
               onPressed: () async {
                 login.write("loginBefore", true);
                 Get.off(NavigationbarPage(), transition: Transition.fadeIn);
+                await locationService.determinePosition();
               },
               child: const Text(
                 "Get Started",

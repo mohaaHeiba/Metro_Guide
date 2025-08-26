@@ -145,7 +145,7 @@ Widget cardWidget(
             ),
             boxShadow: [
               BoxShadow(
-                color: Colors.black,
+                color: Colors.black.withOpacity(0.6),
                 // offset: Offset(0, 5),
                 blurRadius: 5,
               ),

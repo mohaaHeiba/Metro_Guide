@@ -11,6 +11,7 @@ Widget dropDown(
   var cont,
   final isEnbeld,
 ) {
+  final controll = Get.find<HomeController>();
   return SizedBox(
     child: Row(
       children: [
@@ -77,7 +78,12 @@ Widget dropDown(
           ),
         ),
         appearIcon2
-            ? IconButton(onPressed: () {}, icon: Icon(Icons.my_location))
+            ? IconButton(
+                onPressed: () async {
+                  await controll.getCurrentLocation();
+                },
+                icon: Icon(Icons.my_location),
+              )
             : SizedBox(),
         IconButton(onPressed: () {}, icon: icon),
       ],
