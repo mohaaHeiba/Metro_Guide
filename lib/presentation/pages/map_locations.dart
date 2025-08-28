@@ -5,8 +5,8 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:metro_guide/core/services/cached_tile_provider.dart';
+import 'package:metro_guide/generated/l10n.dart';
 import 'package:metro_guide/presentation/controllers/controllers.dart';
-import 'package:flutter_map_tile_caching/flutter_map_tile_caching.dart';
 
 class MapLocations extends StatelessWidget {
   final cont;
@@ -24,7 +24,7 @@ class MapLocations extends StatelessWidget {
         }
         final center = snapshot.data!;
         return Scaffold(
-          appBar: AppBar(title: const Text("اختيار الموقع")),
+          appBar: AppBar(title: Text(S.of(context).select_location)),
           body: Column(
             children: [
               Padding(
@@ -34,8 +34,8 @@ class MapLocations extends StatelessWidget {
                     Expanded(
                       child: TextField(
                         controller: controll.searchController,
-                        decoration: const InputDecoration(
-                          hintText: "ابحث عن مكان...",
+                        decoration: InputDecoration(
+                          hintText: S.of(context).search_location,
                           border: OutlineInputBorder(),
                         ),
                         onSubmitted: (query) => controll.searchLocation(query),
@@ -82,7 +82,6 @@ class MapLocations extends StatelessWidget {
               final picked = controll.mapController.center;
 
               try {
-                // 1. هات العنوان من الإحداثيات
                 final placemarks = await placemarkFromCoordinates(
                   picked.latitude,
                   picked.longitude,
@@ -92,10 +91,7 @@ class MapLocations extends StatelessWidget {
                     "${place.street}, ${place.locality}, ${place.country}";
 
                 Get.back();
-                // 2. هات أقرب محطة واكتب النتيجة في الـ controller المناسب
                 await controll.getNearestStationForPickDown(address, cont);
-
-                // ✨ 3. رجّع البيانات للصفحة اللي قبلها (بعد ما تخلص)
               } catch (e) {
                 print(e);
                 Get.snackbar(
@@ -106,7 +102,7 @@ class MapLocations extends StatelessWidget {
                 );
               }
             },
-            label: const Text("تأكيد الموقع"),
+            label: Text(S.of(context).select_location),
             icon: const Icon(Icons.check),
           ),
           floatingActionButtonLocation:

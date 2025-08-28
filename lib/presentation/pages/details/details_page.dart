@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
+import 'package:metro_guide/generated/l10n.dart';
 import 'package:metro_guide/presentation/controllers/controllers.dart';
 import 'package:metro_guide/presentation/widgets/details_widgets/summarycard_widget.dart';
 
@@ -14,7 +15,7 @@ class DetailsPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primaryContainer,
         title: Text(
-          'Route Details',
+          S.of(context).route_details,
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -23,7 +24,7 @@ class DetailsPage extends StatelessWidget {
       body: routeData.isEmpty
           ? Center(
               child: Text(
-                'No routes found',
+                S.of(context).no_routes_found,
                 style: TextStyle(fontSize: 18, color: Colors.grey[400]),
               ),
             )
@@ -39,7 +40,7 @@ class DetailsPage extends StatelessWidget {
 
                   // Shortest Route Details
                   Text(
-                    'Route Details',
+                    S.of(context).route_details,
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 16),
@@ -86,7 +87,11 @@ class DetailsPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
-                  route['type'],
+                  route['type'] == 'direct'
+                      ? S.of(context).direct_route
+                      : route['type'] == 'transfer'
+                      ? S.of(context).tranfers
+                      : S.of(context).tranfers_2,
                   style: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
@@ -95,7 +100,7 @@ class DetailsPage extends StatelessWidget {
               ),
               const Spacer(),
               Text(
-                '${route['price']} EGP',
+                '${route['price']} ${S.of(context).egp}',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ],
@@ -127,13 +132,13 @@ class DetailsPage extends StatelessWidget {
       directionText = 'Towards: ${route['direction']}';
     } else if (route['type'] == 'TRANSFER') {
       directionText =
-          'Towards: ${route['direction1']} ← ${route['direction2']}';
+          'Towards: ${route['direction1']} → ${route['direction2']}';
     } else if (route['type'] == '2 TRANSFER') {
       directionText =
-          '${route['direction1']} ← ${route['direction2']} ← ${route['direction3']}';
+          '${S.of(context).towards}: ${route['direction1']} → ${route['direction2']} → ${route['direction3']}';
     } else {
       directionIcon = Icons.help;
-      directionText = 'Direction information not available';
+      directionText = S.of(context).no_routes_found;
     }
 
     return Container(
@@ -172,7 +177,7 @@ class DetailsPage extends StatelessWidget {
         Expanded(
           child: buildInfoItem(
             Icons.access_time,
-            'Time',
+            S.of(context).duration,
             route['time'],
             Theme.of(context).colorScheme.primary,
           ),
@@ -180,7 +185,7 @@ class DetailsPage extends StatelessWidget {
         Expanded(
           child: buildInfoItem(
             Icons.straighten,
-            'Stations',
+            S.of(context).stations,
             '${route['totalStations']}',
             Theme.of(context).colorScheme.primary,
           ),
@@ -188,7 +193,7 @@ class DetailsPage extends StatelessWidget {
         Expanded(
           child: buildInfoItem(
             Icons.route,
-            'Type',
+            S.of(context).type,
             route['type'],
             Theme.of(context).colorScheme.primary,
           ),
@@ -266,7 +271,7 @@ class DetailsPage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Route Path',
+          S.of(context).route_path,
           style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 12),
@@ -317,7 +322,7 @@ class DetailsPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
-                'START',
+                S.of(context).start,
                 style: TextStyle(
                   color: Colors.green[400],
                   fontSize: 10,
@@ -333,7 +338,7 @@ class DetailsPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
-                'END',
+                S.of(context).end,
                 style: TextStyle(
                   color: Colors.red[400],
                   fontSize: 10,
@@ -376,7 +381,7 @@ class DetailsPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'TRANSFER at $transferStation',
+                    '${S.of(context).transfer_at} $transferStation',
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.scrim,
 

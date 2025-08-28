@@ -36,11 +36,16 @@ class MessageLookup extends MessageLookupByLibrary {
       "Book your journey with ease",
     ),
     "change": MessageLookupByLibrary.simpleMessage("Change"),
+    "confirme_location": MessageLookupByLibrary.simpleMessage(
+      "confirme location",
+    ),
     "contact_us": MessageLookupByLibrary.simpleMessage("Contact Us"),
     "contact_us_desc": MessageLookupByLibrary.simpleMessage(
       "You can reach us via email anytime. We will get back to you as soon as possible.",
     ),
     "dark_mode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
+    "direct_route": MessageLookupByLibrary.simpleMessage("Direct Route"),
+    "distance": MessageLookupByLibrary.simpleMessage("Distance"),
     "duration": MessageLookupByLibrary.simpleMessage("Duration:"),
     "egp": MessageLookupByLibrary.simpleMessage("EGP"),
     "email_error": MessageLookupByLibrary.simpleMessage(
@@ -53,6 +58,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Call 911 for emergencies or use emergency phones on platforms",
     ),
     "en": MessageLookupByLibrary.simpleMessage("English"),
+    "end": MessageLookupByLibrary.simpleMessage("END"),
     "from": MessageLookupByLibrary.simpleMessage("From"),
     "from_card": MessageLookupByLibrary.simpleMessage("From:"),
     "get_started": MessageLookupByLibrary.simpleMessage("Get Started"),
@@ -81,6 +87,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "prohibited_actions_desc": MessageLookupByLibrary.simpleMessage(
       "Smoking, carrying flammable materials, and vandalism are prohibited",
     ),
+    "route_details": MessageLookupByLibrary.simpleMessage("Route Details"),
+    "route_path": MessageLookupByLibrary.simpleMessage("Route Path"),
     "safety_guidelines": MessageLookupByLibrary.simpleMessage(
       "Safety Guidelines",
     ),
@@ -90,12 +98,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "search_location": MessageLookupByLibrary.simpleMessage(
       "Search for a location...",
     ),
+    "select_location": MessageLookupByLibrary.simpleMessage("Select location"),
     "select_route": MessageLookupByLibrary.simpleMessage("Select Your Route"),
     "send_email": MessageLookupByLibrary.simpleMessage("Send Email"),
     "service_status": MessageLookupByLibrary.simpleMessage("Service Status"),
     "show_more": MessageLookupByLibrary.simpleMessage("Show More"),
     "show_ticket": MessageLookupByLibrary.simpleMessage("Show Ticket"),
     "show_ticket_card": MessageLookupByLibrary.simpleMessage("Metro \nTicket"),
+    "start": MessageLookupByLibrary.simpleMessage("START"),
     "stations": MessageLookupByLibrary.simpleMessage("Stations:"),
     "status_all_operational": MessageLookupByLibrary.simpleMessage(
       "All lines operational",
@@ -106,7 +116,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "to": MessageLookupByLibrary.simpleMessage("To"),
     "to_card": MessageLookupByLibrary.simpleMessage("To:"),
+    "towards": MessageLookupByLibrary.simpleMessage("Towards"),
+    "tranfers": MessageLookupByLibrary.simpleMessage("2_transfer"),
+    "tranfers_2": MessageLookupByLibrary.simpleMessage("Double Transfer Route"),
+    "transfer_at": MessageLookupByLibrary.simpleMessage("TRANSFER at"),
     "transfers": MessageLookupByLibrary.simpleMessage("Transfers:"),
+    "type": MessageLookupByLibrary.simpleMessage("Type"),
     "unknown": MessageLookupByLibrary.simpleMessage("UnKnown "),
     "valid": MessageLookupByLibrary.simpleMessage("Valid"),
     "view_full_map": MessageLookupByLibrary.simpleMessage("View Full Map"),

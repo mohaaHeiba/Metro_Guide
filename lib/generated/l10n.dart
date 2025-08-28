@@ -252,6 +252,76 @@ class S {
 
   // skipped getter for the 'details page' key
 
+  /// `Direct Route`
+  String get direct_route {
+    return Intl.message(
+      'Direct Route',
+      name: 'direct_route',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `2_transfer`
+  String get tranfers {
+    return Intl.message('2_transfer', name: 'tranfers', desc: '', args: []);
+  }
+
+  /// `Double Transfer Route`
+  String get tranfers_2 {
+    return Intl.message(
+      'Double Transfer Route',
+      name: 'tranfers_2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Distance`
+  String get distance {
+    return Intl.message('Distance', name: 'distance', desc: '', args: []);
+  }
+
+  /// `Route Details`
+  String get route_details {
+    return Intl.message(
+      'Route Details',
+      name: 'route_details',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Towards`
+  String get towards {
+    return Intl.message('Towards', name: 'towards', desc: '', args: []);
+  }
+
+  /// `Type`
+  String get type {
+    return Intl.message('Type', name: 'type', desc: '', args: []);
+  }
+
+  /// `Route Path`
+  String get route_path {
+    return Intl.message('Route Path', name: 'route_path', desc: '', args: []);
+  }
+
+  /// `START`
+  String get start {
+    return Intl.message('START', name: 'start', desc: '', args: []);
+  }
+
+  /// `END`
+  String get end {
+    return Intl.message('END', name: 'end', desc: '', args: []);
+  }
+
+  /// `TRANSFER at`
+  String get transfer_at {
+    return Intl.message('TRANSFER at', name: 'transfer_at', desc: '', args: []);
+  }
+
   // skipped getter for the 'instructions page' key
 
   /// `View Full Map`
@@ -437,6 +507,26 @@ class S {
   // skipped getter for the 'history page' key
 
   // skipped getter for the 'map page' key
+
+  /// `Select location`
+  String get select_location {
+    return Intl.message(
+      'Select location',
+      name: 'select_location',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `confirme location`
+  String get confirme_location {
+    return Intl.message(
+      'confirme location',
+      name: 'confirme_location',
+      desc: '',
+      args: [],
+    );
+  }
 
   // skipped getter for the 'settings page' key
 

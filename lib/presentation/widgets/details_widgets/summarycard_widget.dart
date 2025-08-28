@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:metro_guide/generated/l10n.dart';
 
 Widget summaryCardWidget(Map<String, dynamic> route, BuildContext context) {
   return Container(
@@ -48,10 +49,10 @@ Widget summaryCardWidget(Map<String, dynamic> route, BuildContext context) {
                 children: [
                   Text(
                     route['type'] == 'direct'
-                        ? 'Direct Route'
+                        ? S.of(context).direct_route
                         : route['type'] == 'transfer'
-                        ? '2_transfer'
-                        : 'Double Transfer Route',
+                        ? S.of(context).tranfers
+                        : S.of(context).tranfers_2,
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.primary,
                       fontSize: 18,
@@ -59,7 +60,7 @@ Widget summaryCardWidget(Map<String, dynamic> route, BuildContext context) {
                     ),
                   ),
                   Text(
-                    '${route['totalStations']} stations',
+                    '${route['totalStations']} ${S.of(context).stations}',
                     style: TextStyle(
                       color: Theme.of(
                         context,
@@ -78,7 +79,7 @@ Widget summaryCardWidget(Map<String, dynamic> route, BuildContext context) {
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Text(
-                '${route['price']} EGP',
+                '${route['price']} ${S.of(context).egp}',
                 style: const TextStyle(
                   // color: Colors.white,
                   fontSize: 16,
@@ -94,7 +95,7 @@ Widget summaryCardWidget(Map<String, dynamic> route, BuildContext context) {
             Expanded(
               child: buildInfoItem(
                 Icons.access_time,
-                'Duration',
+                S.of(context).duration,
                 route['time'],
                 Theme.of(context).colorScheme.primary,
               ),
@@ -103,7 +104,7 @@ Widget summaryCardWidget(Map<String, dynamic> route, BuildContext context) {
             Expanded(
               child: buildInfoItem(
                 Icons.straighten,
-                'Distance',
+                S.of(context).distance,
                 '${route['totalStations']} stations',
                 Theme.of(context).colorScheme.primary,
               ),

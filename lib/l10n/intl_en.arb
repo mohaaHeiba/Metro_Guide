@@ -42,22 +42,33 @@
 
   "details page":"______________________________________________________________________",
 
+    "direct_route":"Direct Route",
+    "tranfers":"2_transfer",
+    "tranfers_2":"Double Transfer Route",
+    "distance":"Distance",
+    "route_details":"Route Details",
+    "towards":"Towards",
+    "type":"Type",
+    "route_path":"Route Path",
+    "start":"START",
+    "end":"END",
+    "transfer_at":"TRANSFER at",
 
 
   "instructions page":"______________________________________________________________________",
 
 
 
-  "view_full_map": "View Full Map",
-  "instructions": "Instructions",
-  "operating_hours": "Operating Hours",
-  "service_status": "Service Status",
-  "last_updated": "Last Updated",
-  "hours": "5:00 AM - 12:00 AM",
-  "status_all_operational": "All lines operational",
-  "just_now": "Just now",
+    "view_full_map": "View Full Map",
+    "instructions": "Instructions",
+    "operating_hours": "Operating Hours",
+    "service_status": "Service Status",
+    "last_updated": "Last Updated",
+    "hours": "5:00 AM - 12:00 AM",
+    "status_all_operational": "All lines operational",
+    "just_now": "Just now",
 
-   "ticketing": "Ticketing",
+    "ticketing": "Ticketing",
     "ticketing_desc": "Use contactless cards or tokens at entry gates",
     "safety_guidelines": "Safety Guidelines",
     "safety_guidelines_desc": "Stand behind the yellow line, hold the handrail on escalators",
@@ -80,7 +91,8 @@
 
   "map page":"______________________________________________________________________",
 
-
+    "select_location":"Select location",
+    "confirme_location":"confirme location",
 
 
 
