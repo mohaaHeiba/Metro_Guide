@@ -105,7 +105,7 @@ Widget summaryCardWidget(Map<String, dynamic> route, BuildContext context) {
               child: buildInfoItem(
                 Icons.straighten,
                 S.of(context).distance,
-                '${route['totalStations']} stations',
+                '${route['totalStations']} ${S.of(context).stations}',
                 Theme.of(context).colorScheme.primary,
               ),
             ),

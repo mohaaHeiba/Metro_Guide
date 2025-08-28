@@ -132,10 +132,10 @@ class DetailsPage extends StatelessWidget {
       directionText = '${S.of(context).towards}: ${route['direction']}';
     } else if (route['type'] == 'TRANSFER') {
       directionText =
-          '${S.of(context).towards} ${route['direction1']} → ${route['direction2']}';
+          '${S.of(context).towards}: ${route['direction1']} ${S.of(context).symbol} ${route['direction2']}';
     } else if (route['type'] == '2 TRANSFER') {
       directionText =
-          '${S.of(context).towards}: ${route['direction1']} → ${route['direction2']} → ${route['direction3']}';
+          '${S.of(context).towards}: ${route['direction1']} ${S.of(context).symbol} ${route['direction2']} ${S.of(context).symbol} ${route['direction3']}';
     } else {
       directionIcon = Icons.help;
       directionText = S.of(context).no_routes_found;
@@ -194,7 +194,11 @@ class DetailsPage extends StatelessWidget {
           child: buildInfoItem(
             Icons.route,
             S.of(context).type,
-            route['type'],
+            route['type'] == 'DIRECT'
+                ? S.of(context).direct_route
+                : route['type'] == 'TRANSFER'
+                ? S.of(context).tranfers
+                : S.of(context).tranfers_2,
             Theme.of(context).colorScheme.primary,
           ),
         ),

@@ -322,6 +322,11 @@ class S {
     return Intl.message('TRANSFER at', name: 'transfer_at', desc: '', args: []);
   }
 
+  /// `→`
+  String get symbol {
+    return Intl.message('→', name: 'symbol', desc: '', args: []);
+  }
+
   // skipped getter for the 'instructions page' key
 
   /// `View Full Map`

@@ -53,6 +53,7 @@
     "start":"START",
     "end":"END",
     "transfer_at":"TRANSFER at",
+    "symbol":"→",
 
 
   "instructions page":"______________________________________________________________________",

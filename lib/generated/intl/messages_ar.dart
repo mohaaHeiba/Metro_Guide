@@ -106,6 +106,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "status_all_operational": MessageLookupByLibrary.simpleMessage(
       "جميع الخطوط تعمل",
     ),
+    "symbol": MessageLookupByLibrary.simpleMessage("←"),
     "ticketing": MessageLookupByLibrary.simpleMessage("التذاكر"),
     "ticketing_desc": MessageLookupByLibrary.simpleMessage(
       "استخدم البطاقات بدون تلامس أو الرموز عند بوابات الدخول",

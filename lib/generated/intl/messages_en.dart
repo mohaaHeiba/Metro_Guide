@@ -110,6 +110,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "status_all_operational": MessageLookupByLibrary.simpleMessage(
       "All lines operational",
     ),
+    "symbol": MessageLookupByLibrary.simpleMessage("→"),
     "ticketing": MessageLookupByLibrary.simpleMessage("Ticketing"),
     "ticketing_desc": MessageLookupByLibrary.simpleMessage(
       "Use contactless cards or tokens at entry gates",
