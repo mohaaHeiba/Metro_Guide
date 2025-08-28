@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:metro_guide/generated/l10n.dart';
 import 'package:metro_guide/presentation/navigationbar/navigationbar_page.dart'
     show NavigationbarPage;
 import 'package:metro_guide/presentation/pages/welcome_page.dart';
@@ -13,6 +15,16 @@ class MyApp extends StatelessWidget {
     final loginbefore = GetStorage().read("loginBefore") ?? false;
 
     return GetMaterialApp(
+      // localization
+      localizationsDelegates: [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: S.delegate.supportedLocales,
+
+      // theme
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.light,
