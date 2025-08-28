@@ -50,6 +50,7 @@ Widget textFieldWidget(BuildContext context, controllText) {
               final homeController = Get.find<HomeController>();
               await homeController.getNearestStationForPickDown(
                 controllText.text,
+                homeController.cont2,
               );
             },
             icon: Icon(Icons.search, color: Theme.of(context).iconTheme.color),

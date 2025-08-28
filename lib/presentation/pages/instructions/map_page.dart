@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:metro_guide/presentation/pages/map/Instructions_page.dart';
-import 'package:metro_guide/presentation/pages/map/fullmap_page.dart';
+import 'package:metro_guide/presentation/pages/instructions/Instructions_page.dart';
+import 'package:metro_guide/presentation/pages/instructions/fullmap_page.dart';
 import 'package:metro_guide/presentation/widgets/map_widgets/infocars_widget.dart';
 
 class MapPage extends StatelessWidget {
@@ -12,14 +12,14 @@ class MapPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        physics:AlwaysScrollableScrollPhysics(),
+        physics: AlwaysScrollableScrollPhysics(),
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
             children: [
               const SizedBox(),
               const SizedBox(height: 20),
-              
+
               // Map container
               Container(
                 height: 280,
@@ -96,7 +96,6 @@ class MapPage extends StatelessWidget {
                   ),
                 ],
               ),
-
             ],
           ),
         ),
@@ -104,28 +103,19 @@ class MapPage extends StatelessWidget {
     );
   }
 
-
-  Widget _buildActionButton(
-    BuildContext context,
-    String text,
-    IconData icon,
-  ) {
+  Widget _buildActionButton(BuildContext context, String text, IconData icon) {
     return ElevatedButton(
       onPressed: () {
         if (text == 'View Full Map') {
-          
-          Get.to(const FullMapPage(),transition: Transition.downToUp);
+          Get.to(const FullMapPage(), transition: Transition.downToUp);
         } else {
-          Get.to(const InstructionsPage(),transition: Transition.downToUp);
-
+          Get.to(const InstructionsPage(), transition: Transition.downToUp);
         }
       },
       style: ElevatedButton.styleFrom(
         minimumSize: const Size(double.infinity, 50),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        padding: EdgeInsets.all(0)
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        padding: EdgeInsets.all(0),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -134,14 +124,10 @@ class MapPage extends StatelessWidget {
           const SizedBox(width: 8),
           Text(
             text,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-            ),
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
           ),
         ],
       ),
     );
   }
-
 }

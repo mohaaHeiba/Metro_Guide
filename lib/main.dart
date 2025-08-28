@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_map_tile_caching/flutter_map_tile_caching.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:metro_guide/app.dart';
@@ -12,6 +13,7 @@ Future<void> main() async {
   await initi.initDatabase();
 
   Get.put(HomeController(), permanent: true);
+
   Get.put(NavigationController(), permanent: true);
   Get.put(SettingsController(), permanent: true);
 

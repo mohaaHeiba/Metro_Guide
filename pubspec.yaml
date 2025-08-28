@@ -46,6 +46,18 @@ dependencies:
   flutter_native_splash: ^2.4.6
   floor: ^1.5.0
   path_provider: ^2.1.5
+  flutter_osm_plugin: ^1.4.2
+  osm_nominatim: ^4.0.1
+
+  open_street_map_search_and_pick: ^0.1.1
+  flutter_map_tile_caching: 9.0.1
+
+  flutter_cache_manager: ^3.4.1
+  cached_network_image: ^3.2.3
+
+dependency_overrides:
+  flutter_lints: ^5.0.0
+  geolocator: ^14.0.2
 
 
 dev_dependencies:

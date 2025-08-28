@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:metro_guide/presentation/controllers/controllers.dart';
+import 'package:metro_guide/presentation/pages/map_locations.dart';
 
 Widget dropDown(
   String label,
@@ -70,7 +71,7 @@ Widget dropDown(
 
                 hintText: label,
                 onSelected: (a) {
-                  cont = a;
+                  cont.text = a;
                   print(cont);
                 },
               ),
@@ -85,7 +86,15 @@ Widget dropDown(
                 icon: Icon(Icons.my_location),
               )
             : SizedBox(),
-        IconButton(onPressed: () {}, icon: icon),
+        IconButton(
+          onPressed: () {
+            Get.to(
+              MapLocations(cont: cont),
+              transition: Transition.rightToLeft,
+            );
+          },
+          icon: icon,
+        ),
       ],
     ),
   );
