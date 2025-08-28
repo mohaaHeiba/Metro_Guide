@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:metro_guide/core/services/location_service.dart';
 import 'package:metro_guide/data/datasources/station_database.dart';
 import 'package:metro_guide/domain/entities/station_entity.dart';
@@ -35,10 +36,16 @@ class NavigationController extends GetxController {
 class SettingsController extends GetxController {
   var isDarkMode = false.obs;
   var isArabic = false.obs;
+  final box = GetStorage();
+  final theme = GetStorage();
 
   void toggleTheme() {
     isDarkMode.value = !isDarkMode.value;
-    Get.changeThemeMode(isDarkMode.value ? ThemeMode.dark : ThemeMode.light);
+
+    final dark = isDarkMode.value ? ThemeMode.dark : ThemeMode.light;
+
+    theme.write('theme', isDarkMode.value ? 'dark' : 'light');
+    Get.changeThemeMode(dark);
   }
 
   void toggleLanguage() {
@@ -46,7 +53,16 @@ class SettingsController extends GetxController {
     var locale = isArabic.value
         ? const Locale('ar', 'EG')
         : const Locale('en', 'US');
+
+    box.write('lang', isArabic.value ? 'ar' : 'en');
+
     Get.updateLocale(locale);
+  }
+
+  void onInit() {
+    super.onInit();
+    final storedTheme = box.read('theme') ?? 'light';
+    isDarkMode.value = storedTheme == 'dark';
   }
 }
 
@@ -85,7 +101,11 @@ class HomeController extends GetxController {
     pickDown.value = cont2.text;
 
     final FindRoutes findRoute = FindRoutes();
-    final result = await findRoute.findRoutes(pickUp.value, pickDown.value);
+    final result = await findRoute.findRoutes(
+      pickUp.value,
+      pickDown.value,
+      context,
+    );
     routes.assignAll(result);
 
     print("Found routes: $routes");

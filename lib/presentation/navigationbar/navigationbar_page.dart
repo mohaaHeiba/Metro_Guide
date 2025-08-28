@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:metro_guide/generated/l10n.dart';
 import 'package:metro_guide/presentation/controllers/controllers.dart';
 
 class NavigationbarPage extends StatelessWidget {
@@ -23,15 +24,21 @@ class NavigationbarPage extends StatelessWidget {
           onTap: (index) => controller.currentIndex.value = index,
           type: BottomNavigationBarType.fixed,
           items: [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-            BottomNavigationBarItem(icon: Icon(Icons.map), label: "Map"),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: S.of(context).nav_home,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.map),
+              label: S.of(context).nav_instructions,
+            ),
             BottomNavigationBarItem(
               icon: Icon(Icons.history),
-              label: "History",
+              label: S.of(context).nav_history,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.settings),
-              label: "Settings",
+              label: S.of(context).nav_history,
             ),
           ],
           selectedItemColor: Theme.of(context).colorScheme.onPrimaryContainer,

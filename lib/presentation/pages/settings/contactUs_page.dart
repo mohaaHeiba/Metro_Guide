@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:metro_guide/generated/l10n.dart';
 import 'package:metro_guide/presentation/widgets/custom_widgets/snackbar_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -8,7 +9,7 @@ class ContactUsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Contact Us'), centerTitle: true),
+      appBar: AppBar(title: Text(S.of(context).contact_us), centerTitle: true),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -16,20 +17,20 @@ class ContactUsPage extends StatelessWidget {
           children: [
             const Icon(Icons.email_outlined, size: 80),
             const SizedBox(height: 20),
-            const Text(
-              'Need Help?',
+            Text(
+              S.of(context).need_help,
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
-            const Text(
-              'You can reach us via email anytime. We will get back to you as soon as possible.',
+            Text(
+              S.of(context).contact_us_desc,
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 30),
             ElevatedButton.icon(
               icon: const Icon(Icons.send),
-              label: const Text('Send Email'),
+              label: Text(S.of(context).send_email),
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 50),
                 textStyle: const TextStyle(fontSize: 18),
@@ -44,7 +45,7 @@ class ContactUsPage extends StatelessWidget {
                 if (await canLaunchUrl(emailUri)) {
                   await launchUrl(emailUri);
                 } else {
-                  showSnackBar("Error", "could not lunch Email", Colors.red);
+                  showSnackBar("Error", S.of(context).email_error, Colors.red);
                 }
               },
             ),

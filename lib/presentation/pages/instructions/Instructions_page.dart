@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:metro_guide/generated/l10n.dart';
 
 class InstructionsPage extends StatelessWidget {
   const InstructionsPage({super.key});
@@ -8,57 +9,56 @@ class InstructionsPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        title: const Text(
-          'Metro Instructions',
-        
-        ),
+        title: Text(S.of(context).instructions),
         backgroundColor: Theme.of(context).colorScheme.primaryContainer,
         elevation: 0,
         centerTitle: true,
-        iconTheme: IconThemeData(color: Theme.of(context).colorScheme.onSecondaryContainer),
+        iconTheme: IconThemeData(
+          color: Theme.of(context).colorScheme.onSecondaryContainer,
+        ),
       ),
       body: ListView(
         padding: const EdgeInsets.all(10),
         children: [
           _buildInstructionCard(
             context,
-            'Operating Hours',
-            '5:00 AM to 12:00 AM daily',
+            S.of(context).operating_hours,
+            S.of(context).hours,
             Icons.access_time,
           ),
           const SizedBox(height: 10),
           _buildInstructionCard(
             context,
-            'Ticketing',
-            'Use contactless cards or tokens at entry gates',
+            S.of(context).ticketing,
+            S.of(context).ticketing_desc,
             Icons.credit_card,
           ),
           const SizedBox(height: 10),
           _buildInstructionCard(
             context,
-            'Safety Guidelines',
-            'Stand behind the yellow line, hold the handrail on escalators',
+            S.of(context).safety_guidelines,
+            S.of(context).safety_guidelines_desc,
             Icons.security,
           ),
           const SizedBox(height: 10),
           _buildInstructionCard(
             context,
-            'Prohibited Actions',
-            'Smoking, carrying flammable materials, and vandalism are prohibited',
+            S.of(context).prohibited_actions,
+            S.of(context).prohibited_actions_desc,
             Icons.block,
           ),
           const SizedBox(height: 10),
           _buildInstructionCard(
             context,
-            'Emergency Contacts',
-            'Call 911 for emergencies or use emergency phones on platforms',
+            S.of(context).emergency_contacts,
+            S.of(context).emergency_contacts_desc,
             Icons.emergency,
           ),
           const SizedBox(height: 10),
           _buildInstructionCard(
             context,
-            'Accessibility',
-            'All stations are wheelchair accessible with elevators and ramps',
+            S.of(context).accessibility,
+            S.of(context).accessibility_desc,
             Icons.accessible,
           ),
         ],
@@ -66,7 +66,12 @@ class InstructionsPage extends StatelessWidget {
     );
   }
 
-  Widget _buildInstructionCard(BuildContext context, String title, String subtitle, IconData icon) {
+  Widget _buildInstructionCard(
+    BuildContext context,
+    String title,
+    String subtitle,
+    IconData icon,
+  ) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -85,7 +90,9 @@ class InstructionsPage extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.onPrimaryContainer.withOpacity(0.2),
+              color: Theme.of(
+                context,
+              ).colorScheme.onPrimaryContainer.withOpacity(0.2),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Icon(
@@ -111,7 +118,9 @@ class InstructionsPage extends StatelessWidget {
                   subtitle,
                   style: TextStyle(
                     fontSize: 14,
-                    color: Theme.of(context).colorScheme.primary.withOpacity(0.7),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.primary.withOpacity(0.7),
                     height: 1.4,
                   ),
                 ),

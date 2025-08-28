@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:metro_guide/generated/l10n.dart';
 import 'package:metro_guide/presentation/pages/details/details_page.dart';
 
 Widget cardWidget(
@@ -39,7 +40,7 @@ Widget cardWidget(
                   spacing: 2,
                   children: [
                     Text(
-                      "Journey Details",
+                      S.of(context).journey_details,
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -50,7 +51,8 @@ Widget cardWidget(
                       children: [
                         // SizedBox(width: 8),
                         Text(
-                          "Duration: ${shortsetRoute['time']}" ?? "unknown",
+                          "${S.of(context).duration} ${shortsetRoute['time']}" ??
+                              S.of(context).unknown,
                           style: TextStyle(fontSize: 15),
                           overflow: TextOverflow.visible,
                           maxLines: 1,
@@ -62,7 +64,8 @@ Widget cardWidget(
                       children: [
                         // SizedBox(width: 8),
                         Text(
-                          "Price:       ${shortsetRoute['price']}" ?? "unknown",
+                          "${S.of(context).price}       ${shortsetRoute['price']}" ??
+                              S.of(context).unknown,
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w500,
@@ -75,8 +78,8 @@ Widget cardWidget(
                       children: [
                         // SizedBox(width: 8),
                         Text(
-                          "Stations:  ${shortsetRoute['totalStations']}" ??
-                              "unknown",
+                          "${S.of(context).stations}:  ${shortsetRoute['totalStations']}" ??
+                              S.of(context).unknown,
                           style: TextStyle(fontSize: 15),
                         ),
                       ],
@@ -86,8 +89,8 @@ Widget cardWidget(
                       children: [
                         // SizedBox(width: 8),
                         Text(
-                          "Transfers:${shortsetRoute['type'] == 'direct' ? 1 : 2}" ??
-                              "unknown",
+                          "${S.of(context).transfers}:${shortsetRoute['type'] == 'direct' ? 1 : 2}" ??
+                              S.of(context).unknown,
                           style: TextStyle(fontSize: 15),
                         ),
                       ],
@@ -115,9 +118,9 @@ Widget cardWidget(
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
+                  children: [
                     Text(
-                      'Show More',
+                      S.of(context).show_more,
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 16,
@@ -180,8 +183,8 @@ Widget cardWidget(
                         color: Colors.white.withOpacity(0.2),
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: const Text(
-                        "Valid",
+                      child: Text(
+                        S.of(context).valid,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 10,
@@ -217,8 +220,8 @@ Widget cardWidget(
                         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           const SizedBox(height: 20),
-                          const Text(
-                            "Metro \nTicket",
+                          Text(
+                            S.of(context).show_ticket_card,
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 20,
@@ -233,7 +236,8 @@ Widget cardWidget(
                               children: [
                                 Obx(
                                   () => Text(
-                                    "From: $pickUp" ?? "N/A",
+                                    "${S.of(context).from_card}: $pickUp" ??
+                                        S.of(context).unknown,
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 14,
@@ -242,7 +246,8 @@ Widget cardWidget(
                                 ),
                                 Obx(
                                   () => Text(
-                                    "To: $pickDown" ?? "N/A",
+                                    "${S.of(context).from_card}: $pickDown" ??
+                                        S.of(context).unknown,
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 14,
@@ -266,7 +271,8 @@ Widget cardWidget(
                               ),
 
                               child: Text(
-                                " EGP  ${shortsetRoute['price']}" ?? "N/A",
+                                " ${S.of(context).egp}  ${shortsetRoute['price']}" ??
+                                    S.of(context).unknown,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 16,

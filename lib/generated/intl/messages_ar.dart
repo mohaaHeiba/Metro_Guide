@@ -21,5 +21,94 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{};
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "about": MessageLookupByLibrary.simpleMessage("حول التطبيق"),
+    "accessibility": MessageLookupByLibrary.simpleMessage("إمكانية الوصول"),
+    "accessibility_desc": MessageLookupByLibrary.simpleMessage(
+      "جميع المحطات مناسبة للكراسي المتحركة مع مصاعد ومنحدرات",
+    ),
+    "app_desc": MessageLookupByLibrary.simpleMessage(
+      "رفيقك الذكي للسفر بالمترو.\nاعثر على المسارات والمحطات وأوقات الوصول بسهولة.",
+    ),
+    "app_name": MessageLookupByLibrary.simpleMessage("دليل المترو"),
+    "ar": MessageLookupByLibrary.simpleMessage("العربية"),
+    "book_journey": MessageLookupByLibrary.simpleMessage("احجز رحلتك بسهولة"),
+    "change": MessageLookupByLibrary.simpleMessage("تغيير"),
+    "contact_us": MessageLookupByLibrary.simpleMessage("اتصل بنا"),
+    "contact_us_desc": MessageLookupByLibrary.simpleMessage(
+      "يمكنك التواصل معنا عبر البريد الإلكتروني في أي وقت. سنعود إليك في أقرب وقت ممكن.",
+    ),
+    "dark_mode": MessageLookupByLibrary.simpleMessage("الوضع الليلي"),
+    "duration": MessageLookupByLibrary.simpleMessage("المدة:"),
+    "egp": MessageLookupByLibrary.simpleMessage("جنية"),
+    "email_error": MessageLookupByLibrary.simpleMessage(
+      "تعذر إرسال البريد الإلكتروني",
+    ),
+    "emergency_contacts": MessageLookupByLibrary.simpleMessage(
+      "جهات الاتصال للطوارئ",
+    ),
+    "emergency_contacts_desc": MessageLookupByLibrary.simpleMessage(
+      "اتصل بـ 911 للطوارئ أو استخدم هواتف الطوارئ على الأرصفة",
+    ),
+    "en": MessageLookupByLibrary.simpleMessage("الإنجليزية"),
+    "from": MessageLookupByLibrary.simpleMessage("من"),
+    "from_card": MessageLookupByLibrary.simpleMessage("من"),
+    "get_started": MessageLookupByLibrary.simpleMessage("ابدأ الآن"),
+    "hour": MessageLookupByLibrary.simpleMessage("ساعة"),
+    "hours": MessageLookupByLibrary.simpleMessage("5:00 ص - 12:00 م"),
+    "instructions": MessageLookupByLibrary.simpleMessage("التعليمات"),
+    "journey_details": MessageLookupByLibrary.simpleMessage("تفاصيل الرحلة"),
+    "just_now": MessageLookupByLibrary.simpleMessage("الآن"),
+    "language": MessageLookupByLibrary.simpleMessage("اللغة"),
+    "last_updated": MessageLookupByLibrary.simpleMessage("آخر تحديث"),
+    "light_mode": MessageLookupByLibrary.simpleMessage("الوضع النهاري"),
+    "metro_map": MessageLookupByLibrary.simpleMessage("خريطة المترو"),
+    "metro_ticket": MessageLookupByLibrary.simpleMessage("تذكرة المترو"),
+    "min": MessageLookupByLibrary.simpleMessage("دقايق"),
+    "nav_history": MessageLookupByLibrary.simpleMessage("السجل"),
+    "nav_home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
+    "nav_instructions": MessageLookupByLibrary.simpleMessage("التعليمات"),
+    "nav_settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
+    "need_help": MessageLookupByLibrary.simpleMessage("تحتاج مساعدة؟"),
+    "no_routes_found": MessageLookupByLibrary.simpleMessage(
+      "لم يتم العثور على مسارات",
+    ),
+    "operating_hours": MessageLookupByLibrary.simpleMessage("ساعات العمل"),
+    "price": MessageLookupByLibrary.simpleMessage("السعر:"),
+    "prohibited_actions": MessageLookupByLibrary.simpleMessage(
+      "الأفعال المحظورة",
+    ),
+    "prohibited_actions_desc": MessageLookupByLibrary.simpleMessage(
+      "ممنوع التدخين، حمل المواد القابلة للاشتعال، والتخريب",
+    ),
+    "safety_guidelines": MessageLookupByLibrary.simpleMessage(
+      "إرشادات السلامة",
+    ),
+    "safety_guidelines_desc": MessageLookupByLibrary.simpleMessage(
+      "قف خلف الخط الأصفر، وتمسك بالدرابزين على السلالم المتحركة",
+    ),
+    "search_location": MessageLookupByLibrary.simpleMessage("ابحث عن موقع..."),
+    "select_route": MessageLookupByLibrary.simpleMessage("اختر مسارك"),
+    "send_email": MessageLookupByLibrary.simpleMessage("إرسال بريد إلكتروني"),
+    "service_status": MessageLookupByLibrary.simpleMessage("حالة الخدمة"),
+    "show_more": MessageLookupByLibrary.simpleMessage("عرض المزيد"),
+    "show_ticket": MessageLookupByLibrary.simpleMessage("عرض التذكرة"),
+    "show_ticket_card": MessageLookupByLibrary.simpleMessage("عرض \nالتذكرة"),
+    "stations": MessageLookupByLibrary.simpleMessage("المحطات"),
+    "status_all_operational": MessageLookupByLibrary.simpleMessage(
+      "جميع الخطوط تعمل",
+    ),
+    "ticketing": MessageLookupByLibrary.simpleMessage("التذاكر"),
+    "ticketing_desc": MessageLookupByLibrary.simpleMessage(
+      "استخدم البطاقات بدون تلامس أو الرموز عند بوابات الدخول",
+    ),
+    "to": MessageLookupByLibrary.simpleMessage("الي"),
+    "to_card": MessageLookupByLibrary.simpleMessage("إلى"),
+    "transfers": MessageLookupByLibrary.simpleMessage("التحويلات"),
+    "unknown": MessageLookupByLibrary.simpleMessage("غير معروف"),
+    "valid": MessageLookupByLibrary.simpleMessage("صالح"),
+    "view_full_map": MessageLookupByLibrary.simpleMessage(
+      "عرض الخريطة الكاملة",
+    ),
+  };
 }

@@ -1,1 +1,107 @@
-{}
+{
+  "welcom page":"______________________________________________________________________",
+
+    "app_name": "Metro Guide",
+    "app_desc": "Your smart companion for metro travel.\nFind routes, stations, and arrival times easily.",
+    "get_started": "Get Started",
+
+
+  "Navigation page":"______________________________________________________________________",
+
+    "nav_home": "Home",
+    "nav_instructions": "Instructions",
+    "nav_history": "History",
+    "nav_settings": "Settings",
+
+
+  "Home page":"______________________________________________________________________",
+
+    "metro_ticket": "Metro Ticket",
+    "book_journey": "Book your journey with ease",
+    "select_route": "Select Your Route",    
+    "from":"From",
+    "to":"To",
+    "show_ticket":"Show Ticket",
+    "no_routes_found":"No routes found",    
+    "search_location":"Search for a location...",   
+    "journey_details": "Journey Details",
+    "duration": "Duration:",
+    "price": "Price:",
+    "stations": "Stations:",
+    "transfers": "Transfers:",
+    "show_more": "Show More",
+    "show_ticket_card": "Metro \nTicket",
+    "from_card": "From:",
+    "to_card": "To:",
+    "valid": "Valid",
+    "unknown":"UnKnown ",
+    "egp":"EGP",
+    "min":"min",
+    "hour":"hr",
+
+
+  "details page":"______________________________________________________________________",
+
+
+
+  "instructions page":"______________________________________________________________________",
+
+
+
+  "view_full_map": "View Full Map",
+  "instructions": "Instructions",
+  "operating_hours": "Operating Hours",
+  "service_status": "Service Status",
+  "last_updated": "Last Updated",
+  "hours": "5:00 AM - 12:00 AM",
+  "status_all_operational": "All lines operational",
+  "just_now": "Just now",
+
+   "ticketing": "Ticketing",
+    "ticketing_desc": "Use contactless cards or tokens at entry gates",
+    "safety_guidelines": "Safety Guidelines",
+    "safety_guidelines_desc": "Stand behind the yellow line, hold the handrail on escalators",
+    "prohibited_actions": "Prohibited Actions",
+    "prohibited_actions_desc": "Smoking, carrying flammable materials, and vandalism are prohibited",
+    "emergency_contacts": "Emergency Contacts",
+    "emergency_contacts_desc": "Call 911 for emergencies or use emergency phones on platforms",
+    "accessibility": "Accessibility",
+    "accessibility_desc": "All stations are wheelchair accessible with elevators and ramps"
+,
+    
+  "metro_map":"Full Metro Map",
+
+
+  "history page":"______________________________________________________________________",
+
+
+
+
+
+  "map page":"______________________________________________________________________",
+
+
+
+
+
+
+  "settings page":"______________________________________________________________________",
+  
+
+    "dark_mode": "Dark Mode",
+    "light_mode":"Light Mode",
+    "language": "Language",
+    "change": "Change",
+    "ar": "Arabic",
+    "en": "English",
+    "contact_us": "Contact Us",
+    "about": "About",
+
+    "need_help": "Need Help?",
+    "contact_us_desc": "You can reach us via email anytime. We will get back to you as soon as possible.",
+    "send_email": "Send Email",
+    "email_error": "Could not launch Email"
+
+
+
+}

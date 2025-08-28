@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:metro_guide/generated/l10n.dart';
 
 Widget headerWidget(dynamic context) {
   return Column(
@@ -28,11 +29,11 @@ Widget headerWidget(dynamic context) {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Metro Ticket",
+                  S.of(context).metro_ticket,
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  "Book your journey with ease",
+                  S.of(context).book_journey,
                   style: TextStyle(fontSize: 14),
                 ),
               ],
@@ -42,7 +43,7 @@ Widget headerWidget(dynamic context) {
       ),
       const SizedBox(height: 30),
       Text(
-        "Select Your Route",
+        S.of(context).select_route,
         style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
       ),
     ],

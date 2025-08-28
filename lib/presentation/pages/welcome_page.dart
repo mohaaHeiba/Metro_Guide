@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:metro_guide/core/services/location_service.dart';
+import 'package:metro_guide/generated/l10n.dart';
+import 'package:metro_guide/presentation/controllers/controllers.dart';
 import 'package:metro_guide/presentation/navigationbar/navigationbar_page.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -10,6 +12,7 @@ class WelcomePage extends StatelessWidget {
 
   final login = GetStorage();
   final locationService = LocationService();
+  final controller = Get.find<SettingsController>();
 
   @override
   Widget build(BuildContext context) {
@@ -21,12 +24,12 @@ class WelcomePage extends StatelessWidget {
             Image.asset("assets/images/logo.png", width: 220, height: 220),
             const SizedBox(height: 30),
             Text(
-              "Metro Guide",
+              S.of(context).app_name,
               style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 15),
             Text(
-              "Your smart companion for metro travel.\nFind routes, stations, and arrival times easily.",
+              S.of(context).app_desc,
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 16),
             ),
@@ -44,9 +47,21 @@ class WelcomePage extends StatelessWidget {
                 Get.off(NavigationbarPage(), transition: Transition.fadeIn);
                 await locationService.determinePosition();
               },
-              child: const Text(
-                "Get Started",
+              child: Text(
+                S.of(context).get_started,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+              ),
+            ),
+
+            const SizedBox(height: 30),
+
+            // زر تغيير اللغة
+            ElevatedButton(
+              onPressed: () {
+                controller.toggleLanguage();
+              },
+              child: Obx(
+                () => Text(controller.isArabic.value ? 'English' : "عربي"),
               ),
             ),
           ],

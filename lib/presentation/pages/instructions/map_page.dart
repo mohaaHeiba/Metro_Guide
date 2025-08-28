@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:metro_guide/generated/l10n.dart';
 import 'package:metro_guide/presentation/pages/instructions/Instructions_page.dart';
 import 'package:metro_guide/presentation/pages/instructions/fullmap_page.dart';
 import 'package:metro_guide/presentation/widgets/map_widgets/infocars_widget.dart';
@@ -62,7 +63,7 @@ class MapPage extends StatelessWidget {
                   Expanded(
                     child: _buildActionButton(
                       context,
-                      'Instructions',
+                      S.of(context).instructions,
                       Icons.info_outline,
                     ),
                   ),
@@ -76,22 +77,22 @@ class MapPage extends StatelessWidget {
                 children: [
                   infocardWidget(
                     context,
-                    'Operating Hours',
-                    '5:00 AM - 12:00 AM',
+                    S.of(context).operating_hours,
+                    S.of(context).hour,
                     Icons.access_time,
                   ),
                   const SizedBox(height: 10),
                   infocardWidget(
                     context,
-                    'Service Status',
-                    'All lines operational',
+                    S.of(context).service_status,
+                    S.of(context).status_all_operational,
                     Icons.check_circle,
                   ),
                   const SizedBox(height: 10),
                   infocardWidget(
                     context,
-                    'Last Updated',
-                    'Just now',
+                    S.of(context).last_updated,
+                    S.of(context).just_now,
                     Icons.update,
                   ),
                 ],

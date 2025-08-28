@@ -53,6 +53,462 @@ class S {
   static S? maybeOf(BuildContext context) {
     return Localizations.of<S>(context, S);
   }
+
+  // skipped getter for the 'welcom page' key
+
+  /// `Metro Guide`
+  String get app_name {
+    return Intl.message('Metro Guide', name: 'app_name', desc: '', args: []);
+  }
+
+  /// `Your smart companion for metro travel.\nFind routes, stations, and arrival times easily.`
+  String get app_desc {
+    return Intl.message(
+      'Your smart companion for metro travel.\nFind routes, stations, and arrival times easily.',
+      name: 'app_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Get Started`
+  String get get_started {
+    return Intl.message('Get Started', name: 'get_started', desc: '', args: []);
+  }
+
+  // skipped getter for the 'Navigation page' key
+
+  /// `Home`
+  String get nav_home {
+    return Intl.message('Home', name: 'nav_home', desc: '', args: []);
+  }
+
+  /// `Instructions`
+  String get nav_instructions {
+    return Intl.message(
+      'Instructions',
+      name: 'nav_instructions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `History`
+  String get nav_history {
+    return Intl.message('History', name: 'nav_history', desc: '', args: []);
+  }
+
+  /// `Settings`
+  String get nav_settings {
+    return Intl.message('Settings', name: 'nav_settings', desc: '', args: []);
+  }
+
+  // skipped getter for the 'Home page' key
+
+  /// `Metro Ticket`
+  String get metro_ticket {
+    return Intl.message(
+      'Metro Ticket',
+      name: 'metro_ticket',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Book your journey with ease`
+  String get book_journey {
+    return Intl.message(
+      'Book your journey with ease',
+      name: 'book_journey',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Your Route`
+  String get select_route {
+    return Intl.message(
+      'Select Your Route',
+      name: 'select_route',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `From`
+  String get from {
+    return Intl.message('From', name: 'from', desc: '', args: []);
+  }
+
+  /// `To`
+  String get to {
+    return Intl.message('To', name: 'to', desc: '', args: []);
+  }
+
+  /// `Show Ticket`
+  String get show_ticket {
+    return Intl.message('Show Ticket', name: 'show_ticket', desc: '', args: []);
+  }
+
+  /// `No routes found`
+  String get no_routes_found {
+    return Intl.message(
+      'No routes found',
+      name: 'no_routes_found',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search for a location...`
+  String get search_location {
+    return Intl.message(
+      'Search for a location...',
+      name: 'search_location',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Journey Details`
+  String get journey_details {
+    return Intl.message(
+      'Journey Details',
+      name: 'journey_details',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Duration:`
+  String get duration {
+    return Intl.message('Duration:', name: 'duration', desc: '', args: []);
+  }
+
+  /// `Price:`
+  String get price {
+    return Intl.message('Price:', name: 'price', desc: '', args: []);
+  }
+
+  /// `Stations:`
+  String get stations {
+    return Intl.message('Stations:', name: 'stations', desc: '', args: []);
+  }
+
+  /// `Transfers:`
+  String get transfers {
+    return Intl.message('Transfers:', name: 'transfers', desc: '', args: []);
+  }
+
+  /// `Show More`
+  String get show_more {
+    return Intl.message('Show More', name: 'show_more', desc: '', args: []);
+  }
+
+  /// `Metro \nTicket`
+  String get show_ticket_card {
+    return Intl.message(
+      'Metro \nTicket',
+      name: 'show_ticket_card',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `From:`
+  String get from_card {
+    return Intl.message('From:', name: 'from_card', desc: '', args: []);
+  }
+
+  /// `To:`
+  String get to_card {
+    return Intl.message('To:', name: 'to_card', desc: '', args: []);
+  }
+
+  /// `Valid`
+  String get valid {
+    return Intl.message('Valid', name: 'valid', desc: '', args: []);
+  }
+
+  /// `UnKnown `
+  String get unknown {
+    return Intl.message('UnKnown ', name: 'unknown', desc: '', args: []);
+  }
+
+  /// `EGP`
+  String get egp {
+    return Intl.message('EGP', name: 'egp', desc: '', args: []);
+  }
+
+  /// `min`
+  String get min {
+    return Intl.message('min', name: 'min', desc: '', args: []);
+  }
+
+  /// `hr`
+  String get hour {
+    return Intl.message('hr', name: 'hour', desc: '', args: []);
+  }
+
+  // skipped getter for the 'details page' key
+
+  // skipped getter for the 'instructions page' key
+
+  /// `View Full Map`
+  String get view_full_map {
+    return Intl.message(
+      'View Full Map',
+      name: 'view_full_map',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Instructions`
+  String get instructions {
+    return Intl.message(
+      'Instructions',
+      name: 'instructions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Operating Hours`
+  String get operating_hours {
+    return Intl.message(
+      'Operating Hours',
+      name: 'operating_hours',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Service Status`
+  String get service_status {
+    return Intl.message(
+      'Service Status',
+      name: 'service_status',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last Updated`
+  String get last_updated {
+    return Intl.message(
+      'Last Updated',
+      name: 'last_updated',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `5:00 AM - 12:00 AM`
+  String get hours {
+    return Intl.message(
+      '5:00 AM - 12:00 AM',
+      name: 'hours',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All lines operational`
+  String get status_all_operational {
+    return Intl.message(
+      'All lines operational',
+      name: 'status_all_operational',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Just now`
+  String get just_now {
+    return Intl.message('Just now', name: 'just_now', desc: '', args: []);
+  }
+
+  /// `Ticketing`
+  String get ticketing {
+    return Intl.message('Ticketing', name: 'ticketing', desc: '', args: []);
+  }
+
+  /// `Use contactless cards or tokens at entry gates`
+  String get ticketing_desc {
+    return Intl.message(
+      'Use contactless cards or tokens at entry gates',
+      name: 'ticketing_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Safety Guidelines`
+  String get safety_guidelines {
+    return Intl.message(
+      'Safety Guidelines',
+      name: 'safety_guidelines',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Stand behind the yellow line, hold the handrail on escalators`
+  String get safety_guidelines_desc {
+    return Intl.message(
+      'Stand behind the yellow line, hold the handrail on escalators',
+      name: 'safety_guidelines_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Prohibited Actions`
+  String get prohibited_actions {
+    return Intl.message(
+      'Prohibited Actions',
+      name: 'prohibited_actions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Smoking, carrying flammable materials, and vandalism are prohibited`
+  String get prohibited_actions_desc {
+    return Intl.message(
+      'Smoking, carrying flammable materials, and vandalism are prohibited',
+      name: 'prohibited_actions_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Emergency Contacts`
+  String get emergency_contacts {
+    return Intl.message(
+      'Emergency Contacts',
+      name: 'emergency_contacts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Call 911 for emergencies or use emergency phones on platforms`
+  String get emergency_contacts_desc {
+    return Intl.message(
+      'Call 911 for emergencies or use emergency phones on platforms',
+      name: 'emergency_contacts_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Accessibility`
+  String get accessibility {
+    return Intl.message(
+      'Accessibility',
+      name: 'accessibility',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All stations are wheelchair accessible with elevators and ramps`
+  String get accessibility_desc {
+    return Intl.message(
+      'All stations are wheelchair accessible with elevators and ramps',
+      name: 'accessibility_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Full Metro Map`
+  String get metro_map {
+    return Intl.message(
+      'Full Metro Map',
+      name: 'metro_map',
+      desc: '',
+      args: [],
+    );
+  }
+
+  // skipped getter for the 'history page' key
+
+  // skipped getter for the 'map page' key
+
+  // skipped getter for the 'settings page' key
+
+  /// `Dark Mode`
+  String get dark_mode {
+    return Intl.message('Dark Mode', name: 'dark_mode', desc: '', args: []);
+  }
+
+  /// `Light Mode`
+  String get light_mode {
+    return Intl.message('Light Mode', name: 'light_mode', desc: '', args: []);
+  }
+
+  /// `Language`
+  String get language {
+    return Intl.message('Language', name: 'language', desc: '', args: []);
+  }
+
+  /// `Change`
+  String get change {
+    return Intl.message('Change', name: 'change', desc: '', args: []);
+  }
+
+  /// `Arabic`
+  String get ar {
+    return Intl.message('Arabic', name: 'ar', desc: '', args: []);
+  }
+
+  /// `English`
+  String get en {
+    return Intl.message('English', name: 'en', desc: '', args: []);
+  }
+
+  /// `Contact Us`
+  String get contact_us {
+    return Intl.message('Contact Us', name: 'contact_us', desc: '', args: []);
+  }
+
+  /// `About`
+  String get about {
+    return Intl.message('About', name: 'about', desc: '', args: []);
+  }
+
+  /// `Need Help?`
+  String get need_help {
+    return Intl.message('Need Help?', name: 'need_help', desc: '', args: []);
+  }
+
+  /// `You can reach us via email anytime. We will get back to you as soon as possible.`
+  String get contact_us_desc {
+    return Intl.message(
+      'You can reach us via email anytime. We will get back to you as soon as possible.',
+      name: 'contact_us_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send Email`
+  String get send_email {
+    return Intl.message('Send Email', name: 'send_email', desc: '', args: []);
+  }
+
+  /// `Could not launch Email`
+  String get email_error {
+    return Intl.message(
+      'Could not launch Email',
+      name: 'email_error',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

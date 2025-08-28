@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:metro_guide/generated/l10n.dart';
 import 'package:metro_guide/presentation/controllers/controllers.dart';
 import 'package:metro_guide/presentation/pages/settings/contactUs_page.dart';
 
@@ -21,7 +22,7 @@ class SettingsPage extends StatelessWidget {
 
             Obx(
               () => SwitchListTile(
-                title: const Text("Dark Mode"),
+                title: Text(S.of(context).dark_mode),
                 value: controller.isDarkMode.value,
                 onChanged: (value) => controller.toggleTheme(),
                 secondary: const Icon(Icons.brightness_6),
@@ -35,11 +36,11 @@ class SettingsPage extends StatelessWidget {
               () => ListTile(
                 leading: const Icon(Icons.language),
                 title: Text(
-                  "Language: ${controller.isArabic.value ? "العربية" : "English"}",
+                  "${S.of(context).language}: ${controller.isArabic.value ? S.of(context).ar : S.of(context).en}",
                 ),
                 trailing: ElevatedButton(
                   onPressed: () => controller.toggleLanguage(),
-                  child: const Text("Change"),
+                  child: Text(S.of(context).change),
                 ),
               ),
             ),
@@ -48,7 +49,8 @@ class SettingsPage extends StatelessWidget {
 
             ListTile(
               leading: const Icon(Icons.email),
-              title: const Text("Coutact Us"),
+              title: Text(S.of(context).contact_us),
+
               onTap: () {
                 Get.to(ContactUsPage(), transition: Transition.rightToLeft);
               },
@@ -59,8 +61,8 @@ class SettingsPage extends StatelessWidget {
             // ℹ️ About App
             ListTile(
               leading: const Icon(Icons.info),
-              title: const Text("About"),
-              subtitle: const Text("Metro Guide v1.0.0"),
+              title: Text(S.of(context).about),
+              subtitle: Text("Metro Guide v1.0.0"),
               onTap: () {
                 showAboutDialog(
                   context: context,

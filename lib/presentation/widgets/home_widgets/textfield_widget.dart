@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:metro_guide/generated/l10n.dart';
 import 'package:metro_guide/presentation/controllers/controllers.dart';
 
 Widget textFieldWidget(BuildContext context, controllText) {
@@ -20,7 +21,7 @@ Widget textFieldWidget(BuildContext context, controllText) {
         decoration: InputDecoration(
           filled: true,
           fillColor: Theme.of(context).colorScheme.primaryContainer,
-          hintText: "Where do you wanna to go",
+          hintText: S.of(context).search_location,
           hintStyle: TextStyle(
             color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
           ),

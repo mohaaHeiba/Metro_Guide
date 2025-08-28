@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:metro_guide/generated/l10n.dart';
 import 'package:metro_guide/presentation/controllers/controllers.dart';
 import 'package:metro_guide/presentation/widgets/home_widgets/card_widget.dart';
 import 'package:metro_guide/presentation/widgets/home_widgets/dropdown_widget.dart';
@@ -24,7 +25,7 @@ class HomePage extends StatelessWidget {
               headerWidget(context),
               const SizedBox(height: 10),
               dropDown(
-                "From",
+                S.of(context).from,
                 Icon(Icons.location_on),
                 context,
                 true,
@@ -35,7 +36,7 @@ class HomePage extends StatelessWidget {
               const SizedBox(height: 20),
 
               dropDown(
-                "to",
+                S.of(context).to,
                 Icon(Icons.location_on_outlined),
                 context,
                 false,
@@ -76,7 +77,7 @@ class HomePage extends StatelessWidget {
                     minimumSize: Size(double.infinity, 50),
                   ),
                   child: Text(
-                    "Show Ticket",
+                    S.of(context).show_ticket,
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.normal,
@@ -92,7 +93,9 @@ class HomePage extends StatelessWidget {
                   child: controll.isCardsAppear.value
                       ? Obx(() {
                           if (controll.routes.isEmpty) {
-                            return Center(child: Text("No routes found"));
+                            return Center(
+                              child: Text(S.of(context).no_routes_found),
+                            );
                           } else {
                             return cardWidget(
                               context,

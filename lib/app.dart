@@ -13,6 +13,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loginbefore = GetStorage().read("loginBefore") ?? false;
+    final lang = GetStorage().read("lang") ?? 'en';
+    final theme = GetStorage().read("theme") ?? 'dark';
 
     return GetMaterialApp(
       // localization
@@ -24,6 +26,9 @@ class MyApp extends StatelessWidget {
       ],
       supportedLocales: S.delegate.supportedLocales,
 
+      locale: lang == 'ar'
+          ? const Locale('ar', 'EG')
+          : const Locale('en', 'US'),
       // theme
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -82,7 +87,7 @@ class MyApp extends StatelessWidget {
         ),
         iconTheme: IconThemeData(color: Colors.blue[400], size: 28),
       ),
-      themeMode: ThemeMode.light,
+      themeMode: theme == 'dark' ? ThemeMode.dark : ThemeMode.light,
       home: loginbefore ? NavigationbarPage() : WelcomePage(),
     );
   }
