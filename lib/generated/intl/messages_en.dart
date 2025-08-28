@@ -117,7 +117,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "to": MessageLookupByLibrary.simpleMessage("To"),
     "to_card": MessageLookupByLibrary.simpleMessage("To:"),
     "towards": MessageLookupByLibrary.simpleMessage("Towards"),
-    "tranfers": MessageLookupByLibrary.simpleMessage("2_transfer"),
+    "tranfers": MessageLookupByLibrary.simpleMessage(" Transfer"),
     "tranfers_2": MessageLookupByLibrary.simpleMessage("Double Transfer Route"),
     "transfer_at": MessageLookupByLibrary.simpleMessage("TRANSFER at"),
     "transfers": MessageLookupByLibrary.simpleMessage("Transfers:"),

@@ -101,11 +101,7 @@ class HomeController extends GetxController {
     pickDown.value = cont2.text;
 
     final FindRoutes findRoute = FindRoutes();
-    final result = await findRoute.findRoutes(
-      pickUp.value,
-      pickDown.value,
-      context,
-    );
+    final result = await findRoute.findRoutes(pickUp.value, pickDown.value);
     routes.assignAll(result);
 
     print("Found routes: $routes");

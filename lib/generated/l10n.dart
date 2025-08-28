@@ -262,9 +262,9 @@ class S {
     );
   }
 
-  /// `2_transfer`
+  /// ` Transfer`
   String get tranfers {
-    return Intl.message('2_transfer', name: 'tranfers', desc: '', args: []);
+    return Intl.message(' Transfer', name: 'tranfers', desc: '', args: []);
   }
 
   /// `Double Transfer Route`

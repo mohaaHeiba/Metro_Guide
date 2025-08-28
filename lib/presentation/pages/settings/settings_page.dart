@@ -23,7 +23,7 @@ class SettingsPage extends StatelessWidget {
             Obx(
               () => SwitchListTile(
                 title: Text(S.of(context).dark_mode),
-                value: controller.isDarkMode.value,
+                value: !controller.isDarkMode.value,
                 onChanged: (value) => controller.toggleTheme(),
                 secondary: const Icon(Icons.brightness_6),
               ),

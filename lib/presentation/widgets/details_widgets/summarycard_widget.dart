@@ -48,9 +48,9 @@ Widget summaryCardWidget(Map<String, dynamic> route, BuildContext context) {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    route['type'] == 'direct'
+                    route['type'] == 'DIRECT'
                         ? S.of(context).direct_route
-                        : route['type'] == 'transfer'
+                        : route['type'] == 'TRANSFER'
                         ? S.of(context).tranfers
                         : S.of(context).tranfers_2,
                     style: TextStyle(

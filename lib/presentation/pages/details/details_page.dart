@@ -87,9 +87,9 @@ class DetailsPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
-                  route['type'] == 'direct'
+                  route['type'] == 'DIRECT'
                       ? S.of(context).direct_route
-                      : route['type'] == 'transfer'
+                      : route['type'] == 'TRANSFER'
                       ? S.of(context).tranfers
                       : S.of(context).tranfers_2,
                   style: const TextStyle(
@@ -129,10 +129,10 @@ class DetailsPage extends StatelessWidget {
 
     if (route['type'] == 'DIRECT') {
       directionIcon = Icons.directions_subway;
-      directionText = 'Towards: ${route['direction']}';
+      directionText = '${S.of(context).towards}: ${route['direction']}';
     } else if (route['type'] == 'TRANSFER') {
       directionText =
-          'Towards: ${route['direction1']} → ${route['direction2']}';
+          '${S.of(context).towards} ${route['direction1']} → ${route['direction2']}';
     } else if (route['type'] == '2 TRANSFER') {
       directionText =
           '${S.of(context).towards}: ${route['direction1']} → ${route['direction2']} → ${route['direction3']}';

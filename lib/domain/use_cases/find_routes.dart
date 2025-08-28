@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:metro_guide/domain/entities/station_entity.dart';
 import 'package:metro_guide/generated/l10n.dart';
@@ -21,12 +22,12 @@ class FindRoutes {
     return 20;
   }
 
-  String _getTime(int totalStation, final context) {
+  String _getTime(int totalStation) {
     final totalMinutes = totalStation * 2;
     if (totalMinutes >= 60) {
       final hours = totalMinutes ~/ 60;
       final minutes = totalMinutes % 60;
-      return "$hours ${S.of(context).hour} $minutes ${S.of(context).min}";
+      return "$hours h $minutes min";
     }
     return "$totalMinutes min";
   }
@@ -71,7 +72,6 @@ class FindRoutes {
   Future<List<Map<String, dynamic>>> findRoutes(
     String fromStation,
     String toStation,
-    dynamic context,
   ) async {
     final linesMap = await _getStationsByLine();
     final from = fromStation.toLowerCase();
@@ -105,7 +105,7 @@ class FindRoutes {
           'stations': stations,
           'totalStations': stations.length + 1,
           'price': _getPrice(stations.length + 1),
-          'time': _getTime(stations.length + 1, context),
+          'time': _getTime(stations.length + 1),
         });
       }
     }
@@ -145,7 +145,7 @@ class FindRoutes {
             'part2': part2,
             'totalStations': totalStations,
             'price': _getPrice(totalStations),
-            'time': _getTime(totalStations, context),
+            'time': _getTime(totalStations),
           });
         }
       }
@@ -209,7 +209,7 @@ class FindRoutes {
                   'part3': part3,
                   'totalStations': totalStations,
                   'price': _getPrice(totalStations),
-                  'time': _getTime(totalStations, context),
+                  'time': _getTime(totalStations),
                 });
               }
             }
