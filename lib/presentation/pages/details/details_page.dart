@@ -198,7 +198,7 @@ class DetailsPage extends StatelessWidget {
                 ? S.of(context).direct_route
                 : route['type'] == 'TRANSFER'
                 ? S.of(context).tranfers
-                : S.of(context).tranfers_2,
+                : S.of(context).tranfers,
             Theme.of(context).colorScheme.primary,
           ),
         ),

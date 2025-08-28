@@ -10,11 +10,11 @@ Future<void> main() async {
   await GetStorage.init();
   final initi = Get.put(DatabaseController(), permanent: true);
   await initi.initDatabase();
+  Get.put(SettingsController(), permanent: true);
 
   Get.put(HomeController(), permanent: true);
 
   Get.put(NavigationController(), permanent: true);
-  Get.put(SettingsController(), permanent: true);
 
   runApp(const MyApp());
 }

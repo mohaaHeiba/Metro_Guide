@@ -57,16 +57,34 @@ class SettingsController extends GetxController {
     box.write('lang', isArabic.value ? 'ar' : 'en');
 
     Get.updateLocale(locale);
+
+    final homeController = Get.find<HomeController>();
+    homeController.cont1.clear();
+    homeController.cont2.clear();
+    homeController.isCardsAppear.value = false;
+    homeController.isAppearDropdownMenu2.value = false;
+
+    homeController.loadDataBase();
   }
 
   void onInit() {
     super.onInit();
     final storedTheme = box.read('theme') ?? 'light';
     isDarkMode.value = storedTheme == 'dark';
+
+    final storedLang = box.read('lang') ?? 'ar';
+    isArabic.value = storedLang == 'ar';
+
+    Get.updateLocale(
+      isArabic.value ? const Locale('ar', 'EG') : const Locale('en', 'US'),
+    );
   }
 }
 
 class HomeController extends GetxController {
+  final settings = Get.find<SettingsController>();
+
+  bool get isArabic => settings.isArabic.value;
   // =================== Controllers ===================
   final cont1 = TextEditingController();
   final cont2 = TextEditingController();
@@ -114,9 +132,14 @@ class HomeController extends GetxController {
 
   Future<void> loadDataBase() async {
     final dbController = Get.find<DatabaseController>();
-    final data = await dbController.database.metrostationdao
-        .getallStationArabic();
-    stations.addAll(data);
+    final isArabic = Get.find<SettingsController>().isArabic.value;
+
+    final data = isArabic
+        ? await dbController.database.metrostationdao.getallStationArabic()
+        : await dbController.database.metrostationdao.getallStationEnglish();
+
+    stations.clear();
+    stations.addAll(data.map((s) => s.toString().toLowerCase()).toList());
     print(stations);
   }
 
@@ -128,7 +151,6 @@ class HomeController extends GetxController {
   Future<LatLng> getUserLocation() async {
     final pos = await getlocation();
 
-    // بمجرد ما نجيب اللوكيشن → نجيب أقرب محطة
     final stationEntities = await getData();
     final findNearestStation = FindNearestStation(
       latitude: pos.latitude,
@@ -136,13 +158,10 @@ class HomeController extends GetxController {
     );
 
     final nearest = findNearestStation.findNearestStation(stationEntities);
-    cont1.text = nearest.name_ar ?? "try again";
 
-    showSnackBar(
-      "Nearest Station",
-      "You are near: ${nearest.name_ar}",
-      Colors.blue,
-    );
+    cont1.text = isArabic ? nearest.name_ar ?? "" : nearest.name_en ?? "";
+
+    showSnackBar("Nearest Station", "You are near: ${cont1.text}", Colors.blue);
 
     return LatLng(pos.latitude, pos.longitude);
   }
@@ -176,12 +195,14 @@ class HomeController extends GetxController {
       );
 
       final nearest = findNearestStation.findNearestStation(stationEntities);
-      cont1.text = nearest.name_ar ?? "try again";
-      print("Nearest Station: ${nearest.name_ar}");
+
+      cont1.text = isArabic ? nearest.name_ar ?? "" : nearest.name_en ?? "";
+
+      print("Nearest Station: ${cont1.text}");
 
       showSnackBar(
         "Nearest Station",
-        "You are near: ${nearest.name_ar}",
+        "You are near: ${cont1.text}",
         Colors.blue,
       );
     } catch (e) {
@@ -237,12 +258,14 @@ class HomeController extends GetxController {
 
       // ✅ لو الكنترولر مش null
       if (controlltext != null) {
-        controlltext.text = nearest.name_ar ?? "try again";
+        controlltext.text = isArabic
+            ? nearest.name_ar ?? ""
+            : nearest.name_en ?? "";
       }
 
       showSnackBar(
         "Nearest Station",
-        "You are near: ${nearest.name_ar}",
+        "You are near: ${controlltext!.text}",
         Colors.blue,
       );
     } catch (e) {
@@ -267,24 +290,20 @@ class HomeController extends GetxController {
 
     cont1.addListener(() {
       final text1 = cont1.text.toLowerCase();
-      final text2 = cont2.text.toLowerCase();
-
-      final match1 = stations.any((value) => value.contains(text1));
-      if (match1) {
-        isAppearDropdownMenu2.value = true;
-      }
+      final match1 = stations.any((station) => station.contains(text1));
+      isAppearDropdownMenu2.value = match1;
     });
 
     cont2.addListener(() {
       final text1 = cont1.text.toLowerCase();
       final text2 = cont2.text.toLowerCase();
 
-      final match2 = stations.any((value) => value.contains(text2));
+      final match2 = stations.any((station) => station.contains(text2));
 
       if (text1 == text2) {
         isAppearButton.value = false;
-      } else if (match2) {
-        isAppearButton.value = true;
+      } else {
+        isAppearButton.value = match2;
       }
     });
   }
@@ -306,9 +325,9 @@ class DatabaseController extends GetxController {
 
     database = await $FloorStationDatabase.databaseBuilder(dbPath).build();
 
-    // test: load stations English
-    final data = await database.metrostationdao.getallStationEnglish();
-    print("Stations: $data");
+    // // test: load stations English
+    // final data = await database.metrostationdao.getallStationEnglish();
+    // print("Stations: $data");
   }
 
   Future<void> _copyDatabase() async {
