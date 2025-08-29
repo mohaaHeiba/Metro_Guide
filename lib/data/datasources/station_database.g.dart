@@ -96,7 +96,7 @@ class _$StationDatabase extends StationDatabase {
       },
       onCreate: (database, version) async {
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `metro_stations` (`station_id` INTEGER PRIMARY KEY AUTOINCREMENT, `name_ar` TEXT, `name_en` TEXT, `latitude` REAL, `longitude` REAL, `line` TEXT)');
+            'CREATE TABLE IF NOT EXISTS `metro_stations` (`station_id` INTEGER PRIMARY KEY AUTOINCREMENT, `name_ar` TEXT NOT NULL, `name_en` TEXT NOT NULL, `latitude` REAL NOT NULL, `longitude` REAL NOT NULL, `line` TEXT NOT NULL, `nearestId` INTEGER)');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -124,45 +124,16 @@ class _$MetroStationDao extends MetroStationDao {
   final QueryAdapter _queryAdapter;
 
   @override
-  Future<List<String>> getallStationArabic() async {
-    return _queryAdapter.queryList(
-        'SELECT DISTINCT name_ar from metro_stations',
-        mapper: (Map<String, Object?> row) => row.values.first as String);
-  }
-
-  @override
-  Future<List<String>> getallStationEnglish() async {
-    return _queryAdapter.queryList(
-        'SELECT DISTINCT name_en from metro_stations',
-        mapper: (Map<String, Object?> row) => row.values.first as String);
-  }
-
-  @override
   Future<List<StationEntity>> getallStation() async {
     return _queryAdapter.queryList(
         'SELECT name_ar, name_en, latitude,longitude, line from metro_stations',
         mapper: (Map<String, Object?> row) => StationEntity(
             station_id: row['station_id'] as int?,
-            name_ar: row['name_ar'] as String?,
-            name_en: row['name_en'] as String?,
-            latitude: row['latitude'] as double?,
-            longitude: row['longitude'] as double?,
-            line: row['line'] as String?));
-  }
-
-  @override
-  Future<List<StationEntity>> getStationPickUP(String pickUp) async {
-    return _queryAdapter.queryList(
-        'SELECT name_ar, latitude, longitude, line FROM metro_stations WHERE name_en = ?1',
-        mapper: (Map<String, Object?> row) => StationEntity(station_id: row['station_id'] as int?, name_ar: row['name_ar'] as String?, name_en: row['name_en'] as String?, latitude: row['latitude'] as double?, longitude: row['longitude'] as double?, line: row['line'] as String?),
-        arguments: [pickUp]);
-  }
-
-  @override
-  Future<List<StationEntity>> getStationPickDown(String pickDown) async {
-    return _queryAdapter.queryList(
-        'SELECT name_ar, latitude, longitude, line FROM metro_stations WHERE name_en = ?1',
-        mapper: (Map<String, Object?> row) => StationEntity(station_id: row['station_id'] as int?, name_ar: row['name_ar'] as String?, name_en: row['name_en'] as String?, latitude: row['latitude'] as double?, longitude: row['longitude'] as double?, line: row['line'] as String?),
-        arguments: [pickDown]);
+            name_ar: row['name_ar'] as String,
+            name_en: row['name_en'] as String,
+            latitude: row['latitude'] as double,
+            longitude: row['longitude'] as double,
+            line: row['line'] as String,
+            nearestId: row['nearestId'] as int?));
   }
 }

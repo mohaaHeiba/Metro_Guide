@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geocoding/geocoding.dart';
@@ -18,7 +17,6 @@ import 'package:metro_guide/presentation/pages/settings/settings_page.dart';
 import 'package:metro_guide/presentation/widgets/custom_widgets/snackbar_widget.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_map/flutter_map.dart' as flutter_map;
 
@@ -135,13 +133,11 @@ class HomeController extends GetxController {
     final dbController = Get.find<DatabaseController>();
     final isArabic = Get.find<SettingsController>().isArabic.value;
 
-    final data = isArabic
-        ? await dbController.database.metrostationdao.getallStationArabic()
-        : await dbController.database.metrostationdao.getallStationEnglish();
+    final data = isArabic ? dbController.stationAr : dbController.stationEn;
 
     stations.clear();
     stations.addAll(data.map((s) => s.toString().toLowerCase()).toList());
-    print(stations);
+    print("$stations");
   }
 
   Future<Position> getlocation() async {
@@ -299,7 +295,8 @@ class HomeController extends GetxController {
 
 class DatabaseController extends GetxController {
   late final StationDatabase database;
-
+  late final stationAr = [].obs;
+  late final stationEn = [].obs;
   @override
   void onInit() {
     super.onInit();
@@ -314,8 +311,12 @@ class DatabaseController extends GetxController {
     database = await $FloorStationDatabase.databaseBuilder(dbPath).build();
 
     // // test: load stations English
-    // final data = await database.metrostationdao.getallStationEnglish();
-    // print("Stations: $data");
+    final data = await database.metrostationdao.getallStation();
+    stationAr.assignAll(data.map((station) => station?.name_ar).toList());
+    stationEn.assignAll(data.map((station) => station?.name_en).toList());
+
+    // print("Stations: $stationAr");
+    // print("Stations: $stationEn");
   }
 
   Future<void> _copyDatabase() async {
