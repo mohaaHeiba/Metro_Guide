@@ -67,6 +67,7 @@ class SettingsController extends GetxController {
     homeController.loadDataBase();
   }
 
+  @override
   void onInit() {
     super.onInit();
     final storedTheme = box.read('theme') ?? 'light';
@@ -148,20 +149,8 @@ class HomeController extends GetxController {
   }
 
   // =================== Map + Nearest Station ===================
-  Future<LatLng> getUserLocation() async {
+  Future<LatLng> getUserLocation(bool nuh) async {
     final pos = await getlocation();
-
-    final stationEntities = await getData();
-    final findNearestStation = FindNearestStation(
-      latitude: pos.latitude,
-      longitude: pos.longitude,
-    );
-
-    final nearest = findNearestStation.findNearestStation(stationEntities);
-
-    cont1.text = isArabic ? nearest.name_ar ?? "" : nearest.name_en ?? "";
-
-    showSnackBar("Nearest Station", "You are near: ${cont1.text}", Colors.blue);
 
     return LatLng(pos.latitude, pos.longitude);
   }
@@ -174,7 +163,7 @@ class HomeController extends GetxController {
         mapController.move(LatLng(loc.latitude, loc.longitude), 14);
       }
     } catch (e) {
-      print("مكان غير موجود: $query");
+      print("مش موجود: $query");
     }
   }
 
@@ -256,7 +245,6 @@ class HomeController extends GetxController {
 
       final nearest = findNearestStation.findNearestStation(stationEntities);
 
-      // ✅ لو الكنترولر مش null
       if (controlltext != null) {
         controlltext.text = isArabic
             ? nearest.name_ar ?? ""

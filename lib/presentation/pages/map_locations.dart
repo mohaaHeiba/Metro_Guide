@@ -17,7 +17,7 @@ class MapLocations extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<LatLng>(
-      future: controll.getUserLocation(),
+      future: controll.getUserLocation(false),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return const Center(child: CircularProgressIndicator());
