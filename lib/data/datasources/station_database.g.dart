@@ -74,6 +74,8 @@ class _$StationDatabase extends StationDatabase {
 
   MetroStationDao? _metrostationdaoInstance;
 
+  NearestStreetDao? _neareststreetdaoInstance;
+
   Future<sqflite.Database> open(
     String path,
     List<Migration> migrations, [
@@ -97,6 +99,11 @@ class _$StationDatabase extends StationDatabase {
       onCreate: (database, version) async {
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `metro_stations` (`station_id` INTEGER PRIMARY KEY AUTOINCREMENT, `name_ar` TEXT NOT NULL, `name_en` TEXT NOT NULL, `latitude` REAL NOT NULL, `longitude` REAL NOT NULL, `line` TEXT NOT NULL, `nearestId` INTEGER)');
+        await database.execute(
+            'CREATE TABLE IF NOT EXISTS `addressNearestStation` (`nearestId` INTEGER PRIMARY KEY AUTOINCREMENT, `addressText` TEXT NOT NULL)');
+
+        await database.execute(
+            'CREATE VIEW IF NOT EXISTS `station_address` AS select name_ar, name_en, addressText FROM metro_stations INNER JOIN addressNearestStation on metro_stations.nearestId=addressNearestStation.nearestId');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -109,13 +116,32 @@ class _$StationDatabase extends StationDatabase {
     return _metrostationdaoInstance ??=
         _$MetroStationDao(database, changeListener);
   }
+
+  @override
+  NearestStreetDao get neareststreetdao {
+    return _neareststreetdaoInstance ??=
+        _$NearestStreetDao(database, changeListener);
+  }
 }
 
 class _$MetroStationDao extends MetroStationDao {
   _$MetroStationDao(
     this.database,
     this.changeListener,
-  ) : _queryAdapter = QueryAdapter(database);
+  )   : _queryAdapter = QueryAdapter(database),
+        _stationEntityUpdateAdapter = UpdateAdapter(
+            database,
+            'metro_stations',
+            ['station_id'],
+            (StationEntity item) => <String, Object?>{
+                  'station_id': item.station_id,
+                  'name_ar': item.name_ar,
+                  'name_en': item.name_en,
+                  'latitude': item.latitude,
+                  'longitude': item.longitude,
+                  'line': item.line,
+                  'nearestId': item.nearestId
+                });
 
   final sqflite.DatabaseExecutor database;
 
@@ -123,10 +149,11 @@ class _$MetroStationDao extends MetroStationDao {
 
   final QueryAdapter _queryAdapter;
 
+  final UpdateAdapter<StationEntity> _stationEntityUpdateAdapter;
+
   @override
   Future<List<StationEntity>> getallStation() async {
-    return _queryAdapter.queryList(
-        'SELECT name_ar, name_en, latitude,longitude, line from metro_stations',
+    return _queryAdapter.queryList('SELECT * from metro_stations',
         mapper: (Map<String, Object?> row) => StationEntity(
             station_id: row['station_id'] as int?,
             name_ar: row['name_ar'] as String,
@@ -135,5 +162,51 @@ class _$MetroStationDao extends MetroStationDao {
             longitude: row['longitude'] as double,
             line: row['line'] as String,
             nearestId: row['nearestId'] as int?));
+  }
+
+  @override
+  Future<int> updateStreet(StationEntity address) {
+    return _stationEntityUpdateAdapter.updateAndReturnChangedRows(
+        address, OnConflictStrategy.abort);
+  }
+}
+
+class _$NearestStreetDao extends NearestStreetDao {
+  _$NearestStreetDao(
+    this.database,
+    this.changeListener,
+  )   : _queryAdapter = QueryAdapter(database),
+        _nearestStreetEntityInsertionAdapter = InsertionAdapter(
+            database,
+            'addressNearestStation',
+            (NearestStreetEntity item) => <String, Object?>{
+                  'nearestId': item.nearestId,
+                  'addressText': item.addressText
+                });
+
+  final sqflite.DatabaseExecutor database;
+
+  final StreamController<String> changeListener;
+
+  final QueryAdapter _queryAdapter;
+
+  final InsertionAdapter<NearestStreetEntity>
+      _nearestStreetEntityInsertionAdapter;
+
+  @override
+  Future<StationAddressView?> findByAddress(String address) async {
+    return _queryAdapter.query(
+        'SELECT * FROM station_address WHERE addressText = ?1 LIMIT 1',
+        mapper: (Map<String, Object?> row) => StationAddressView(
+            name_ar: row['name_ar'] as String?,
+            name_en: row['name_en'] as String?,
+            addressText: row['addressText'] as String?),
+        arguments: [address]);
+  }
+
+  @override
+  Future<int> insertStreet(NearestStreetEntity address) {
+    return _nearestStreetEntityInsertionAdapter.insertAndReturnId(
+        address, OnConflictStrategy.abort);
   }
 }

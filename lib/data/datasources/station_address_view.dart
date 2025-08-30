@@ -5,7 +5,7 @@ import 'package:floor/floor.dart';
   viewName: 'station_address',
 )
 class StationAddressView {
-  final String name_ar, name_en, addressText;
+  final String ?name_ar, name_en, addressText;
 
   StationAddressView({
     required this.name_ar,

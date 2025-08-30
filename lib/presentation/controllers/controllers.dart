@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:metro_guide/core/services/location_service.dart';
 import 'package:metro_guide/data/datasources/station_database.dart';
+import 'package:metro_guide/domain/entities/nearest_street_entity.dart';
 import 'package:metro_guide/domain/entities/station_entity.dart';
 import 'package:metro_guide/domain/use_cases/find_nearest_station.dart';
 import 'package:metro_guide/domain/use_cases/find_routes.dart';
@@ -167,11 +168,6 @@ class HomeController extends GetxController {
   Future<void> getCurrentLocation() async {
     try {
       final position = await locationService.determinePosition();
-      showSnackBar(
-        "Your Location",
-        "Current location: ${position.latitude}, ${position.longitude}",
-        Colors.green,
-      );
 
       final stationEntities = await getData();
       final findNearestStation = FindNearestStation(
@@ -224,12 +220,29 @@ class HomeController extends GetxController {
       return null;
     }
   }
-
   Future<void> getNearestStationForPickDown(
-    String street,
-    TextEditingController? controlltext,
-  ) async {
+      String street,
+      TextEditingController? controlltext,
+      ) async {
     try {
+      final dbController = Get.find<DatabaseController>();
+
+      // cheack in cash first
+      final cached = await dbController.database.neareststreetdao.findByAddress(street);
+
+      if (cached != null) {
+        controlltext?.text = isArabic ? cached.name_ar ?? "" : cached.name_en ?? "";
+
+
+        showSnackBar(
+          "Nearest Station (Cached)",
+          "You are near: ${controlltext?.text}",
+          Colors.green,
+        );
+        return;
+      }
+
+      // geocding
       final position = await getCoordinatesFromAddress(street);
       if (position == null) return;
 
@@ -241,22 +254,41 @@ class HomeController extends GetxController {
 
       final nearest = findNearestStation.findNearestStation(stationEntities);
 
-      if (controlltext != null) {
-        controlltext.text = isArabic
-            ? nearest.name_ar ?? ""
-            : nearest.name_en ?? "";
-      }
+      controlltext?.text = isArabic ? nearest.name_ar ?? "" : nearest.name_en ?? "";
+
+
+      // save data
+      final newStreet = NearestStreetEntity(addressText: street);
+      final nearestStreetId = await dbController.database.neareststreetdao.insertStreet(newStreet);
+
+
+      // update metro_staions
+      final updatedStation = StationEntity(
+        station_id: nearest.station_id,
+        name_ar: nearest.name_ar,
+        name_en: nearest.name_en,
+        latitude: nearest.latitude,
+        longitude: nearest.longitude,
+        line: nearest.line,
+        nearestId: nearestStreetId,
+      );
+
+      final rowsAffected =
+      await dbController.database.metrostationdao.updateStreet(updatedStation);
+
 
       showSnackBar(
-        "Nearest Station",
-        "You are near: ${controlltext!.text}",
+        "Nearest Station (Online)",
+        "You are near: ${controlltext?.text}",
         Colors.blue,
       );
     } catch (e) {
-      print(e);
+      print("❌ Error in getNearestStationForPickDown: $e");
       showSnackBar("Error", "$e", Colors.red);
     }
   }
+
+
 
   Color getColors(int totalStations) {
     if (totalStations <= 9) return Colors.amber;
