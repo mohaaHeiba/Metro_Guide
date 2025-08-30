@@ -246,7 +246,7 @@ Widget cardWidget(
                                 ),
                                 Obx(
                                   () => Text(
-                                    "${S.of(context).from_card}: $pickDown" ??
+                                    "${S.of(context).to_card}: $pickDown" ??
                                         S.of(context).unknown,
                                     style: TextStyle(
                                       color: Colors.white,

@@ -69,15 +69,18 @@ class SettingsController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    final storedTheme = box.read('theme') ?? 'light';
+
+    final storedTheme = theme.read('theme') ?? 'dark';
     isDarkMode.value = storedTheme == 'dark';
 
-    final storedLang = box.read('lang') ?? 'ar';
+    final storedLang = box.read('lang') ?? 'en';
     isArabic.value = storedLang == 'ar';
 
     Get.updateLocale(
       isArabic.value ? const Locale('ar', 'EG') : const Locale('en', 'US'),
     );
+
+    Get.changeThemeMode(isDarkMode.value ? ThemeMode.dark : ThemeMode.light);
   }
 }
 
@@ -220,19 +223,23 @@ class HomeController extends GetxController {
       return null;
     }
   }
+
   Future<void> getNearestStationForPickDown(
-      String street,
-      TextEditingController? controlltext,
-      ) async {
+    String street,
+    TextEditingController? controlltext,
+  ) async {
     try {
       final dbController = Get.find<DatabaseController>();
 
       // cheack in cash first
-      final cached = await dbController.database.neareststreetdao.findByAddress(street);
+      final cached = await dbController.database.neareststreetdao.findByAddress(
+        street,
+      );
 
       if (cached != null) {
-        controlltext?.text = isArabic ? cached.name_ar ?? "" : cached.name_en ?? "";
-
+        controlltext?.text = isArabic
+            ? cached.name_ar ?? ""
+            : cached.name_en ?? "";
 
         showSnackBar(
           "Nearest Station (Cached)",
@@ -254,13 +261,14 @@ class HomeController extends GetxController {
 
       final nearest = findNearestStation.findNearestStation(stationEntities);
 
-      controlltext?.text = isArabic ? nearest.name_ar ?? "" : nearest.name_en ?? "";
-
+      controlltext?.text = isArabic
+          ? nearest.name_ar ?? ""
+          : nearest.name_en ?? "";
 
       // save data
       final newStreet = NearestStreetEntity(addressText: street);
-      final nearestStreetId = await dbController.database.neareststreetdao.insertStreet(newStreet);
-
+      final nearestStreetId = await dbController.database.neareststreetdao
+          .insertStreet(newStreet);
 
       // update metro_staions
       final updatedStation = StationEntity(
@@ -273,9 +281,8 @@ class HomeController extends GetxController {
         nearestId: nearestStreetId,
       );
 
-      final rowsAffected =
-      await dbController.database.metrostationdao.updateStreet(updatedStation);
-
+      final rowsAffected = await dbController.database.metrostationdao
+          .updateStreet(updatedStation);
 
       showSnackBar(
         "Nearest Station (Online)",
@@ -287,8 +294,6 @@ class HomeController extends GetxController {
       showSnackBar("Error", "$e", Colors.red);
     }
   }
-
-
 
   Color getColors(int totalStations) {
     if (totalStations <= 9) return Colors.amber;

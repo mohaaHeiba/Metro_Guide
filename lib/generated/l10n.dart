@@ -190,14 +190,14 @@ class S {
     return Intl.message('Price:', name: 'price', desc: '', args: []);
   }
 
-  /// `Stations:`
+  /// `Stations`
   String get stations {
-    return Intl.message('Stations:', name: 'stations', desc: '', args: []);
+    return Intl.message('Stations', name: 'stations', desc: '', args: []);
   }
 
-  /// `Transfers:`
+  /// `Transfers`
   String get transfers {
-    return Intl.message('Transfers:', name: 'transfers', desc: '', args: []);
+    return Intl.message('Transfers', name: 'transfers', desc: '', args: []);
   }
 
   /// `Show More`
@@ -215,14 +215,14 @@ class S {
     );
   }
 
-  /// `From:`
+  /// `From`
   String get from_card {
-    return Intl.message('From:', name: 'from_card', desc: '', args: []);
+    return Intl.message('From', name: 'from_card', desc: '', args: []);
   }
 
-  /// `To:`
+  /// `To`
   String get to_card {
-    return Intl.message('To:', name: 'to_card', desc: '', args: []);
+    return Intl.message('To', name: 'to_card', desc: '', args: []);
   }
 
   /// `Valid`

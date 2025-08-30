@@ -55,7 +55,7 @@ class MapPage extends StatelessWidget {
                   Expanded(
                     child: _buildActionButton(
                       context,
-                      'View Full Map',
+                      S.of(context).view_full_map,
                       Icons.map,
                     ),
                   ),
