@@ -362,20 +362,48 @@ class HomeController extends GetxController {
 
     cont1.addListener(() {
       final text1 = cont1.text.toLowerCase();
-      final match1 = stations.any((station) => station.contains(text1));
-      isAppearDropdownMenu2.value = match1;
-    });
-
-    cont2.addListener(() {
-      final text1 = cont1.text.toLowerCase();
       final text2 = cont2.text.toLowerCase();
 
-      final match2 = stations.any((station) => station.contains(text2));
+      final match = stations.any(
+        (station) => station.toString().toLowerCase() == text1,
+      );
+      final match2 = stations.any(
+        (station) => station.toString().toLowerCase() == text2,
+      );
+      if (text1 == text2) {
+        isAppearButton.value = false;
+      } else if (match) {
+        isAppearDropdownMenu2.value = true;
+        if (text1 != text2 && match2) {
+          isAppearButton.value = true;
+        }
+      } else if (!match) {
+        isAppearDropdownMenu2.value = false;
+        isAppearButton.value = false;
+      } else {
+        isAppearDropdownMenu2.value = true;
+        isAppearButton.value = true;
+      }
+    });
+    cont2.addListener(() {
+      final text2 = cont2.text.trim().toLowerCase();
+      final text1 = cont1.text.toLowerCase();
+
+      final match1 = stations.any(
+        (station) => station.toString().toLowerCase() == text1,
+      );
+      final match2 = stations.any(
+        (station) => station.toString().toLowerCase() == text2,
+      );
 
       if (text1 == text2) {
         isAppearButton.value = false;
+      } else if (!match2) {
+        isAppearButton.value = false;
       } else {
-        isAppearButton.value = match2;
+        if (match1) {
+          isAppearButton.value = true;
+        }
       }
     });
   }

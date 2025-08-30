@@ -79,16 +79,8 @@ class MapLocations extends StatelessWidget {
           ),
           floatingActionButton: FloatingActionButton.extended(
             onPressed: () async {
-              final picked = controll.mapController.center;
-
               try {
-                final placemarks = await placemarkFromCoordinates(
-                  picked.latitude,
-                  picked.longitude,
-                );
-                final place = placemarks.first;
-                final address =
-                    "${place.street}, ${place.locality}, ${place.country}";
+                final address =controll.searchController.text;
 
                 Get.back();
                 await controll.getNearestStationForPickDown(address, cont);
