@@ -511,6 +511,121 @@ class S {
 
   // skipped getter for the 'history page' key
 
+  /// `Journey History`
+  String get journey_history {
+    return Intl.message(
+      'Journey History',
+      name: 'journey_history',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your recent metro journeys`
+  String get recent_journeys {
+    return Intl.message(
+      'Your recent metro journeys',
+      name: 'recent_journeys',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Clear History`
+  String get clear_history {
+    return Intl.message(
+      'Clear History',
+      name: 'clear_history',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No journey history yet`
+  String get no_history {
+    return Intl.message(
+      'No journey history yet',
+      name: 'no_history',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your recent routes will appear here`
+  String get no_history_desc {
+    return Intl.message(
+      'Your recent routes will appear here',
+      name: 'no_history_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Route removed from history`
+  String get route_removed {
+    return Intl.message(
+      'Route removed from history',
+      name: 'route_removed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All history cleared`
+  String get all_history_cleared {
+    return Intl.message(
+      'All history cleared',
+      name: 'all_history_cleared',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Route Loaded`
+  String get route_loaded {
+    return Intl.message(
+      'Route Loaded',
+      name: 'route_loaded',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Route has been loaded`
+  String get route_loaded_desc {
+    return Intl.message(
+      'Route has been loaded',
+      name: 'route_loaded_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to clear all route history?`
+  String get clear_history_confirm {
+    return Intl.message(
+      'Are you sure you want to clear all route history?',
+      name: 'clear_history_confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message('Cancel', name: 'cancel', desc: '', args: []);
+  }
+
+  /// `Clear`
+  String get clear {
+    return Intl.message('Clear', name: 'clear', desc: '', args: []);
+  }
+
+  /// `Delete`
+  String get delete {
+    return Intl.message('Delete', name: 'delete', desc: '', args: []);
+  }
+
   // skipped getter for the 'map page' key
 
   /// `Select location`
@@ -602,6 +717,73 @@ class S {
       name: 'email_error',
       desc: '',
       args: [],
+    );
+  }
+
+  // skipped getter for the 'snackbar messages' key
+
+  /// `Nearest Station`
+  String get nearest_station {
+    return Intl.message(
+      'Nearest Station',
+      name: 'nearest_station',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nearest Station (Cached)`
+  String get nearest_station_cached {
+    return Intl.message(
+      'Nearest Station (Cached)',
+      name: 'nearest_station_cached',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nearest Station (Online)`
+  String get nearest_station_online {
+    return Intl.message(
+      'Nearest Station (Online)',
+      name: 'nearest_station_online',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You are near: {stationName}`
+  String you_are_near(Object stationName) {
+    return Intl.message(
+      'You are near: $stationName',
+      name: 'you_are_near',
+      desc: '',
+      args: [stationName],
+    );
+  }
+
+  /// `Error`
+  String get error {
+    return Intl.message('Error', name: 'error', desc: '', args: []);
+  }
+
+  /// `Error getting coordinates from address: {error}`
+  String error_getting_coordinates(Object error) {
+    return Intl.message(
+      'Error getting coordinates from address: $error',
+      name: 'error_getting_coordinates',
+      desc: '',
+      args: [error],
+    );
+  }
+
+  /// `Location not found: {query}`
+  String location_not_found(Object query) {
+    return Intl.message(
+      'Location not found: $query',
+      name: 'location_not_found',
+      desc: '',
+      args: [query],
     );
   }
 }

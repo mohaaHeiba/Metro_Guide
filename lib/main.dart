@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:metro_guide/app.dart';
 import 'package:metro_guide/presentation/controllers/controllers.dart';
+import 'package:metro_guide/presentation/pages/history/history_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,6 +17,8 @@ Future<void> main() async {
   Get.put(HomeController(), permanent: true);
 
   Get.put(NavigationController(), permanent: true);
+
+  Get.put(HistoryController(), permanent: true);
 
   runApp(const MyApp());
 }

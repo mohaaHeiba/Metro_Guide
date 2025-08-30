@@ -89,6 +89,20 @@
 
   "history page":"______________________________________________________________________",
 
+    "journey_history": "سجل الرحلات",
+    "recent_journeys": "رحلات المترو الأخيرة",
+    "clear_history": "مسح السجل",
+    "no_history": "لا يوجد سجل رحلات بعد",
+    "no_history_desc": "ستظهر رحلاتك الأخيرة هنا",
+    "route_removed": "تم حذف المسار من السجل",
+    "all_history_cleared": "تم مسح جميع السجل",
+    "route_loaded": "تم تحميل المسار",
+    "route_loaded_desc": "تم تحميل المسار",
+    "clear_history_confirm": "هل أنت متأكد من مسح جميع سجل الرحلات؟",
+    "cancel": "إلغاء",
+    "clear": "مسح",
+    "delete": "حذف",
+
 
 
 
@@ -113,7 +127,17 @@
     "need_help": "تحتاج مساعدة؟",
     "contact_us_desc": "يمكنك التواصل معنا عبر البريد الإلكتروني في أي وقت. سنعود إليك في أقرب وقت ممكن.",
     "send_email": "إرسال بريد إلكتروني",
-    "email_error": "تعذر إرسال البريد الإلكتروني"
+    "email_error": "تعذر إرسال البريد الإلكتروني",
 
+
+  "snackbar messages":"______________________________________________________________________",
+
+    "nearest_station": "أقرب محطة",
+    "nearest_station_cached": "أقرب محطة (مخزنة)",
+    "nearest_station_online": "أقرب محطة (متصل)",
+    "you_are_near": "أنت قريب من: {stationName}",
+    "error": "خطأ",
+    "error_getting_coordinates": "خطأ في الحصول على الإحداثيات من العنوان: {error}",
+    "location_not_found": "لم يتم العثور على الموقع: {query}"
 
 }

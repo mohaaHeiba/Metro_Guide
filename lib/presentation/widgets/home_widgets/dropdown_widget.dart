@@ -49,6 +49,8 @@ Widget dropDown(
                     ),
                 ],
                 controller: cont,
+                requestFocusOnTap: true,
+
                 enableSearch: true,
                 enableFilter: true,
                 enabled: isEnbeld.value,

@@ -20,6 +20,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_map/flutter_map.dart' as flutter_map;
+import 'package:metro_guide/generated/l10n.dart';
 
 class NavigationController extends GetxController {
   final currentIndex = 0.obs;
@@ -64,6 +65,14 @@ class SettingsController extends GetxController {
     homeController.isAppearDropdownMenu2.value = false;
 
     homeController.loadDataBase();
+
+    // Refresh history display to show station names in another  language im tired
+    try {
+      final historyController = Get.find<HistoryController>();
+      historyController.refreshHistoryDisplay();
+    } catch (e) {
+      print("HistoryController not found: $e");
+    }
   }
 
   @override
@@ -125,6 +134,27 @@ class HomeController extends GetxController {
     final result = await findRoute.findRoutes(pickUp.value, pickDown.value);
     routes.assignAll(result);
 
+    // Save to history if routes found
+    if (result.isNotEmpty) {
+      final historyController = Get.find<HistoryController>();
+
+      // Get station IDs for from and to stations
+      final fromStationId = await getStationIdByName(pickUp.value);
+      final toStationId = await getStationIdByName(pickDown.value);
+
+      final routeToSave = {
+        'fromStationId': fromStationId,
+        'toStationId': toStationId,
+        'from': pickUp.value,
+        'to': pickDown.value,
+        'time': result.first['time'] ?? '',
+        'totalStations': result.first['totalStations'] ?? 0,
+        'type': result.first['type'] ?? '',
+        'price': result.first['price'] ?? '',
+      };
+      historyController.addToHistory(routeToSave);
+    }
+
     print("Found routes: $routes");
   }
 
@@ -163,7 +193,7 @@ class HomeController extends GetxController {
         mapController.move(LatLng(loc.latitude, loc.longitude), 14);
       }
     } catch (e) {
-      print("مش موجود: $query");
+      print(S.of(Get.context!).location_not_found(query));
     }
   }
 
@@ -185,12 +215,12 @@ class HomeController extends GetxController {
       print("Nearest Station: ${cont1.text}");
 
       showSnackBar(
-        "Nearest Station",
-        "You are near: ${cont1.text}",
+        S.of(Get.context!).nearest_station,
+        S.of(Get.context!).you_are_near(cont1.text),
         Colors.blue,
       );
     } catch (e) {
-      showSnackBar("Error", "$e", Colors.red);
+      showSnackBar(S.of(Get.context!).error, "$e", Colors.red);
     }
   }
 
@@ -216,8 +246,8 @@ class HomeController extends GetxController {
       return null;
     } catch (e) {
       showSnackBar(
-        'Error',
-        "Error getting coordinates from address: $e",
+        S.of(Get.context!).error,
+        S.of(Get.context!).error_getting_coordinates(e.toString()),
         Colors.red[600]!,
       );
       return null;
@@ -242,8 +272,8 @@ class HomeController extends GetxController {
             : cached.name_en ?? "";
 
         showSnackBar(
-          "Nearest Station (Cached)",
-          "You are near: ${controlltext?.text}",
+          S.of(Get.context!).nearest_station_cached,
+          S.of(Get.context!).you_are_near(controlltext?.text ?? ""),
           Colors.green,
         );
         return;
@@ -285,13 +315,13 @@ class HomeController extends GetxController {
           .updateStreet(updatedStation);
 
       showSnackBar(
-        "Nearest Station (Online)",
-        "You are near: ${controlltext?.text}",
+        S.of(Get.context!).nearest_station_online,
+        S.of(Get.context!).you_are_near(controlltext?.text ?? ""),
         Colors.blue,
       );
     } catch (e) {
-      print("❌ Error in getNearestStationForPickDown: $e");
-      showSnackBar("Error", "$e", Colors.red);
+      print(" Error in getNearestStationForPickDown: $e");
+      showSnackBar(S.of(Get.context!).error, "$e", Colors.red);
     }
   }
 
@@ -300,6 +330,27 @@ class HomeController extends GetxController {
     if (totalStations <= 16) return Colors.green;
     if (totalStations <= 23) return Colors.pink;
     return Colors.brown;
+  }
+
+  Future<int?> getStationIdByName(String stationName) async {
+    try {
+      final dbController = Get.find<DatabaseController>();
+      final allStations = await dbController.database.metrostationdao
+          .getallStation();
+
+      // Search by both Arabic and English names
+      for (final station in allStations) {
+        if (station?.name_ar?.toLowerCase() == stationName.toLowerCase() ||
+            station?.name_en?.toLowerCase() == stationName.toLowerCase()) {
+          return station?.station_id;
+        }
+      }
+
+      return null;
+    } catch (e) {
+      print("Error getting station ID for $stationName: $e");
+      return null;
+    }
   }
 
   // =================== Lifecycle ===================

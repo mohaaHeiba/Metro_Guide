@@ -20,6 +20,13 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
+  static String m0(error) =>
+      "خطأ في الحصول على الإحداثيات من العنوان: ${error}";
+
+  static String m1(query) => "لم يتم العثور على الموقع: ${query}";
+
+  static String m2(stationName) => "أنت قريب من: ${stationName}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "about": MessageLookupByLibrary.simpleMessage("حول التطبيق"),
@@ -27,19 +34,29 @@ class MessageLookup extends MessageLookupByLibrary {
     "accessibility_desc": MessageLookupByLibrary.simpleMessage(
       "جميع المحطات مناسبة للكراسي المتحركة مع مصاعد ومنحدرات",
     ),
+    "all_history_cleared": MessageLookupByLibrary.simpleMessage(
+      "تم مسح جميع السجل",
+    ),
     "app_desc": MessageLookupByLibrary.simpleMessage(
       "رفيقك الذكي للسفر بالمترو.\nاعثر على المسارات والمحطات وأوقات الوصول بسهولة.",
     ),
     "app_name": MessageLookupByLibrary.simpleMessage("دليل المترو"),
     "ar": MessageLookupByLibrary.simpleMessage("العربية"),
     "book_journey": MessageLookupByLibrary.simpleMessage("احجز رحلتك بسهولة"),
+    "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
     "change": MessageLookupByLibrary.simpleMessage("تغيير"),
+    "clear": MessageLookupByLibrary.simpleMessage("مسح"),
+    "clear_history": MessageLookupByLibrary.simpleMessage("مسح السجل"),
+    "clear_history_confirm": MessageLookupByLibrary.simpleMessage(
+      "هل أنت متأكد من مسح جميع سجل الرحلات؟",
+    ),
     "confirme_location": MessageLookupByLibrary.simpleMessage("تأكيد الموقع"),
     "contact_us": MessageLookupByLibrary.simpleMessage("اتصل بنا"),
     "contact_us_desc": MessageLookupByLibrary.simpleMessage(
       "يمكنك التواصل معنا عبر البريد الإلكتروني في أي وقت. سنعود إليك في أقرب وقت ممكن.",
     ),
     "dark_mode": MessageLookupByLibrary.simpleMessage("الوضع الليلي"),
+    "delete": MessageLookupByLibrary.simpleMessage("حذف"),
     "direct_route": MessageLookupByLibrary.simpleMessage("اتجاه واحد"),
     "distance": MessageLookupByLibrary.simpleMessage("المسافة"),
     "duration": MessageLookupByLibrary.simpleMessage("المدة:"),
@@ -55,6 +72,8 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "en": MessageLookupByLibrary.simpleMessage("الإنجليزية"),
     "end": MessageLookupByLibrary.simpleMessage("النهاية"),
+    "error": MessageLookupByLibrary.simpleMessage("خطأ"),
+    "error_getting_coordinates": m0,
     "from": MessageLookupByLibrary.simpleMessage("من"),
     "from_card": MessageLookupByLibrary.simpleMessage("من"),
     "get_started": MessageLookupByLibrary.simpleMessage("ابدأ الآن"),
@@ -62,10 +81,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "hours": MessageLookupByLibrary.simpleMessage("5:00 ص - 12:00 م"),
     "instructions": MessageLookupByLibrary.simpleMessage("التعليمات"),
     "journey_details": MessageLookupByLibrary.simpleMessage("تفاصيل الرحلة"),
+    "journey_history": MessageLookupByLibrary.simpleMessage("سجل الرحلات"),
     "just_now": MessageLookupByLibrary.simpleMessage("الآن"),
     "language": MessageLookupByLibrary.simpleMessage("اللغة"),
     "last_updated": MessageLookupByLibrary.simpleMessage("آخر تحديث"),
     "light_mode": MessageLookupByLibrary.simpleMessage("الوضع النهاري"),
+    "location_not_found": m1,
     "metro_map": MessageLookupByLibrary.simpleMessage("خريطة المترو"),
     "metro_ticket": MessageLookupByLibrary.simpleMessage("تذكرة المترو"),
     "min": MessageLookupByLibrary.simpleMessage("دقايق"),
@@ -73,7 +94,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "nav_home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
     "nav_instructions": MessageLookupByLibrary.simpleMessage("التعليمات"),
     "nav_settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
+    "nearest_station": MessageLookupByLibrary.simpleMessage("أقرب محطة"),
+    "nearest_station_cached": MessageLookupByLibrary.simpleMessage(
+      "أقرب محطة (مخزنة)",
+    ),
+    "nearest_station_online": MessageLookupByLibrary.simpleMessage(
+      "أقرب محطة (متصل)",
+    ),
     "need_help": MessageLookupByLibrary.simpleMessage("تحتاج مساعدة؟"),
+    "no_history": MessageLookupByLibrary.simpleMessage("لا يوجد سجل رحلات بعد"),
+    "no_history_desc": MessageLookupByLibrary.simpleMessage(
+      "ستظهر رحلاتك الأخيرة هنا",
+    ),
     "no_routes_found": MessageLookupByLibrary.simpleMessage(
       "لم يتم العثور على مسارات",
     ),
@@ -85,8 +117,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "prohibited_actions_desc": MessageLookupByLibrary.simpleMessage(
       "ممنوع التدخين، حمل المواد القابلة للاشتعال، والتخريب",
     ),
+    "recent_journeys": MessageLookupByLibrary.simpleMessage(
+      "رحلات المترو الأخيرة",
+    ),
     "route_details": MessageLookupByLibrary.simpleMessage("تفاصيل المحطة"),
+    "route_loaded": MessageLookupByLibrary.simpleMessage("تم تحميل المسار"),
+    "route_loaded_desc": MessageLookupByLibrary.simpleMessage(
+      "تم تحميل المسار",
+    ),
     "route_path": MessageLookupByLibrary.simpleMessage("المسار"),
+    "route_removed": MessageLookupByLibrary.simpleMessage(
+      "تم حذف المسار من السجل",
+    ),
     "safety_guidelines": MessageLookupByLibrary.simpleMessage(
       "إرشادات السلامة",
     ),
@@ -124,5 +166,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "view_full_map": MessageLookupByLibrary.simpleMessage(
       "عرض الخريطة الكاملة",
     ),
+    "you_are_near": m2,
   };
 }

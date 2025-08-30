@@ -86,6 +86,20 @@
 
   "history page":"______________________________________________________________________",
 
+    "journey_history": "Journey History",
+    "recent_journeys": "Your recent metro journeys",
+    "clear_history": "Clear History",
+    "no_history": "No journey history yet",
+    "no_history_desc": "Your recent routes will appear here",
+    "route_removed": "Route removed from history",
+    "all_history_cleared": "All history cleared",
+    "route_loaded": "Route Loaded",
+    "route_loaded_desc": "Route has been loaded",
+    "clear_history_confirm": "Are you sure you want to clear all route history?",
+    "cancel": "Cancel",
+    "clear": "Clear",
+    "delete": "Delete",
+
 
 
 
@@ -113,8 +127,17 @@
     "need_help": "Need Help?",
     "contact_us_desc": "You can reach us via email anytime. We will get back to you as soon as possible.",
     "send_email": "Send Email",
-    "email_error": "Could not launch Email"
+    "email_error": "Could not launch Email",
 
 
+  "snackbar messages":"______________________________________________________________________",
+
+    "nearest_station": "Nearest Station",
+    "nearest_station_cached": "Nearest Station (Cached)",
+    "nearest_station_online": "Nearest Station (Online)",
+    "you_are_near": "You are near: {stationName}",
+    "error": "Error",
+    "error_getting_coordinates": "Error getting coordinates from address: {error}",
+    "location_not_found": "Location not found: {query}"
 
 }

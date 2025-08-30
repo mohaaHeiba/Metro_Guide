@@ -20,12 +20,21 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(error) => "Error getting coordinates from address: ${error}";
+
+  static String m1(query) => "Location not found: ${query}";
+
+  static String m2(stationName) => "You are near: ${stationName}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "about": MessageLookupByLibrary.simpleMessage("About"),
     "accessibility": MessageLookupByLibrary.simpleMessage("Accessibility"),
     "accessibility_desc": MessageLookupByLibrary.simpleMessage(
       "All stations are wheelchair accessible with elevators and ramps",
+    ),
+    "all_history_cleared": MessageLookupByLibrary.simpleMessage(
+      "All history cleared",
     ),
     "app_desc": MessageLookupByLibrary.simpleMessage(
       "Your smart companion for metro travel.\nFind routes, stations, and arrival times easily.",
@@ -35,7 +44,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "book_journey": MessageLookupByLibrary.simpleMessage(
       "Book your journey with ease",
     ),
+    "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "change": MessageLookupByLibrary.simpleMessage("Change"),
+    "clear": MessageLookupByLibrary.simpleMessage("Clear"),
+    "clear_history": MessageLookupByLibrary.simpleMessage("Clear History"),
+    "clear_history_confirm": MessageLookupByLibrary.simpleMessage(
+      "Are you sure you want to clear all route history?",
+    ),
     "confirme_location": MessageLookupByLibrary.simpleMessage(
       "confirme location",
     ),
@@ -44,6 +59,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "You can reach us via email anytime. We will get back to you as soon as possible.",
     ),
     "dark_mode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
+    "delete": MessageLookupByLibrary.simpleMessage("Delete"),
     "direct_route": MessageLookupByLibrary.simpleMessage("Direct Route"),
     "distance": MessageLookupByLibrary.simpleMessage("Distance"),
     "duration": MessageLookupByLibrary.simpleMessage("Duration:"),
@@ -59,6 +75,8 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "en": MessageLookupByLibrary.simpleMessage("English"),
     "end": MessageLookupByLibrary.simpleMessage("END"),
+    "error": MessageLookupByLibrary.simpleMessage("Error"),
+    "error_getting_coordinates": m0,
     "from": MessageLookupByLibrary.simpleMessage("From"),
     "from_card": MessageLookupByLibrary.simpleMessage("From"),
     "get_started": MessageLookupByLibrary.simpleMessage("Get Started"),
@@ -66,10 +84,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "hours": MessageLookupByLibrary.simpleMessage("5:00 AM - 12:00 AM"),
     "instructions": MessageLookupByLibrary.simpleMessage("Instructions"),
     "journey_details": MessageLookupByLibrary.simpleMessage("Journey Details"),
+    "journey_history": MessageLookupByLibrary.simpleMessage("Journey History"),
     "just_now": MessageLookupByLibrary.simpleMessage("Just now"),
     "language": MessageLookupByLibrary.simpleMessage("Language"),
     "last_updated": MessageLookupByLibrary.simpleMessage("Last Updated"),
     "light_mode": MessageLookupByLibrary.simpleMessage("Light Mode"),
+    "location_not_found": m1,
     "metro_map": MessageLookupByLibrary.simpleMessage("Full Metro Map"),
     "metro_ticket": MessageLookupByLibrary.simpleMessage("Metro Ticket"),
     "min": MessageLookupByLibrary.simpleMessage("min"),
@@ -77,7 +97,20 @@ class MessageLookup extends MessageLookupByLibrary {
     "nav_home": MessageLookupByLibrary.simpleMessage("Home"),
     "nav_instructions": MessageLookupByLibrary.simpleMessage("Instructions"),
     "nav_settings": MessageLookupByLibrary.simpleMessage("Settings"),
+    "nearest_station": MessageLookupByLibrary.simpleMessage("Nearest Station"),
+    "nearest_station_cached": MessageLookupByLibrary.simpleMessage(
+      "Nearest Station (Cached)",
+    ),
+    "nearest_station_online": MessageLookupByLibrary.simpleMessage(
+      "Nearest Station (Online)",
+    ),
     "need_help": MessageLookupByLibrary.simpleMessage("Need Help?"),
+    "no_history": MessageLookupByLibrary.simpleMessage(
+      "No journey history yet",
+    ),
+    "no_history_desc": MessageLookupByLibrary.simpleMessage(
+      "Your recent routes will appear here",
+    ),
     "no_routes_found": MessageLookupByLibrary.simpleMessage("No routes found"),
     "operating_hours": MessageLookupByLibrary.simpleMessage("Operating Hours"),
     "price": MessageLookupByLibrary.simpleMessage("Price:"),
@@ -87,8 +120,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "prohibited_actions_desc": MessageLookupByLibrary.simpleMessage(
       "Smoking, carrying flammable materials, and vandalism are prohibited",
     ),
+    "recent_journeys": MessageLookupByLibrary.simpleMessage(
+      "Your recent metro journeys",
+    ),
     "route_details": MessageLookupByLibrary.simpleMessage("Route Details"),
+    "route_loaded": MessageLookupByLibrary.simpleMessage("Route Loaded"),
+    "route_loaded_desc": MessageLookupByLibrary.simpleMessage(
+      "Route has been loaded",
+    ),
     "route_path": MessageLookupByLibrary.simpleMessage("Route Path"),
+    "route_removed": MessageLookupByLibrary.simpleMessage(
+      "Route removed from history",
+    ),
     "safety_guidelines": MessageLookupByLibrary.simpleMessage(
       "Safety Guidelines",
     ),
@@ -126,5 +169,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "unknown": MessageLookupByLibrary.simpleMessage("UnKnown "),
     "valid": MessageLookupByLibrary.simpleMessage("Valid"),
     "view_full_map": MessageLookupByLibrary.simpleMessage("View Full Map"),
+    "you_are_near": m2,
   };
 }
