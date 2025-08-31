@@ -106,6 +106,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "no_history_desc": MessageLookupByLibrary.simpleMessage(
       "ستظهر رحلاتك الأخيرة هنا",
     ),
+    "no_location_selected": MessageLookupByLibrary.simpleMessage(
+      "لم تختار موقع",
+    ),
     "no_routes_found": MessageLookupByLibrary.simpleMessage(
       "لم يتم العثور على مسارات",
     ),

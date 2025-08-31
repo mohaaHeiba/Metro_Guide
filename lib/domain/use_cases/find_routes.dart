@@ -58,8 +58,8 @@ class FindRoutes {
     Map<String, List<String>> linesMap = {};
 
     for (var station in stations) {
-      final line = station.line ?? 'unknown';
-      final name = isArabic ? (station.name_ar ?? "") : (station.name_en ?? "");
+      final line = station.line;
+      final name = isArabic ? (station.name_ar) : (station.name_en);
 
       linesMap.putIfAbsent(line, () => []);
       linesMap[line]!.add(name.toLowerCase());

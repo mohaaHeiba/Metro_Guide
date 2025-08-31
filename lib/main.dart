@@ -16,8 +16,6 @@ Future<void> main() async {
 
   Get.put(HomeController(), permanent: true);
 
-  Get.put(NavigationController(), permanent: true);
-
   Get.put(HistoryController(), permanent: true);
 
   runApp(const MyApp());

@@ -31,7 +31,7 @@ class SettingsPage extends StatelessWidget {
 
             const Divider(height: 30),
 
-            // 🌍 Language Button
+            // Language Button
             Obx(
               () => ListTile(
                 leading: const Icon(Icons.language),
@@ -58,7 +58,7 @@ class SettingsPage extends StatelessWidget {
 
             const Divider(height: 30),
 
-            // ℹ️ About App
+            // About App
             ListTile(
               leading: const Icon(Icons.info),
               title: Text(S.of(context).about),

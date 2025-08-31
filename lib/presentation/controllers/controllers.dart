@@ -12,26 +12,12 @@ import 'package:metro_guide/domain/entities/station_entity.dart';
 import 'package:metro_guide/domain/use_cases/find_nearest_station.dart';
 import 'package:metro_guide/domain/use_cases/find_routes.dart';
 import 'package:metro_guide/presentation/pages/history/history_page.dart';
-import 'package:metro_guide/presentation/pages/home/home_page.dart';
-import 'package:metro_guide/presentation/pages/instructions/map_page.dart';
-import 'package:metro_guide/presentation/pages/settings/settings_page.dart';
 import 'package:metro_guide/presentation/widgets/custom_widgets/snackbar_widget.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_map/flutter_map.dart' as flutter_map;
 import 'package:metro_guide/generated/l10n.dart';
-
-class NavigationController extends GetxController {
-  final currentIndex = 0.obs;
-
-  final List<Widget> screens = [
-    const HomePage(),
-    const MapPage(),
-    const HistoryPage(),
-    const SettingsPage(),
-  ];
-}
 
 class SettingsController extends GetxController {
   var isDarkMode = false.obs;
@@ -71,7 +57,7 @@ class SettingsController extends GetxController {
       final historyController = Get.find<HistoryController>();
       historyController.refreshHistoryDisplay();
     } catch (e) {
-      print("HistoryController not found: $e");
+      // print("HistoryController not found: $e");
     }
   }
 
@@ -155,7 +141,7 @@ class HomeController extends GetxController {
       historyController.addToHistory(routeToSave);
     }
 
-    print("Found routes: $routes");
+    // print("Found routes: $routes");
   }
 
   Future<List<StationEntity>> getData() async {
@@ -172,9 +158,8 @@ class HomeController extends GetxController {
 
       return allStations.firstWhere(
         (s) =>
-            (s?.name_ar?.toLowerCase() == query) ||
-            (s?.name_en?.toLowerCase() == query),
-        orElse: () => null as StationEntity,
+            (s.name_ar.toLowerCase() == query) ||
+            (s.name_en.toLowerCase() == query),
       );
     } catch (_) {
       return null;
@@ -189,7 +174,7 @@ class HomeController extends GetxController {
 
     stations.clear();
     stations.addAll(data.map((s) => s.toString().toLowerCase()).toList());
-    print("$stations");
+    // print("$stations");
   }
 
   Future<Position> getlocation() async {
@@ -212,7 +197,7 @@ class HomeController extends GetxController {
         mapController.move(LatLng(loc.latitude, loc.longitude), 14);
       }
     } catch (e) {
-      print(S.of(Get.context!).location_not_found(query));
+      // print(S.of(Get.context!).location_not_found(query));
     }
   }
 
@@ -229,9 +214,9 @@ class HomeController extends GetxController {
 
       final nearest = findNearestStation.findNearestStation(stationEntities);
 
-      cont1.text = (isArabic ? nearest.name_ar ?? "" : nearest.name_en ?? "").toLowerCase();
+      cont1.text = (isArabic ? nearest.name_ar : nearest.name_en).toLowerCase();
 
-      print("Nearest Station: ${cont1.text}");
+      // print("Nearest Station: ${cont1.text}");
 
       showSnackBar(
         S.of(Get.context!).nearest_station,
@@ -295,9 +280,9 @@ class HomeController extends GetxController {
       );
 
       if (cached != null) {
-        controlltext?.text = (isArabic
-            ? cached.name_ar ?? ""
-            : cached.name_en ?? "").toLowerCase();
+        controlltext?.text =
+            (isArabic ? cached.name_ar ?? "" : cached.name_en ?? "")
+                .toLowerCase();
 
         showSnackBar(
           S.of(Get.context!).nearest_station_cached,
@@ -319,9 +304,8 @@ class HomeController extends GetxController {
 
       final nearest = findNearestStation.findNearestStation(stationEntities);
 
-      controlltext?.text = (isArabic
-          ? nearest.name_ar ?? ""
-          : nearest.name_en ?? "").toLowerCase();
+      controlltext?.text = (isArabic ? nearest.name_ar : nearest.name_en)
+          .toLowerCase();
 
       // save data
       final newStreet = NearestStreetEntity(addressText: street);
@@ -348,7 +332,7 @@ class HomeController extends GetxController {
         Colors.blue,
       );
     } catch (e) {
-      print(" Error in getNearestStationForPickDown: $e");
+      // print(" Error in getNearestStationForPickDown: $e");
       showSnackBar(S.of(Get.context!).error, "$e", Colors.red);
     }
   }
@@ -368,9 +352,9 @@ class HomeController extends GetxController {
 
       // Search by both Arabic and English names
       for (final station in allStations) {
-        if (station?.name_ar?.toLowerCase() == stationName.toLowerCase() ||
-            station?.name_en?.toLowerCase() == stationName.toLowerCase()) {
-          return station?.station_id;
+        if (station.name_ar.toLowerCase() == stationName.toLowerCase() ||
+            station.name_en.toLowerCase() == stationName.toLowerCase()) {
+          return station.station_id;
         }
       }
 
@@ -441,11 +425,11 @@ class DatabaseController extends GetxController {
   late final StationDatabase database;
   late final stationAr = [].obs;
   late final stationEn = [].obs;
-  @override
-  void onInit() {
-    super.onInit();
-    // initDatabase();
-  }
+  // @override
+  // void onInit() {
+  //   super.onInit();
+  //   // initDatabase();
+  // }
 
   Future<void> initDatabase() async {
     await _copyDatabase();

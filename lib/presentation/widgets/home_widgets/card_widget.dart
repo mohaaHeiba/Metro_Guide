@@ -10,7 +10,6 @@ Widget cardWidget(
   final shortsetRoute,
   final color,
 ) {
-  // final route = shortsetRoute.first;
   return Row(
     children: [
       Expanded(
@@ -51,8 +50,7 @@ Widget cardWidget(
                       children: [
                         // SizedBox(width: 8),
                         Text(
-                          "${S.of(context).duration} ${shortsetRoute['time']}" ??
-                              S.of(context).unknown,
+                          "${S.of(context).duration} ${shortsetRoute['time']}",
                           style: TextStyle(fontSize: 15),
                           overflow: TextOverflow.visible,
                           maxLines: 1,
@@ -64,8 +62,7 @@ Widget cardWidget(
                       children: [
                         // SizedBox(width: 8),
                         Text(
-                          "${S.of(context).price}       ${shortsetRoute['price']}" ??
-                              S.of(context).unknown,
+                          "${S.of(context).price}       ${shortsetRoute['price']}",
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w500,
@@ -78,8 +75,7 @@ Widget cardWidget(
                       children: [
                         // SizedBox(width: 8),
                         Text(
-                          "${S.of(context).stations}:  ${shortsetRoute['totalStations']}" ??
-                              S.of(context).unknown,
+                          "${S.of(context).stations}:  ${shortsetRoute['totalStations']}",
                           style: TextStyle(fontSize: 15),
                         ),
                       ],
@@ -89,8 +85,7 @@ Widget cardWidget(
                       children: [
                         // SizedBox(width: 8),
                         Text(
-                          "${S.of(context).transfers}:${shortsetRoute['type'] == 'direct' ? 1 : 2}" ??
-                              S.of(context).unknown,
+                          "${S.of(context).transfers}:${shortsetRoute['type'] == 'direct' ? 1 : 2}",
                           style: TextStyle(fontSize: 15),
                         ),
                       ],
@@ -236,8 +231,7 @@ Widget cardWidget(
                               children: [
                                 Obx(
                                   () => Text(
-                                    "${S.of(context).from_card}: $pickUp" ??
-                                        S.of(context).unknown,
+                                    "${S.of(context).from_card}: $pickUp",
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 14,
@@ -246,8 +240,7 @@ Widget cardWidget(
                                 ),
                                 Obx(
                                   () => Text(
-                                    "${S.of(context).to_card}: $pickDown" ??
-                                        S.of(context).unknown,
+                                    "${S.of(context).to_card}: $pickDown",
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 14,
@@ -271,8 +264,7 @@ Widget cardWidget(
                               ),
 
                               child: Text(
-                                " ${S.of(context).egp}  ${shortsetRoute['price']}" ??
-                                    S.of(context).unknown,
+                                " ${S.of(context).egp}  ${shortsetRoute['price']}",
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 16,

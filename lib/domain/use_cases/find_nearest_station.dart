@@ -16,8 +16,8 @@ class FindNearestStation {
         final distance = Geolocator.distanceBetween(
           latitude,
           longitude,
-          station.latitude!,
-          station.longitude!,
+          station.latitude,
+          station.longitude,
         );
 
         if (distance < shortestDistance) {

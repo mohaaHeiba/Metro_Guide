@@ -648,6 +648,16 @@ class S {
     );
   }
 
+  /// `No location selected`
+  String get no_location_selected {
+    return Intl.message(
+      'No location selected',
+      name: 'no_location_selected',
+      desc: '',
+      args: [],
+    );
+  }
+
   // skipped getter for the 'settings page' key
 
   /// `Dark Mode`

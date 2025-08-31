@@ -4,7 +4,7 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:metro_guide/generated/l10n.dart';
 import 'package:metro_guide/presentation/pages/instructions/Instructions_page.dart';
 import 'package:metro_guide/presentation/pages/instructions/fullmap_page.dart';
-import 'package:metro_guide/presentation/widgets/map_widgets/infocars_widget.dart';
+import 'package:metro_guide/presentation/widgets/instructions_widgets/infocars_widget.dart';
 
 class MapPage extends StatelessWidget {
   const MapPage({super.key});

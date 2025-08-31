@@ -3,33 +3,34 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:metro_guide/generated/l10n.dart';
 import 'package:metro_guide/presentation/controllers/controllers.dart';
+import 'package:metro_guide/presentation/navigationbar/navigationbar_page.dart';
 import 'package:metro_guide/presentation/widgets/custom_widgets/snackbar_widget.dart';
 
 class HistoryPage extends StatelessWidget {
   const HistoryPage({super.key});
 
-    @override
+  @override
   Widget build(BuildContext context) {
     final controller = Get.put(HistoryController());
-    
+
     return Scaffold(
-   
       body: Column(
         children: [
-                       Container(
-             width: double.infinity,
-             color: Theme.of(context).colorScheme.primaryContainer,
-             padding: const EdgeInsets.symmetric(vertical: 12),
-             child: Center(
-               child: Text(S.of(context).nav_history,
-               style: TextStyle(
-                 fontSize: 18,
-                 fontWeight: FontWeight.w500,
-                 color: Theme.of(context).colorScheme.primary,
-               ),
-               ),
-             ),
+          Container(
+            width: double.infinity,
+            color: Theme.of(context).colorScheme.primaryContainer,
+            padding: const EdgeInsets.symmetric(vertical: 12),
+            child: Center(
+              child: Text(
+                S.of(context).nav_history,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
             ),
+          ),
           // Clear History Button
           Obx(() {
             if (controller.historyItems.isEmpty) {
@@ -40,7 +41,7 @@ class HistoryPage extends StatelessWidget {
               padding: const EdgeInsets.all(16),
               child: ElevatedButton.icon(
                 onPressed: () => controller.clearHistory(context),
-                                  icon: const Icon(Icons.clear_all, size: 16),
+                icon: const Icon(Icons.clear_all, size: 16),
                 label: Text('Clear All'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.red,
@@ -59,12 +60,13 @@ class HistoryPage extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-
                       Text(
                         'No history yet',
                         style: TextStyle(
                           fontSize: 16,
-                          color: Theme.of(context).colorScheme.primary.withOpacity(0.7),
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.primary.withOpacity(0.7),
                         ),
                       ),
                     ],
@@ -80,7 +82,8 @@ class HistoryPage extends StatelessWidget {
                   return HistoryCard(
                     historyItem: item,
                     onTap: () => controller.reuseRoute(context, item),
-                    onDelete: () => controller.deleteHistoryItem(context, index),
+                    onDelete: () =>
+                        controller.deleteHistoryItem(context, index),
                   );
                 },
               );
@@ -107,22 +110,29 @@ class HistoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<HistoryController>();
-    
+
     return Card(
       margin: const EdgeInsets.only(bottom: 8),
-              child: ListTile(
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          leading: Icon(
-            Icons.route,
-            color: Theme.of(context).colorScheme.primary,
-          ),
-          title: Row(
+      child: ListTile(
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 12,
+        ),
+        leading: Icon(
+          Icons.route,
+          color: Theme.of(context).colorScheme.primary,
+        ),
+        title: Row(
           children: [
             Expanded(
               child: FutureBuilder<String>(
                 future: historyItem['fromStationId'] != null
-                  ? controller.getStationNameInCurrentLanguage(historyItem['fromStationId'])
-                  : controller.getStationNameByName(historyItem['from'] ?? ''),
+                    ? controller.getStationNameInCurrentLanguage(
+                        historyItem['fromStationId'],
+                      )
+                    : controller.getStationNameByName(
+                        historyItem['from'] ?? '',
+                      ),
                 builder: (context, snapshot) {
                   final fromName = snapshot.data ?? historyItem['from'] ?? '';
                   return Text(
@@ -139,8 +149,10 @@ class HistoryCard extends StatelessWidget {
             Expanded(
               child: FutureBuilder<String>(
                 future: historyItem['toStationId'] != null
-                  ? controller.getStationNameInCurrentLanguage(historyItem['toStationId'])
-                  : controller.getStationNameByName(historyItem['to'] ?? ''),
+                    ? controller.getStationNameInCurrentLanguage(
+                        historyItem['toStationId'],
+                      )
+                    : controller.getStationNameByName(historyItem['to'] ?? ''),
                 builder: (context, snapshot) {
                   final toName = snapshot.data ?? historyItem['to'] ?? '';
                   return Text(
@@ -170,72 +182,70 @@ class HistoryCard extends StatelessWidget {
       ),
     );
   }
-
-
 }
 
 class HistoryController extends GetxController {
   final historyItems = <Map<String, dynamic>>[].obs;
   final storage = GetStorage();
-  
+
   @override
   void onInit() {
     super.onInit();
     loadHistory();
   }
-  
+
   void loadHistory() {
     final savedHistory = storage.read('route_history') ?? [];
     historyItems.assignAll(List<Map<String, dynamic>>.from(savedHistory));
   }
-  
+
   void refreshHistoryDisplay() {
     final currentItems = List<Map<String, dynamic>>.from(historyItems);
     historyItems.clear();
     historyItems.addAll(currentItems);
   }
-  
-  // Get station name in current language
+
   Future<String> getStationNameInCurrentLanguage(int? stationId) async {
     if (stationId == null) return '';
-    
+
     try {
       final dbController = Get.find<DatabaseController>();
-      final allStations = await dbController.database.metrostationdao.getallStation();
-      
+      final allStations = await dbController.database.metrostationdao
+          .getallStation();
+
       for (final station in allStations) {
-        if (station?.station_id == stationId) {
+        if (station.station_id == stationId) {
           final settings = Get.find<SettingsController>();
-          return settings.isArabic.value ? station.name_ar ?? '' : station.name_en ?? '';
+          return settings.isArabic.value ? station.name_ar : station.name_en;
         }
       }
-      
+
       return '';
     } catch (e) {
-      print("Error getting station name for ID $stationId: $e");
+      // print("Error getting station name for ID $stationId: $e");
       return '';
     }
   }
-  
-  // Get station name by name 
+
   Future<String> getStationNameByName(String stationName) async {
     if (stationName.isEmpty) return '';
-    
+
     try {
       final dbController = Get.find<DatabaseController>();
-      final allStations = await dbController.database.metrostationdao.getallStation();
-      
+      final allStations = await dbController.database.metrostationdao
+          .getallStation();
+
       for (final station in allStations) {
-        if (station?.name_ar?.toLowerCase() == stationName.toLowerCase() ||
-            station?.name_en?.toLowerCase() == stationName.toLowerCase()) {
+        if (station.name_ar.toLowerCase() == stationName.toLowerCase() ||
+            station.name_en.toLowerCase() == stationName.toLowerCase()) {
           final settings = Get.find<SettingsController>();
-          return settings.isArabic.value ? station.name_ar ?? '' : station.name_en ?? '';
+          return settings.isArabic.value ? station.name_ar : station.name_en;
         }
       }
-      
-      return stationName; // Return original name if not found
+
+      return stationName;
     } catch (e) {
-      print("Error getting station name for $stationName: $e");
+      // print("Error getting station name for $stationName: $e");
       return stationName;
     }
   }
@@ -245,18 +255,13 @@ class HistoryController extends GetxController {
   }
 
   void addToHistory(Map<String, dynamic> route) {
-    // Add current timestamp
-    final historyItem = {...route, 'date': DateTime.now().toString()};
-
-    // Remove duplicate if exists (same from/to or same station IDs)
+    // Remove duplicate if exists
     historyItems.removeWhere(
-      (item) => 
-        (item['from'] == route['from'] && item['to'] == route['to']) ||
-        (item['fromStationId'] == route['fromStationId'] && item['toStationId'] == route['toStationId']),
+      (item) =>
+          (item['from'] == route['from'] && item['to'] == route['to']) ||
+          (item['fromStationId'] == route['fromStationId'] &&
+              item['toStationId'] == route['toStationId']),
     );
-
-    // Add to beginning of list
-    historyItems.insert(0, historyItem);
 
     // Keep only last 20 items
     if (historyItems.length > 20) {
@@ -309,32 +314,36 @@ class HistoryController extends GetxController {
     );
   }
 
-    void reuseRoute(BuildContext context, Map<String, dynamic> historyItem) async {
+  void reuseRoute(
+    BuildContext context,
+    Map<String, dynamic> historyItem,
+  ) async {
     final homeController = Get.find<HomeController>();
-    
-    // Get station names in current language (handle backward compatibility)
+
     String fromName, toName;
-    
+
     if (historyItem['fromStationId'] != null) {
-      fromName = await getStationNameInCurrentLanguage(historyItem['fromStationId']);
+      fromName = await getStationNameInCurrentLanguage(
+        historyItem['fromStationId'],
+      );
     } else {
       fromName = await getStationNameByName(historyItem['from'] ?? '');
     }
-    
+
     if (historyItem['toStationId'] != null) {
-      toName = await getStationNameInCurrentLanguage(historyItem['toStationId']);
+      toName = await getStationNameInCurrentLanguage(
+        historyItem['toStationId'],
+      );
     } else {
       toName = await getStationNameByName(historyItem['to'] ?? '');
     }
-    
-    // Set the route in home controller
+
     homeController.cont1.text = fromName;
     homeController.cont2.text = toName;
-    
-    // Navigate to home page
-    final navigationController = Get.find<NavigationController>();
-    navigationController.currentIndex.value = 0;
-    
+
+    final navigationbarpage = NavigationbarPage();
+    navigationbarpage.currentIndex.value = 0;
+
     showSnackBar(
       S.of(context).route_loaded,
       '${S.of(context).route_path} "$fromName" ${S.of(context).to} "$toName" ${S.of(context).route_loaded_desc}',

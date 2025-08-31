@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:metro_guide/core/services/cached_tile_provider.dart';
-import 'package:metro_guide/domain/entities/station_entity.dart';
 import 'package:metro_guide/generated/l10n.dart';
 import 'package:metro_guide/presentation/controllers/controllers.dart';
 import 'package:metro_guide/presentation/widgets/custom_widgets/snackbar_widget.dart';
@@ -21,9 +19,15 @@ class MapLocations extends StatelessWidget {
     if (cont != null && cont!.text.isNotEmpty) {
       // First try to find the station directly by name (more reliable)
       final station = await controll.getStationByName(cont!.text);
-      if (station != null && station.latitude != null && station.longitude != null) {
-        center = LatLng(station.latitude!, station.longitude!);
-        print("station found by name: ${station.name_en} at ${station.latitude}, ${station.longitude}");
+      if (station != null
+      //&&
+      //station.latitude != null &&
+      //station.longitude != null
+      ) {
+        center = LatLng(station.latitude, station.longitude);
+        // print(
+        //   "station found by name: ${station.name_en} at ${station.latitude}, ${station.longitude}",
+        // );
       } else {
         // Fallback to geocoding if station not found by name
         final position = await controll.getCoordinatesFromAddress(cont!.text);
@@ -32,16 +36,20 @@ class MapLocations extends StatelessWidget {
             LatLng(position.latitude, position.longitude),
           );
           if (nearestStation != null) {
-            center = LatLng(nearestStation.latitude!, nearestStation.longitude!);
-            print("nearest station found by geocoding: ${nearestStation.name_en} at ${nearestStation.latitude}, ${nearestStation.longitude}");
+            center = LatLng(
+              nearestStation.latitude!,
+              nearestStation.longitude!,
+            );
+            // print(
+            //   "nearest station found by geocoding: ${nearestStation.name_en} at ${nearestStation.latitude}, ${nearestStation.longitude}",
+            // );
           } else {
-            print("no station found for '${cont!.text}'");
+            // print("no station found for '${cont!.text}'");
           }
         }
       }
     }
 
-    // أول قيمة للـ Pin
     controll.selectedLatLng.value = center;
     return center;
   }
@@ -57,11 +65,10 @@ class MapLocations extends StatelessWidget {
 
         final center = snapshot.data!;
 
-        // استخدام WillPopScope لمسح البحث عند الرجوع
         return WillPopScope(
           onWillPop: () async {
             controll.searchController.clear();
-            return true; // يسمح بالرجوع
+            return true;
           },
           child: Scaffold(
             appBar: AppBar(title: Text(S.of(context).select_location)),
@@ -130,8 +137,9 @@ class MapLocations extends StatelessWidget {
                   final latLng = controll.selectedLatLng.value;
                   if (latLng == null) {
                     Get.snackbar(
-                      "Error",
-                      "No location selected",
+                      S.of(context).error,
+
+                      S.of(context).no_location_selected,
                       backgroundColor: Colors.red,
                       colorText: Colors.white,
                     );
@@ -143,10 +151,11 @@ class MapLocations extends StatelessWidget {
 
                   if (nearestStation != null && cont != null) {
                     // Always return the station name in lowercase
-                    cont!.text = (controll.isArabic
-                        ? (nearestStation.name_ar ?? nearestStation.name_en ?? "")
-                        : (nearestStation.name_en ?? nearestStation.name_ar ?? ""))
-                        .toLowerCase();
+                    cont!.text =
+                        (controll.isArabic
+                                ? (nearestStation.name_ar)
+                                : (nearestStation.name_en))
+                            .toLowerCase();
                   }
 
                   controll.searchController.clear();
@@ -161,9 +170,9 @@ class MapLocations extends StatelessWidget {
                     );
                   }
                 } catch (e) {
-                  print(e);
+                  // print(e);
                   Get.snackbar(
-                    "Error",
+                    S.of(context).error,
                     "Failed: $e",
                     backgroundColor: Colors.red,
                     colorText: Colors.white,

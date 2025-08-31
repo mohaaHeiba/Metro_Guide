@@ -111,6 +111,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "no_history_desc": MessageLookupByLibrary.simpleMessage(
       "Your recent routes will appear here",
     ),
+    "no_location_selected": MessageLookupByLibrary.simpleMessage(
+      "No location selected",
+    ),
     "no_routes_found": MessageLookupByLibrary.simpleMessage("No routes found"),
     "operating_hours": MessageLookupByLibrary.simpleMessage("Operating Hours"),
     "price": MessageLookupByLibrary.simpleMessage("Price:"),

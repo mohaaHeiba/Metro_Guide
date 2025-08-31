@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/route_manager.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:metro_guide/core/services/location_service.dart';
 import 'package:metro_guide/generated/l10n.dart';
@@ -55,7 +54,6 @@ class WelcomePage extends StatelessWidget {
 
             const SizedBox(height: 30),
 
-            // زر تغيير اللغة
             ElevatedButton(
               onPressed: () {
                 controller.toggleLanguage();
