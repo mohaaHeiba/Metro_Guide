@@ -5,24 +5,50 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:metro_guide/core/services/cached_tile_provider.dart';
+import 'package:metro_guide/domain/entities/station_entity.dart';
 import 'package:metro_guide/generated/l10n.dart';
 import 'package:metro_guide/presentation/controllers/controllers.dart';
 
 class MapLocations extends StatelessWidget {
-  final cont;
+  final TextEditingController? cont;
   MapLocations({super.key, required this.cont});
 
   final controll = Get.find<HomeController>();
 
+  Future<LatLng> _getCenter() async {
+    // 1. الموقع الحالي
+    var center = await controll.getUserLocation(false);
+
+    // 2. لو فيه عنوان مكتوب، جيب الإحداثيات
+    if (cont != null && cont!.text.isNotEmpty) {
+      final position = await controll.getCoordinatesFromAddress(cont!.text);
+      if (position != null) {
+        final station = await controll.getNearestStationByLatLng(
+          LatLng(position.latitude, position.longitude),
+        );
+        if (station != null) {
+          center = LatLng(station.latitude, station.longitude);
+          print("station found: ${station.latitude}, ${station.longitude}");
+        } else {
+          print("⚠️ no station found for '${cont!.text}'");
+        }
+      }
+    }
+
+    return center;
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<LatLng>(
-      future: controll.getUserLocation(false),
+      future: _getCenter(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return const Center(child: CircularProgressIndicator());
         }
+
         final center = snapshot.data!;
+
         return Scaffold(
           appBar: AppBar(title: Text(S.of(context).select_location)),
           body: Column(
@@ -80,8 +106,7 @@ class MapLocations extends StatelessWidget {
           floatingActionButton: FloatingActionButton.extended(
             onPressed: () async {
               try {
-                final address =controll.searchController.text;
-
+                final address = controll.searchController.text;
                 Get.back();
                 await controll.getNearestStationForPickDown(address, cont);
               } catch (e) {

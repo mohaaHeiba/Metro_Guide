@@ -163,6 +163,24 @@ class HomeController extends GetxController {
     return await dbController.database.metrostationdao.getallStation();
   }
 
+  Future<StationEntity?> getStationByName(String name) async {
+    try {
+      final dbController = Get.find<DatabaseController>();
+      final allStations = await dbController.database.metrostationdao
+          .getallStation();
+      final query = name.trim().toLowerCase();
+
+      return allStations.firstWhere(
+        (s) =>
+            (s?.name_ar?.toLowerCase() == query) ||
+            (s?.name_en?.toLowerCase() == query),
+        orElse: () => null as StationEntity,
+      );
+    } catch (_) {
+      return null;
+    }
+  }
+
   Future<void> loadDataBase() async {
     final dbController = Get.find<DatabaseController>();
     final isArabic = Get.find<SettingsController>().isArabic.value;
@@ -252,6 +270,15 @@ class HomeController extends GetxController {
       );
       return null;
     }
+  }
+
+  Future<StationEntity?> getNearestStationByLatLng(LatLng location) async {
+    final stationEntities = await getData();
+    final finder = FindNearestStation(
+      latitude: location.latitude,
+      longitude: location.longitude,
+    );
+    return finder.findNearestStation(stationEntities);
   }
 
   Future<void> getNearestStationForPickDown(

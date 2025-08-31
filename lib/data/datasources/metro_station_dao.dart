@@ -5,10 +5,11 @@ import '../../domain/entities/nearest_street_entity.dart';
 
 @dao
 abstract class MetroStationDao {
-  @Query(
-    "SELECT * from metro_stations",
-  )
+  @Query("SELECT * from metro_stations")
   Future<List<StationEntity>> getallStation();
+
+  // @Query('SELECT * FROM metro_stations WHERE addressText = :address LIMIT 1')
+  // Future<StationEntity> findAddress(String address);
 
   @update
   Future<int> updateStreet(StationEntity address);
