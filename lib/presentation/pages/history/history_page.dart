@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:metro_guide/generated/l10n.dart';
 import 'package:metro_guide/presentation/controllers/controllers.dart';
-import 'package:metro_guide/presentation/navigationbar/navigationbar_page.dart';
 import 'package:metro_guide/presentation/widgets/custom_widgets/snackbar_widget.dart';
 
 class HistoryPage extends StatelessWidget {
@@ -205,6 +204,7 @@ class HistoryController extends GetxController {
     historyItems.addAll(currentItems);
   }
 
+  // Get station name in current language
   Future<String> getStationNameInCurrentLanguage(int? stationId) async {
     if (stationId == null) return '';
 
@@ -214,19 +214,22 @@ class HistoryController extends GetxController {
           .getallStation();
 
       for (final station in allStations) {
-        if (station.station_id == stationId) {
+        if (station?.station_id == stationId) {
           final settings = Get.find<SettingsController>();
-          return settings.isArabic.value ? station.name_ar : station.name_en;
+          return settings.isArabic.value
+              ? station.name_ar ?? ''
+              : station.name_en ?? '';
         }
       }
 
       return '';
     } catch (e) {
-      // print("Error getting station name for ID $stationId: $e");
+      print("Error getting station name for ID $stationId: $e");
       return '';
     }
   }
 
+  // Get station name by name
   Future<String> getStationNameByName(String stationName) async {
     if (stationName.isEmpty) return '';
 
@@ -236,16 +239,18 @@ class HistoryController extends GetxController {
           .getallStation();
 
       for (final station in allStations) {
-        if (station.name_ar.toLowerCase() == stationName.toLowerCase() ||
-            station.name_en.toLowerCase() == stationName.toLowerCase()) {
+        if (station?.name_ar?.toLowerCase() == stationName.toLowerCase() ||
+            station?.name_en?.toLowerCase() == stationName.toLowerCase()) {
           final settings = Get.find<SettingsController>();
-          return settings.isArabic.value ? station.name_ar : station.name_en;
+          return settings.isArabic.value
+              ? station.name_ar ?? ''
+              : station.name_en ?? '';
         }
       }
 
-      return stationName;
+      return stationName; // Return original name if not found
     } catch (e) {
-      // print("Error getting station name for $stationName: $e");
+      print("Error getting station name for $stationName: $e");
       return stationName;
     }
   }
@@ -255,13 +260,19 @@ class HistoryController extends GetxController {
   }
 
   void addToHistory(Map<String, dynamic> route) {
-    // Remove duplicate if exists
+    // Add current timestamp
+    final historyItem = {...route, 'date': DateTime.now().toString()};
+
+    // Remove duplicate if exists (same from/to or same station IDs)
     historyItems.removeWhere(
       (item) =>
           (item['from'] == route['from'] && item['to'] == route['to']) ||
           (item['fromStationId'] == route['fromStationId'] &&
               item['toStationId'] == route['toStationId']),
     );
+
+    // Add to beginning of list
+    historyItems.insert(0, historyItem);
 
     // Keep only last 20 items
     if (historyItems.length > 20) {
@@ -320,6 +331,7 @@ class HistoryController extends GetxController {
   ) async {
     final homeController = Get.find<HomeController>();
 
+    // Get station names in current language (handle backward compatibility)
     String fromName, toName;
 
     if (historyItem['fromStationId'] != null) {
@@ -338,11 +350,13 @@ class HistoryController extends GetxController {
       toName = await getStationNameByName(historyItem['to'] ?? '');
     }
 
+    // Set the route in home controller
     homeController.cont1.text = fromName;
     homeController.cont2.text = toName;
 
-    final navigationbarpage = NavigationbarPage();
-    navigationbarpage.currentIndex.value = 0;
+    // Navigate to home page
+    final navigationController = Get.find<NavigationController>();
+    navigationController.currentIndex.value = 0;
 
     showSnackBar(
       S.of(context).route_loaded,

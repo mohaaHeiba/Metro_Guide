@@ -1,33 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:metro_guide/generated/l10n.dart';
-import 'package:metro_guide/presentation/pages/history/history_page.dart';
-import 'package:metro_guide/presentation/pages/home/home_page.dart';
-import 'package:metro_guide/presentation/pages/instructions/map_page.dart';
-import 'package:metro_guide/presentation/pages/settings/settings_page.dart';
+import 'package:metro_guide/presentation/controllers/controllers.dart';
 
 class NavigationbarPage extends StatelessWidget {
-  NavigationbarPage({super.key});
-  final currentIndex = 0.obs;
+  const NavigationbarPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> screens = [
-      const HomePage(),
-      const MapPage(),
-      const HistoryPage(),
-      const SettingsPage(),
-    ];
+    final controller = Get.find<NavigationController>();
 
     return Obx(
       () => Scaffold(
         body: Padding(
           padding: const EdgeInsets.only(top: 33),
-          child: IndexedStack(index: currentIndex.value, children: screens),
+          child: IndexedStack(
+            index: controller.currentIndex.value,
+            children: controller.screens,
+          ),
         ),
         bottomNavigationBar: BottomNavigationBar(
-          currentIndex: currentIndex.value,
-          onTap: (index) => currentIndex.value = index,
+          currentIndex: controller.currentIndex.value,
+          onTap: (index) => controller.currentIndex.value = index,
           type: BottomNavigationBarType.fixed,
           items: [
             BottomNavigationBarItem(

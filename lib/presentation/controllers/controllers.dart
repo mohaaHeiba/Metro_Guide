@@ -12,12 +12,26 @@ import 'package:metro_guide/domain/entities/station_entity.dart';
 import 'package:metro_guide/domain/use_cases/find_nearest_station.dart';
 import 'package:metro_guide/domain/use_cases/find_routes.dart';
 import 'package:metro_guide/presentation/pages/history/history_page.dart';
+import 'package:metro_guide/presentation/pages/home/home_page.dart';
+import 'package:metro_guide/presentation/pages/instructions/map_page.dart';
+import 'package:metro_guide/presentation/pages/settings/settings_page.dart';
 import 'package:metro_guide/presentation/widgets/custom_widgets/snackbar_widget.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_map/flutter_map.dart' as flutter_map;
 import 'package:metro_guide/generated/l10n.dart';
+
+class NavigationController extends GetxController {
+  final currentIndex = 0.obs;
+
+  final List<Widget> screens = [
+    const HomePage(),
+    const MapPage(),
+    const HistoryPage(),
+    const SettingsPage(),
+  ];
+}
 
 class SettingsController extends GetxController {
   var isDarkMode = false.obs;

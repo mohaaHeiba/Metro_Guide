@@ -12,6 +12,8 @@ Future<void> main() async {
   final initi = Get.put(DatabaseController(), permanent: true);
   await initi.initDatabase();
 
+  Get.put(NavigationController(), permanent: true);
+
   Get.put(SettingsController(), permanent: true);
 
   Get.put(HomeController(), permanent: true);
