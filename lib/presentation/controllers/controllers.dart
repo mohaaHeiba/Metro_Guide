@@ -197,6 +197,7 @@ class HomeController extends GetxController {
   }
 
   // =================== Map + Nearest Station ===================
+  final selectedLatLng = Rxn<LatLng>();
   Future<LatLng> getUserLocation(bool nuh) async {
     final pos = await getlocation();
 
@@ -228,7 +229,7 @@ class HomeController extends GetxController {
 
       final nearest = findNearestStation.findNearestStation(stationEntities);
 
-      cont1.text = isArabic ? nearest.name_ar ?? "" : nearest.name_en ?? "";
+      cont1.text = (isArabic ? nearest.name_ar ?? "" : nearest.name_en ?? "").toLowerCase();
 
       print("Nearest Station: ${cont1.text}");
 
@@ -294,9 +295,9 @@ class HomeController extends GetxController {
       );
 
       if (cached != null) {
-        controlltext?.text = isArabic
+        controlltext?.text = (isArabic
             ? cached.name_ar ?? ""
-            : cached.name_en ?? "";
+            : cached.name_en ?? "").toLowerCase();
 
         showSnackBar(
           S.of(Get.context!).nearest_station_cached,
@@ -318,9 +319,9 @@ class HomeController extends GetxController {
 
       final nearest = findNearestStation.findNearestStation(stationEntities);
 
-      controlltext?.text = isArabic
+      controlltext?.text = (isArabic
           ? nearest.name_ar ?? ""
-          : nearest.name_en ?? "";
+          : nearest.name_en ?? "").toLowerCase();
 
       // save data
       final newStreet = NearestStreetEntity(addressText: street);
