@@ -101,15 +101,15 @@ lib/
 - **App crashes** - Clear app data
 - **Slow performance** - Check storage space
 ## images
-![2](https://github.com/user-attachments/assets/af21a5ba-d023-4924-94d3-411e6c1a15a5)
-![1](https://github.com/user-attachments/assets/c9aead87-9ac8-4586-8eb2-271734b7889d)
+<img src="https://github.com/user-attachments/assets/af21a5ba-d023-4924-94d3-411e6c1a15a5" width="180"/>
+<img src="https://github.com/user-attachments/assets/c9aead87-9ac8-4586-8eb2-271734b7889d" width="180"/>
+<img src="https://github.com/user-attachments/assets/61dddb1b-07a0-4260-bac0-3eaf25c4541a" width="180"/>
+<img src="https://github.com/user-attachments/assets/cee5fcf4-5b08-4903-9416-53ea533c826b" width="180"/>
+<img src="https://github.com/user-attachments/assets/ecd3ac24-0b9a-4fad-bfdb-c4aeace1f473" width="180"/>
+<img src="https://github.com/user-attachments/assets/6d510c13-7cff-4d21-9e0d-5acf283047ca" width="180"/>
+<img src="https://github.com/user-attachments/assets/bd2e56c0-f1cc-4283-a4e6-ae4a2f3c8622" width="180"/>
+<img src="https://github.com/user-attachments/assets/fb308394-a4af-4161-9108-c94adad3fe3a" width="180"/>
 
-![4](https://github.com/user-attachments/assets/61dddb1b-07a0-4260-bac0-3eaf25c4541a)
-![3](https://github.com/user-attachments/assets/cee5fcf4-5b08-4903-9416-53ea533c826b)
-![5](https://github.com/user-attachments/assets/ecd3ac24-0b9a-4fad-bfdb-c4aeace1f473)
-![6](https://github.com/user-attachments/assets/6d510c13-7cff-4d21-9e0d-5acf283047ca)
-![7](https://github.com/user-attachments/assets/bd2e56c0-f1cc-4283-a4e6-ae4a2f3c8622)
-![8](https://github.com/user-attachments/assets/fb308394-a4af-4161-9108-c94adad3fe3a)
 
 
 ## Developer
