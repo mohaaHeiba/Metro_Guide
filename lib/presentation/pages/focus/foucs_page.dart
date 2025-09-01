@@ -2,45 +2,54 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:metro_guide/generated/l10n.dart';
 import 'package:metro_guide/presentation/controllers/controllers.dart';
-import 'package:metro_guide/presentation/widgets/details_widgets/focus_mode_button_widget.dart';
 import 'package:metro_guide/presentation/widgets/details_widgets/summarycard_widget.dart';
 
-class DetailsPage extends StatelessWidget {
-  DetailsPage({super.key});
-  final routeData = Get.arguments as Map<String, dynamic>;
+class FoucsPage extends StatefulWidget {
+  const FoucsPage({super.key});
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _FoucsPageState createState() => _FoucsPageState();
+}
+
+class _FoucsPageState extends State<FoucsPage> {
   final controller = Get.find<HomeController>();
+  late final Map<String, dynamic> routeData;
+
+  @override
+  void initState() {
+    super.initState();
+    routeData = Get.arguments as Map<String, dynamic>;
+    controller.isFocusActive.value = true;
+    controller.startLocationAddress();
+  }
+
+  @override
+  void dispose() {
+    controller.stopLocationLoop();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: routeData.isEmpty
-          ? Center(
-              child: Text(
-                S.of(context).no_routes_found,
-                style: TextStyle(fontSize: 18, color: Colors.grey[400]),
-              ),
-            )
-          : SingleChildScrollView(
-              padding: EdgeInsets.all(10),
-              child: Column(
-                // spacing: 10,
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  summaryCardWidget(routeData, context),
-                  const SizedBox(height: 20),
-
-                  // Shortest Route Details
-                  Text(
-                    S.of(context).Shortest_route_details,
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 16),
-
-                  // Single Route Card
-                  _buildRouteCard(routeData, context),
-                ],
-              ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 40),
+            summaryCardWidget(routeData, context),
+            const SizedBox(height: 20),
+            Text(
+              S.of(context).Shortest_route_details,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
+            const SizedBox(height: 16),
+            _buildRouteCard(routeData, context),
+          ],
+        ),
+      ),
     );
   }
 
@@ -65,142 +74,7 @@ class DetailsPage extends StatelessWidget {
           ),
         ],
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Route Header
-          Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Text(
-                  route['type'] == 'DIRECT'
-                      ? S.of(context).direct_route
-                      : route['type'] == 'TRANSFER'
-                      ? S.of(context).tranfers
-                      : S.of(context).tranfers_2,
-                  style: const TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              const Spacer(),
-              Text(
-                '${route['price']} ${S.of(context).egp}',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
-
-          // Direction Information
-          _buildDirectionCard(route, context),
-          const SizedBox(height: 16),
-
-          // Route Details
-          _buildRouteDetails(route, context),
-          const SizedBox(height: 16),
-
-          // Station List
-          _buildStationList(route, context),
-
-          SizedBox(
-            height: 100,
-            width: double.infinity,
-
-            child: Center(child: focsModeButtonWidget(route)),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildDirectionCard(Map<String, dynamic> route, BuildContext context) {
-    Color directionColor = Theme.of(context).colorScheme.primary;
-    IconData? directionIcon;
-    String directionText;
-
-    if (route['type'] == 'DIRECT') {
-      directionIcon = Icons.directions_subway;
-      directionText = '${S.of(context).towards}: ${route['direction']}';
-    } else if (route['type'] == 'TRANSFER') {
-      directionText =
-          '${S.of(context).towards}: ${route['direction1']} ${S.of(context).symbol} ${route['direction2']}';
-    } else if (route['type'] == '2 TRANSFER') {
-      directionText =
-          '${S.of(context).towards}: ${route['direction1']} ${S.of(context).symbol} ${route['direction2']} ${S.of(context).symbol} ${route['direction3']}';
-    } else {
-      directionIcon = Icons.help;
-      directionText = S.of(context).no_routes_found;
-    }
-
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: directionColor.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: directionColor.withOpacity(0.3)),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(directionIcon, color: directionColor, size: 20),
-          const SizedBox(width: 8),
-          Expanded(
-            child: Text(
-              directionText,
-              style: TextStyle(
-                color: directionColor,
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-              ),
-              overflow: TextOverflow.ellipsis,
-              maxLines: 3,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildRouteDetails(Map<String, dynamic> route, BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: buildInfoItem(
-            Icons.access_time,
-            S.of(context).duration,
-            route['time'],
-            Theme.of(context).colorScheme.primary,
-          ),
-        ),
-        Expanded(
-          child: buildInfoItem(
-            Icons.straighten,
-            S.of(context).stations,
-            '${route['totalStations']}',
-            Theme.of(context).colorScheme.primary,
-          ),
-        ),
-        Expanded(
-          child: buildInfoItem(
-            Icons.route,
-            S.of(context).type,
-            route['type'] == 'DIRECT'
-                ? S.of(context).direct_route
-                : route['type'] == 'TRANSFER'
-                ? S.of(context).tranfers
-                : S.of(context).tranfers,
-            Theme.of(context).colorScheme.primary,
-          ),
-        ),
-      ],
+      child: _buildStationList(route, context),
     );
   }
 
@@ -286,6 +160,7 @@ class DetailsPage extends StatelessWidget {
     String stationName,
     bool isStart,
     bool isEnd,
+    // bool isCurrent,
     BuildContext context,
   ) {
     return Padding(
@@ -300,6 +175,8 @@ class DetailsPage extends StatelessWidget {
                   ? Colors.green[400]
                   : isEnd
                   ? Colors.red[400]
+                  // : isCurrent?
+                  // Colors.yellow[400]
                   : Colors.blue[400],
               shape: BoxShape.circle,
             ),

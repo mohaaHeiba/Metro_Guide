@@ -216,6 +216,25 @@ class HomeController extends GetxController {
   }
 
   // =================== Extra helpers ===================
+
+  final isFocusActive = true.obs;
+
+  void startLocationAddress() {
+    if (!isFocusActive.value) return;
+
+    Future.delayed(Duration(seconds: 10), () async {
+      if (!isFocusActive.value) return;
+
+      await getCurrentLocation();
+
+      startLocationAddress();
+    });
+  }
+
+  void stopLocationLoop() {
+    isFocusActive.value = false;
+  }
+
   Future<void> getCurrentLocation() async {
     try {
       final position = await locationService.determinePosition();

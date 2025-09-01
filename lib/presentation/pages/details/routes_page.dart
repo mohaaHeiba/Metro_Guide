@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:metro_guide/generated/l10n.dart';
 import 'package:metro_guide/presentation/controllers/controllers.dart';
 import 'package:metro_guide/presentation/pages/details/details_page.dart';
 import 'package:metro_guide/presentation/pages/details/seconde_details_page.dart';
 
 class RoutesPage extends StatelessWidget {
+  RoutesPage({super.key});
+
   final controller = Get.find<HomeController>();
 
   @override

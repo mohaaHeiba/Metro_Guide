@@ -27,7 +27,7 @@ class SecondeDetailsPage extends StatelessWidget {
                   summaryCardWidget(controller.routes.last, context),
                   const SizedBox(height: 20),
 
-                  // Shortest Route Details
+                  // comfortable Route Details
                   Text(
                     S.of(context).comfortable_route_details,
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
