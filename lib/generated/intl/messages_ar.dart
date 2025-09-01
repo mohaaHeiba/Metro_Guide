@@ -29,6 +29,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "Shortest_route_details": MessageLookupByLibrary.simpleMessage(
+      "تفاصيل اقصر محطة",
+    ),
     "about": MessageLookupByLibrary.simpleMessage("حول التطبيق"),
     "accessibility": MessageLookupByLibrary.simpleMessage("إمكانية الوصول"),
     "accessibility_desc": MessageLookupByLibrary.simpleMessage(
@@ -49,6 +52,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "clear_history": MessageLookupByLibrary.simpleMessage("مسح السجل"),
     "clear_history_confirm": MessageLookupByLibrary.simpleMessage(
       "هل أنت متأكد من مسح جميع سجل الرحلات؟",
+    ),
+    "comfortable_route_details": MessageLookupByLibrary.simpleMessage(
+      "تفاصيل اريح محطة",
     ),
     "confirme_location": MessageLookupByLibrary.simpleMessage("تأكيد الموقع"),
     "contact_us": MessageLookupByLibrary.simpleMessage("اتصل بنا"),
@@ -123,7 +129,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "recent_journeys": MessageLookupByLibrary.simpleMessage(
       "رحلات المترو الأخيرة",
     ),
-    "route_details": MessageLookupByLibrary.simpleMessage("تفاصيل المحطة"),
+    "route_details": MessageLookupByLibrary.simpleMessage("تفاصيل الرحلة"),
     "route_loaded": MessageLookupByLibrary.simpleMessage("تم تحميل المسار"),
     "route_loaded_desc": MessageLookupByLibrary.simpleMessage(
       "تم تحميل المسار",

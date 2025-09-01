@@ -47,7 +47,10 @@
     "tranfers":"اتجاهين",
     "tranfers_2":"ثلاث اتجاهات",
     "distance":"المسافة",
-    "route_details":"تفاصيل المحطة",
+    "route_details":"تفاصيل الرحلة",
+
+    "Shortest_route_details":"تفاصيل اقصر محطة",
+    "comfortable_route_details":"تفاصيل اريح محطة",
     "towards":"باتجاه",
     "type":"نوع",
     "route_path":"المسار",
@@ -55,6 +58,8 @@
     "end":"النهاية",
     "transfer_at":"تحول من ",
     "symbol":"←",
+
+    
 
 
 

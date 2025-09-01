@@ -218,8 +218,35 @@ class FindRoutes {
     }
 
     // Sort
-    routes.sort((a, b) => (a['totalStations']).compareTo(b['totalStations']));
+    int _getTransfersCount(Map<String, dynamic> route) {
+      switch (route['type']) {
+        case 'DIRECT':
+          return 0;
+        case 'TRANSFER':
+          return 1;
+        case '2 TRANSFER':
+          return 2;
+        default:
+          return 99;
+      }
+    }
 
-    return routes;
+    // shortestRoute
+    routes.sort((a, b) {
+      final cmpStations = (a['totalStations'] as int).compareTo(
+        b['totalStations'] as int,
+      );
+      if (cmpStations != 0) return cmpStations;
+      return _getTransfersCount(a).compareTo(_getTransfersCount(b));
+    });
+    final Map<String, dynamic> shortestRoute = routes.first;
+
+    // comfortableRoute
+    routes.sort(
+      (a, b) => _getTransfersCount(a).compareTo(_getTransfersCount(b)),
+    );
+    final Map<String, dynamic> comfortableRoute = routes.first;
+
+    return [shortestRoute, comfortableRoute];
   }
 }

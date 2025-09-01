@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:metro_guide/generated/l10n.dart';
 import 'package:metro_guide/presentation/pages/details/details_page.dart';
+import 'package:metro_guide/presentation/pages/details/routes_page.dart';
 
 Widget cardWidget(
   BuildContext context,
@@ -100,7 +101,7 @@ Widget cardWidget(
               ElevatedButton(
                 onPressed: () {
                   Get.to(
-                    () => DetailsPage(),
+                    () => RoutesPage(),
                     transition: Transition.rightToLeft,
                     arguments: shortsetRoute,
                   );

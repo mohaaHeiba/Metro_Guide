@@ -47,6 +47,10 @@
     "tranfers_2":"Double Transfer Route",
     "distance":"Distance",
     "route_details":"Route Details",
+
+    "Shortest_route_details":"Shortest Route Details",
+    "comfortable_route_details":"comfortable Route Details",
+
     "towards":"Towards",
     "type":"Type",
     "route_path":"Route Path",

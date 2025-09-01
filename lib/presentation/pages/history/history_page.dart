@@ -331,7 +331,7 @@ class HistoryController extends GetxController {
   ) async {
     final homeController = Get.find<HomeController>();
 
-    // Get station names in current language (handle backward compatibility)
+    // Get station names in current language
     String fromName, toName;
 
     if (historyItem['fromStationId'] != null) {

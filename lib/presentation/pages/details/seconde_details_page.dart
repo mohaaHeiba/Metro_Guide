@@ -4,14 +4,13 @@ import 'package:metro_guide/generated/l10n.dart';
 import 'package:metro_guide/presentation/controllers/controllers.dart';
 import 'package:metro_guide/presentation/widgets/details_widgets/summarycard_widget.dart';
 
-class DetailsPage extends StatelessWidget {
-  DetailsPage({super.key});
-  final routeData = Get.arguments as Map<String, dynamic>;
+class SecondeDetailsPage extends StatelessWidget {
+  SecondeDetailsPage({super.key});
   final controller = Get.find<HomeController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: routeData.isEmpty
+      body: controller.routes.isEmpty
           ? Center(
               child: Text(
                 S.of(context).no_routes_found,
@@ -25,18 +24,18 @@ class DetailsPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  summaryCardWidget(routeData, context),
+                  summaryCardWidget(controller.routes.last, context),
                   const SizedBox(height: 20),
 
                   // Shortest Route Details
                   Text(
-                    S.of(context).Shortest_route_details,
+                    S.of(context).comfortable_route_details,
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 16),
 
                   // Single Route Card
-                  _buildRouteCard(routeData, context),
+                  _buildRouteCard(controller.routes.last, context),
                 ],
               ),
             ),

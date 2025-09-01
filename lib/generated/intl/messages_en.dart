@@ -28,6 +28,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "Shortest_route_details": MessageLookupByLibrary.simpleMessage(
+      "Shortest Route Details",
+    ),
     "about": MessageLookupByLibrary.simpleMessage("About"),
     "accessibility": MessageLookupByLibrary.simpleMessage("Accessibility"),
     "accessibility_desc": MessageLookupByLibrary.simpleMessage(
@@ -50,6 +53,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "clear_history": MessageLookupByLibrary.simpleMessage("Clear History"),
     "clear_history_confirm": MessageLookupByLibrary.simpleMessage(
       "Are you sure you want to clear all route history?",
+    ),
+    "comfortable_route_details": MessageLookupByLibrary.simpleMessage(
+      "comfortable Route Details",
     ),
     "confirme_location": MessageLookupByLibrary.simpleMessage(
       "confirme location",

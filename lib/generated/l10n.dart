@@ -292,6 +292,26 @@ class S {
     );
   }
 
+  /// `Shortest Route Details`
+  String get Shortest_route_details {
+    return Intl.message(
+      'Shortest Route Details',
+      name: 'Shortest_route_details',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `comfortable Route Details`
+  String get comfortable_route_details {
+    return Intl.message(
+      'comfortable Route Details',
+      name: 'comfortable_route_details',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Towards`
   String get towards {
     return Intl.message('Towards', name: 'towards', desc: '', args: []);
