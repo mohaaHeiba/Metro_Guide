@@ -45,18 +45,18 @@ lib/
 ## Tech Stack
 
 Flutter 3.8.1+
-GetX – State management & routing
-Floor – SQLite database ORM
-GetStorage – Lightweight key-value storage
-Geolocator – Location services (GPS)
-Geocoding – Address ↔ Coordinates conversion
-flutter_osm_plugin – OpenStreetMap integration
-osm_nominatim – Location search (Nominatim API)
-open_street_map_search_and_pick – Map search & location picker
-flutter_map_tile_caching – Offline map tiles caching
-flutter_cache_manager – File & image caching
-url_launcher – External links & app redirection
-localizations, intl – Localization support
+- GetX – State management & routing
+- Floor – SQLite database ORM
+- GetStorage – Lightweight key-value storage
+- Geolocator – Location services (GPS)
+- Geocoding – Address ↔ Coordinates conversion
+- flutter_osm_plugin – OpenStreetMap integration
+- osm_nominatim – Location search (Nominatim API)
+- open_street_map_search_and_pick – Map search & location picker
+- flutter_map_tile_caching – Offline map tiles caching
+- flutter_cache_manager – File & image caching
+- url_launcher – External links & app redirection
+- localizations, intl – Localization support
 
 ## Installation
 
