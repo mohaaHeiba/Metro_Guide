@@ -2,6 +2,8 @@
 
 A Flutter app for metro travel navigation with route planning, location services, and journey history.
 
+Demo: https://drive.google.com/file/d/10QtOTJ_AR4Rwryf3iDPHk-KmMylakMEw/view?usp=sharing
+
 ## Features
 
 ### Route Planning
